@@ -9,12 +9,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#030303] text-stone-100">
       <Hero />
-      <main className="mx-auto flex max-w-7xl flex-col gap-16 px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
+      <main className="mx-auto flex max-w-7xl flex-col gap-14 px-4 py-12 sm:px-8 lg:px-10 lg:py-24">
         <Categories />
         <Features />
         <JewelleryBanner />
         <BagsBanner />
-        <section id="faq" className="rounded-[2.5rem] border border-white/10 bg-zinc-950/80 p-8 shadow-[0_24px_80px_rgba(0,0,0,0.24)] sm:p-10">
+        <section id="faq" className="rounded-[2.5rem] border border-white/10 bg-zinc-950/80 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.24)] sm:p-10">
           <div className="max-w-2xl">
             <p className="text-sm uppercase tracking-[0.42em] text-zinc-400">Frequently asked</p>
             <h2 className="section-heading mt-4 text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">

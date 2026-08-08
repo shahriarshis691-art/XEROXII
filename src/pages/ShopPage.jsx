@@ -8,8 +8,8 @@ import { products } from "../data/products";
 export default function ShopPage() {
   return (
     <div className="min-h-screen bg-[#030303] text-stone-100">
-      <main id="shop" className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-10 sm:px-8 lg:px-10 lg:py-16">
-        <motion.section initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="rounded-[2.5rem] border border-white/10 bg-[linear-gradient(140deg,rgba(255,255,255,0.1),rgba(255,255,255,0.03))] p-8 shadow-[0_25px_90px_rgba(0,0,0,0.25)] sm:p-10 lg:p-12">
+      <main id="shop" className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-8 sm:px-8 lg:px-10 lg:py-16">
+        <motion.section initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="rounded-[2.5rem] border border-white/10 bg-[linear-gradient(140deg,rgba(255,255,255,0.1),rgba(255,255,255,0.03))] p-6 shadow-[0_25px_90px_rgba(0,0,0,0.25)] sm:p-10 lg:p-12">
           <div className="max-w-3xl">
             <p className="text-sm uppercase tracking-[0.4em] text-zinc-400">Luxury shop</p>
             <h1 className="section-heading mt-4 text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">Discover exceptional timepieces with sculptural presence.</h1>
