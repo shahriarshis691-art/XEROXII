@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import watch from "../assets/watch.jpg";
 import Navbar from "./Navbar";
 
+const watch =
+  "https://images.pexels.com/photos/32528932/pexels-photo-32528932.jpeg?auto=compress&cs=tinysrgb&w=1200";
 const PAGES = [1, 2, 3, 4];
 
 export default function Hero() {
@@ -79,7 +80,7 @@ export default function Hero() {
               <img
                 src={watch}
                 alt="Watch dial detail"
-                className="h-full w-full scale-[2.2] object-cover object-[38%_58%] mix-blend-multiply"
+                className="h-full w-full scale-[1.8] object-cover object-[45%_30%]"
               />
             </div>
             <p className="mt-1.5 text-center text-[0.55rem] uppercase tracking-[0.16em] text-black/45">
@@ -113,22 +114,12 @@ export default function Hero() {
           className="relative order-3 flex h-full min-h-[24rem] items-center justify-center pr-0 lg:min-h-0 lg:pr-6"
         >
           <div className="absolute h-64 w-64 rounded-full bg-white/70 blur-3xl sm:h-80 sm:w-80" aria-hidden="true" />
-          <div className="relative z-10 h-[58svh] w-full max-w-sm sm:h-[64svh]">
-            {/* Radial fade hides the photo's hard background edges */}
-            <div
-              className="h-full w-full overflow-hidden"
-              style={{
-                maskImage: "radial-gradient(ellipse 62% 80% at 50% 42%, black 55%, transparent 100%)",
-                WebkitMaskImage: "radial-gradient(ellipse 62% 80% at 50% 42%, black 55%, transparent 100%)",
-              }}
-            >
-              <img
-                src={watch}
-                alt="XEROXII luxury steel chronograph watch"
-                className="h-full w-full scale-[1.3] object-cover object-[22%_34%] mix-blend-multiply"
-              />
-            </div>
-            <div className="absolute inset-x-10 bottom-3 h-6 rounded-full bg-black/15 blur-xl" aria-hidden="true" />
+          <div className="relative z-10 aspect-[2/3] w-full max-w-xs overflow-hidden rounded-[2rem] shadow-[0_35px_60px_rgba(0,0,0,0.25)] sm:max-w-sm">
+            <img
+              src={watch}
+              alt="XEROXII luxury steel chronograph watch"
+              className="h-full w-full object-cover"
+            />
           </div>
         </motion.div>
       </div>
