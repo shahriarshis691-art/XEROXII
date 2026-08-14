@@ -68,7 +68,7 @@ export default function FeaturedWatches() {
         </h2>
       </div>
 
-      <div className="page-shell mt-14 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-14">
+      <div className="page-shell mt-14 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14">
         {FEATURED.map((watch, index) => (
           <motion.div
             key={watch.name}
