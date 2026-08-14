@@ -135,7 +135,7 @@ export default function WatchListing() {
         </h2>
       </div>
 
-      <div className="page-shell mt-14 grid grid-cols-3 gap-x-3 gap-y-8 sm:mt-16 sm:gap-x-8 sm:gap-y-14">
+      <div className="page-shell mt-14 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-14">
         {WATCHES.map((watch, index) => (
           <motion.div
             key={watch.name}
