@@ -1,22 +1,22 @@
 const PANELS = [
   {
-    label: "Diamond Jewellery",
-    alt: "Close-up of a luxury diamond and emerald necklace",
-    src: "https://images.pexels.com/photos/32988525/pexels-photo-32988525.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    label: "Necklace Showcase",
+    alt: "Luxury diamond and royal blue sapphire necklace set against a premium dark leather texture",
+    src: "https://images.pexels.com/photos/29986280/pexels-photo-29986280.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
-    label: "Women's Bag Collection",
-    alt: "Luxury black crocodile-leather handbag with matching belt",
-    src: "https://images.pexels.com/photos/30975839/pexels-photo-30975839.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    label: "Earrings Showcase",
+    alt: "Pair of exquisite luxury diamond and pink gemstone chandelier drop earrings displayed on a metallic pedestal in front of an architectural backdrop",
+    src: "https://images.pexels.com/photos/3266700/pexels-photo-3266700.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
 ];
 
 export default function WomensJewellery() {
   return (
-    <section id="jewellery" className="relative bg-white py-20 sm:py-28">
-      <div className="page-shell flex flex-col items-center text-center">
-        <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.35em] text-[#a3123a] sm:text-4xl">
-          Women&apos;s Jewellery
+    <section id="jewellery" className="relative bg-white">
+      <div className="flex flex-col items-center text-center pt-20 sm:pt-28">
+        <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.35em] text-[#5a001a] sm:text-4xl">
+          W O M E N&apos;S&nbsp;&nbsp;J E W E L L E R Y
         </h2>
         <a
           href="#collections"
@@ -26,14 +26,17 @@ export default function WomensJewellery() {
         </a>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-px bg-black/10 sm:mt-16 sm:grid-cols-2">
+      <div className="mt-14 grid grid-cols-1 sm:mt-16 sm:grid-cols-2">
         {PANELS.map((panel) => (
-          <div key={panel.label} className="group relative aspect-[4/5] overflow-hidden bg-[#e9e7e1]">
+          <div
+            key={panel.label}
+            className="group relative aspect-[4/5] overflow-hidden bg-[#0a0a0a] sm:aspect-auto sm:h-[80vh]"
+          >
             <img
               src={panel.src}
               alt={panel.alt}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="h-full w-full object-cover opacity-90 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
             />
           </div>
         ))}
