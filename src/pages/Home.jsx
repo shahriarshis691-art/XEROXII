@@ -1,4 +1,5 @@
 import Hero from "../components/Hero";
+import HeroCampaign from "../components/HeroCampaign";
 import Categories from "../components/Categories";
 import Features from "../components/Features";
 import JewelleryBanner from "../components/JewelleryBanner";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#030303] text-stone-100">
       <Hero />
+      <HeroCampaign />
       <main className="mx-auto flex max-w-7xl flex-col gap-14 px-4 py-12 sm:px-8 lg:px-10 lg:py-24">
         <Categories />
         <Features />
