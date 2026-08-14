@@ -3,26 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --color-ink: #030303;
-  --color-panel: #0b0b0b;
-  --color-panel-soft: rgba(255, 255, 255, 0.05);
-  --color-line: rgba(255, 255, 255, 0.12);
-  --color-copy: #f5f5f3;
-  --color-muted: #a1a1aa;
-  --color-accent: #d8d4cc;
   --content-width: 80rem;
   --page-gutter: clamp(1rem, 3vw, 2.5rem);
-  color-scheme: dark;
   font-family: 'Montserrat', sans-serif;
-  color: var(--color-copy);
-  background: var(--color-ink);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-  background: var(--color-ink);
   scroll-behavior: auto;
 }
 
@@ -30,10 +19,8 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.08), transparent 32rem),
-    var(--color-ink);
-  color: var(--color-copy);
+  background: #fafaf8;
+  color: #0a0a0a;
 }
 
 * {
@@ -67,8 +54,8 @@ img {
 }
 
 ::selection {
-  color: #030303;
-  background: rgba(255, 255, 255, 0.8);
+  color: #fafaf8;
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .section-heading {
@@ -85,7 +72,7 @@ img {
   }
 
   .eyebrow {
-    color: var(--color-muted);
+    color: #71717a;
     font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.24em;
@@ -94,8 +81,8 @@ img {
   }
 
   .surface {
-    border: 1px solid var(--color-line);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
   }
 
   .button-primary,
@@ -115,13 +102,15 @@ img {
   }
 
   .button-primary {
-    background: var(--color-copy);
-    color: var(--color-ink);
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   .button-secondary {
-    border: 1px solid var(--color-line);
-    color: var(--color-copy);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #0a0a0a;
+    background: transparent;
   }
 
   .button-primary:hover,
@@ -129,9 +118,15 @@ img {
     transform: translateY(-2px);
   }
 
+  .button-primary:hover {
+    background: #0a0a0a;
+    color: #ffffff;
+    border-color: #0a0a0a;
+  }
+
   .button-secondary:hover {
-    border-color: rgba(255, 255, 255, 0.32);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.04);
   }
 }
 
@@ -144,4 +139,26 @@ img {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+.testimonials-swiper {
+  overflow: hidden;
+}
+
+.testimonials-swiper .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 1;
+  transition: all 300ms ease;
+}
+
+.testimonials-swiper .swiper-pagination-bullet-active {
+  width: 18px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+body.modal-open {
+  overflow: hidden;
 }

@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
-import Navbar from "./Navbar";
-
-const watch =
-  "https://images.pexels.com/photos/32528932/pexels-photo-32528932.jpeg?auto=compress&cs=tinysrgb&w=1600";
+import watch from "../assets/hero.png";
 
 export default function Hero() {
   return (
@@ -10,8 +7,6 @@ export default function Hero() {
       id="home"
       className="relative overflow-hidden border-b border-black/10 bg-[#f3f2ef] text-black"
     >
-      <Navbar />
-
       {/* Studio spotlight backdrop */}
       <div
         aria-hidden="true"

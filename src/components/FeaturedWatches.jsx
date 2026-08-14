@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import ProductQuickViewModal from "./ProductQuickViewModal";
 
 const FEATURED = [
   {
@@ -57,6 +59,8 @@ const FEATURED = [
 ];
 
 export default function FeaturedWatches() {
+  const [selected, setSelected] = useState(null);
+
   return (
     <section id="featured" className="relative bg-white py-20 sm:py-28">
       <div className="page-shell flex flex-col items-center text-center">
@@ -91,9 +95,13 @@ export default function FeaturedWatches() {
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/10">
-                <span className="pointer-events-auto translate-y-4 rounded-full border border-black/20 bg-white/90 px-5 py-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black backdrop-blur-sm">
+                <button
+                  type="button"
+                  onClick={() => setSelected(watch)}
+                  className="pointer-events-auto translate-y-4 rounded-full border border-black/20 bg-white/90 px-5 py-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black backdrop-blur-sm"
+                >
                   View Details
-                </span>
+                </button>
               </div>
             </div>
             <h3 className="mt-3 text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:mt-5 sm:text-sm sm:tracking-[0.14em]">
@@ -108,6 +116,11 @@ export default function FeaturedWatches() {
           </motion.div>
         ))}
       </div>
+
+      <ProductQuickViewModal
+        product={selected}
+        onClose={() => setSelected(null)}
+      />
     </section>
   );
 }
