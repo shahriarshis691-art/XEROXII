@@ -1,8 +1,14 @@
-import { FiImage } from "react-icons/fi";
-
 const PANELS = [
-  { label: "Diamond Jewellery", alt: "Diamond jewellery collection" },
-  { label: "Women's Bag Collection", alt: "Women's bag collection" },
+  {
+    label: "Diamond Jewellery",
+    alt: "Close-up of a luxury diamond and emerald necklace",
+    src: "https://images.pexels.com/photos/32988525/pexels-photo-32988525.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  },
+  {
+    label: "Women's Bag Collection",
+    alt: "Luxury black crocodile-leather handbag with matching belt",
+    src: "https://images.pexels.com/photos/30975839/pexels-photo-30975839.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  },
 ];
 
 export default function WomensJewellery() {
@@ -22,13 +28,13 @@ export default function WomensJewellery() {
 
       <div className="mt-14 grid grid-cols-1 gap-px bg-black/10 sm:mt-16 sm:grid-cols-2">
         {PANELS.map((panel) => (
-          <div
-            key={panel.label}
-            className="group relative flex aspect-[4/5] flex-col items-center justify-center gap-3 overflow-hidden bg-gradient-to-br from-[#f5f4f0] to-[#e2dfd7] text-center"
-          >
-            {/* Placeholder until a real product/lifestyle photo is added here */}
-            <FiImage size={28} className="text-black/25" aria-hidden="true" />
-            <p className="text-[0.65rem] uppercase tracking-[0.2em] text-black/40">{panel.label}</p>
+          <div key={panel.label} className="group relative aspect-[4/5] overflow-hidden bg-[#e9e7e1]">
+            <img
+              src={panel.src}
+              alt={panel.alt}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
           </div>
         ))}
       </div>
