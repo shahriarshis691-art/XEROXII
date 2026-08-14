@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black py-12">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 text-sm text-zinc-400 sm:px-8 lg:px-10">
+      <div className="page-shell flex flex-col gap-8 text-sm text-zinc-400">
         <div className="flex flex-col gap-6 border-b border-white/10 pb-8 sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-base uppercase tracking-[0.35em] text-white">XEROXII</span>
+          <Link to="/" className="text-sm font-semibold uppercase tracking-[0.3em] text-white">XEROXII</Link>
           <p className="max-w-2xl leading-8 text-zinc-400">
             Swiss-inspired horology for those who value elegance, precision, and deliberate design.
           </p>
@@ -13,24 +15,24 @@ export default function Footer() {
           <div>
             <p className="mb-4 uppercase tracking-[0.28em] text-white/70">Collections</p>
             <ul className="space-y-3 text-sm text-zinc-400">
-              <li>Chronograph</li>
-              <li>GMT</li>
-              <li>Moonphase</li>
+              <li><Link to="/shop" className="transition hover:text-white">Chronograph</Link></li>
+              <li><Link to="/shop" className="transition hover:text-white">GMT</Link></li>
+              <li><Link to="/shop" className="transition hover:text-white">Moonphase</Link></li>
             </ul>
           </div>
           <div>
             <p className="mb-4 uppercase tracking-[0.28em] text-white/70">Service</p>
             <ul className="space-y-3 text-sm text-zinc-400">
-              <li>Private consultations</li>
-              <li>Worldwide delivery</li>
-              <li>Aftercare</li>
+              <li><Link to="/contact" className="transition hover:text-white">Private consultations</Link></li>
+              <li><Link to="/contact" className="transition hover:text-white">Worldwide delivery</Link></li>
+              <li><Link to="/contact" className="transition hover:text-white">Aftercare</Link></li>
             </ul>
           </div>
           <div>
             <p className="mb-4 uppercase tracking-[0.28em] text-white/70">Contact</p>
             <ul className="space-y-3 text-sm text-zinc-400">
-              <li>hello@xeroxii.com</li>
-              <li>+1 800 987 6543</li>
+              <li><a href="mailto:hello@xeroxii.com" className="transition hover:text-white">hello@xeroxii.com</a></li>
+              <li><a href="tel:+18009876543" className="transition hover:text-white">+1 800 987 6543</a></li>
             </ul>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FiMenu, FiSearch, FiShoppingBag } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 
@@ -24,8 +24,8 @@ export default function Navbar({ onCartOpen }) {
   };
 
   return (
-    <motion.header initial={{ y: -24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="sticky top-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-8 sm:py-4 lg:px-10">
+    <motion.header initial={{ y: -24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="sticky top-0 z-50 border-b border-white/10 bg-black/75 backdrop-blur-2xl">
+      <div className="page-shell flex items-center justify-between py-3 sm:py-4">
         <button
           type="button"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -45,9 +45,9 @@ export default function Navbar({ onCartOpen }) {
 
         <div className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
-            <Link key={link.label} to={link.to} className="text-sm uppercase tracking-[0.28em] text-zinc-300 transition hover:text-white">
+            <NavLink key={link.label} to={link.to} className={({ isActive }) => `text-[0.6875rem] font-medium uppercase tracking-[0.16em] transition ${isActive ? "text-white" : "text-zinc-400 hover:text-white"}`}>
               {link.label}
-            </Link>
+            </NavLink>
           ))}
         </div>
 
@@ -72,13 +72,13 @@ export default function Navbar({ onCartOpen }) {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="border-t border-white/10 bg-black/95 md:hidden"
           >
-            <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 sm:px-8">
+            <div className="page-shell flex flex-col gap-2 py-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.to}
                   onClick={handleLinkClick}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm uppercase tracking-[0.22em] text-zinc-200 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
+                  className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-xs font-medium uppercase tracking-[0.16em] text-zinc-300 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
                 >
                   {link.label}
                 </Link>
