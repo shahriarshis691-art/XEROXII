@@ -1,15 +1,15 @@
 import Hero from "./components/Hero";
-import WatchListing from "./components/WatchListing";
 import CollectionShowcase from "./components/CollectionShowcase";
 import WomensJewellery from "./components/WomensJewellery";
+import WatchListing from "./components/WatchListing";
 
 function App() {
   return (
     <>
       <Hero />
-      <WatchListing />
       <CollectionShowcase />
       <WomensJewellery />
+      <WatchListing />
     </>
   );
 }

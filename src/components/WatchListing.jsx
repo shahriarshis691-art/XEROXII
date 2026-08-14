@@ -51,7 +51,7 @@ export default function WatchListing() {
         </h2>
       </div>
 
-      <div className="page-shell mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="page-shell mt-14 grid grid-cols-3 gap-x-3 gap-y-8 sm:mt-16 sm:gap-x-8 sm:gap-y-14">
         {WATCHES.map((watch, index) => (
           <motion.div
             key={watch.name}
@@ -69,13 +69,15 @@ export default function WatchListing() {
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
             </div>
-            <h3 className="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+            <h3 className="mt-3 text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:mt-5 sm:text-sm sm:tracking-[0.14em]">
               {watch.name}
             </h3>
-            <p className="mt-1 text-[0.6875rem] uppercase tracking-[0.16em] text-black/50">
+            <p className="mt-1 text-[0.55rem] uppercase leading-tight tracking-[0.06em] text-black/50 sm:text-[0.6875rem] sm:tracking-[0.16em]">
               {watch.title}
             </p>
-            <p className="mt-2 text-sm font-medium tracking-[0.04em] text-black/80">{watch.price}</p>
+            <p className="mt-1.5 text-[0.7rem] font-medium tracking-[0.02em] text-black/80 sm:mt-2 sm:text-sm sm:tracking-[0.04em]">
+              {watch.price}
+            </p>
           </motion.div>
         ))}
       </div>
