@@ -1,7 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import BrandHeritageBanner from "./components/BrandHeritageBanner";
-import CraftsmanshipSpecs from "./components/CraftsmanshipSpecs";
 import CollectionShowcase from "./components/CollectionShowcase";
 import WomensJewellery from "./components/WomensJewellery";
 import WatchListing from "./components/WatchListing";
@@ -16,7 +15,6 @@ function App() {
       <Navbar />
       <Hero />
       <BrandHeritageBanner />
-      <CraftsmanshipSpecs />
       <CollectionShowcase />
       <WomensJewellery />
       <WatchListing />
