@@ -1,28 +1,19 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import BrandHeritageBanner from "./components/BrandHeritageBanner";
-import CollectionShowcase from "./components/CollectionShowcase";
-import WomensJewellery from "./components/WomensJewellery";
-import WatchListing from "./components/WatchListing";
-import FeaturedWatches from "./components/FeaturedWatches";
-import TestimonialsCarousel from "./components/TestimonialsCarousel";
-import PopularBrands from "./components/PopularBrands";
+import Home from "./components/Home";
+import BrandPage from "./components/BrandPage";
 import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      <Hero />
-      <BrandHeritageBanner />
-      <CollectionShowcase />
-      <WomensJewellery />
-      <WatchListing />
-      <FeaturedWatches />
-      <TestimonialsCarousel />
-      <PopularBrands />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/brand/:slug" element={<BrandPage />} />
+      </Routes>
       <Footer />
-    </>
+    </BrowserRouter>
   );
 }
 

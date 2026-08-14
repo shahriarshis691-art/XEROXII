@@ -1,37 +1,39 @@
+import { Link } from "react-router-dom";
+
 const BRANDS = [
   {
     name: "SEIKO",
-    href: "#seiko",
+    slug: "seiko",
     src: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80",
     alt: "Seiko luxury watch dial close-up",
   },
   {
     name: "TISSOT",
-    href: "#tissot",
+    slug: "tissot",
     src: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80",
     alt: "Tissot watch dial macro detail",
   },
   {
     name: "CITIZEN",
-    href: "#citizen",
+    slug: "citizen",
     src: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=600&q=80",
     alt: "Citizen watch face close-up",
   },
   {
     name: "CASIO",
-    href: "#casio",
+    slug: "casio",
     src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=600&q=80",
     alt: "Casio timepiece dial detail",
   },
   {
     name: "ORIENT",
-    href: "#orient",
+    slug: "orient",
     src: "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=600&q=80",
     alt: "Orient watch dial showcase",
   },
   {
     name: "HAMILTON",
-    href: "#hamilton",
+    slug: "hamilton",
     src: "https://images.unsplash.com/photo-1533132399788-19650c12c6ed?auto=format&fit=crop&w=600&q=80",
     alt: "Hamilton luxury watch face",
   },
@@ -57,8 +59,8 @@ export default function PopularBrands() {
               index === BRANDS.length - 1 ? "lg:col-span-5 flex justify-center" : ""
             }
           >
-            <a
-              href={brand.href}
+            <Link
+              to={`/brand/${brand.slug}`}
               className={`block relative overflow-hidden bg-[#0a0a0a] group ${
                 index === BRANDS.length - 1
                   ? "lg:w-full lg:max-w-[240px]"
@@ -80,7 +82,7 @@ export default function PopularBrands() {
               <span className="absolute inset-0 flex items-center justify-center text-sm font-semibold uppercase tracking-widest text-white transition-all duration-500 group-hover:tracking-[0.35em] sm:text-base">
                 {brand.name}
               </span>
-            </a>
+            </Link>
           </div>
         ))}
       </div>
