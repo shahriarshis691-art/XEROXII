@@ -3,6 +3,7 @@ import CollectionShowcase from "./components/CollectionShowcase";
 import WomensJewellery from "./components/WomensJewellery";
 import WatchListing from "./components/WatchListing";
 import FeaturedWatches from "./components/FeaturedWatches";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <WomensJewellery />
       <WatchListing />
       <FeaturedWatches />
+      <Footer />
     </>
   );
 }
