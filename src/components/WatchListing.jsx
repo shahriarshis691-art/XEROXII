@@ -37,6 +37,90 @@ const WATCHES = [
     price: "৳ 1,95,000",
     src: "https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg?auto=compress&cs=tinysrgb&w=900",
   },
+  {
+    name: "Titan Chrono Bracelet",
+    title: "Men's Steel Chronograph",
+    price: "৳ 2,25,000",
+    src: "https://images.pexels.com/photos/33532635/pexels-photo-33532635.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Noir Executive",
+    title: "Men's Black Dial Display",
+    price: "৳ 1,75,000",
+    src: "https://images.pexels.com/photos/8839887/pexels-photo-8839887.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Rosé Élan",
+    title: "Women's Rose Gold Edition",
+    price: "৳ 2,95,000",
+    src: "https://images.pexels.com/photos/35080771/pexels-photo-35080771.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Satin Gold Duo",
+    title: "Women's Gold & Silver Set",
+    price: "৳ 3,45,000",
+    src: "https://images.pexels.com/photos/31050004/pexels-photo-31050004.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Alderwood Classic",
+    title: "Men's Leather Strap Edition",
+    price: "৳ 1,55,000",
+    src: "https://images.pexels.com/photos/36812409/pexels-photo-36812409.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Walnut Heritage",
+    title: "Unisex Brown Leather Band",
+    price: "৳ 1,65,000",
+    src: "https://images.pexels.com/photos/34602509/pexels-photo-34602509.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Celestial Diamond",
+    title: "Women's Diamond Encrusted",
+    price: "৳ 4,50,000",
+    src: "https://images.pexels.com/photos/8854152/pexels-photo-8854152.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Heritage Silver",
+    title: "Unisex Vintage Silver",
+    price: "৳ 2,80,000",
+    src: "https://images.pexels.com/photos/1467188/pexels-photo-1467188.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Chronograph Elite",
+    title: "Men's Sports Chronograph",
+    price: "৳ 3,10,000",
+    src: "https://images.pexels.com/photos/3419331/pexels-photo-3419331.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Midnight Black",
+    title: "Men's Premium Black Dial",
+    price: "৳ 2,45,000",
+    src: "https://images.pexels.com/photos/16739804/pexels-photo-16739804.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Celestial Rose",
+    title: "Women's Rose Gold Luxury",
+    price: "৳ 3,75,000",
+    src: "https://images.pexels.com/photos/3809175/pexels-photo-3809175.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Nomad Leather",
+    title: "Men's Explorer Edition",
+    price: "৳ 1,90,000",
+    src: "https://images.pexels.com/photos/5058216/pexels-photo-5058216.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Prestige Black",
+    title: "Men's Ceramic Chronograph",
+    price: "৳ 3,55,000",
+    src: "https://images.pexels.com/photos/19810831/pexels-photo-19810831.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
+  {
+    name: "Mechanical Art",
+    title: "Unisex Skeleton Dial",
+    price: "৳ 4,20,000",
+    src: "https://images.pexels.com/photos/30250930/pexels-photo-30250930.jpeg?auto=compress&cs=tinysrgb&w=900",
+  },
 ];
 
 export default function WatchListing() {
