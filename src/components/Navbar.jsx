@@ -48,7 +48,7 @@ export default function Navbar({ onCartOpen }) {
           XEROXII
         </Link>
 
-        <div className={`hidden items-center gap-8 md:flex ${isHome ? "mx-auto" : ""}`}>
+        <div className={`hidden items-center gap-8 md:flex ${isHome ? "absolute left-1/2 top-full -translate-x-1/2 py-5" : ""}`}>
           {navLinks.map((link) => (
             <NavLink key={link.label} to={link.to} className={({ isActive }) => `text-[0.6875rem] font-medium uppercase tracking-[0.14em] transition ${isHome ? (isActive ? "text-black" : "text-black/60 hover:text-black") : (isActive ? "text-white" : "text-zinc-400 hover:text-white")}`}>
               {link.label}
@@ -72,6 +72,8 @@ export default function Navbar({ onCartOpen }) {
           </button>
         </div>
       </div>
+
+      {isHome ? <div className="hidden h-14 md:block" aria-hidden="true" /> : null}
 
       <AnimatePresence>
         {menuOpen ? (
