@@ -1,17 +1,20 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      title: "Chronograph No. 01",
-      price: 8400,
-      quantity: 1,
-      image: "/src/assets/watch.jpg",
-    },
-  ]);
+  const [items, setItems] = useState(() => {
+    try {
+      const storedItems = window.localStorage.getItem("xeroxii-cart");
+      return storedItems ? JSON.parse(storedItems) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem("xeroxii-cart", JSON.stringify(items));
+  }, [items]);
 
   const addItem = (product) => {
     setItems((current) => {

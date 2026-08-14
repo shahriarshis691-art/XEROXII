@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiMenu, FiSearch, FiShoppingBag } from "react-icons/fi";
+import { useCart } from "../context/CartContext";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -15,6 +16,8 @@ const navLinks = [
 
 export default function Navbar({ onCartOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { items } = useCart();
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleLinkClick = () => {
     setMenuOpen(false);
@@ -54,9 +57,7 @@ export default function Navbar({ onCartOpen }) {
           </button>
           <button type="button" aria-label="Cart" onClick={onCartOpen} className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-zinc-300 hover:bg-white/10">
             <FiShoppingBag className="h-5 w-5" />
-            <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-black">
-              1
-            </span>
+            {itemCount > 0 ? <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-black">{itemCount}</span> : null}
           </button>
         </div>
       </div>
@@ -89,9 +90,7 @@ export default function Navbar({ onCartOpen }) {
                 </button>
                 <button type="button" aria-label="Cart" onClick={onCartOpen} className="relative inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-zinc-300 hover:bg-white/10">
                   <FiShoppingBag className="h-5 w-5" />
-                  <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-black">
-                    1
-                  </span>
+                  {itemCount > 0 ? <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-black">{itemCount}</span> : null}
                 </button>
               </div>
             </div>

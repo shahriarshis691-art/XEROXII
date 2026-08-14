@@ -1,3 +1,6 @@
+import heroImage from "../assets/hero.png";
+import watchImage from "../assets/watch.jpg";
+
 export const products = [
   {
     id: 1,
@@ -9,7 +12,7 @@ export const products = [
     rating: 4.9,
     reviews: 218,
     availability: "In stock",
-    image: "/src/assets/watch.jpg",
+    image: watchImage,
     badge: "Limited",
   },
   {
@@ -22,7 +25,7 @@ export const products = [
     rating: 4.8,
     reviews: 154,
     availability: "In stock",
-    image: "/src/assets/hero.png",
+    image: heroImage,
     badge: "New",
   },
   {
@@ -35,7 +38,7 @@ export const products = [
     rating: 4.7,
     reviews: 96,
     availability: "Pre-order",
-    image: "/src/assets/watch.jpg",
+    image: watchImage,
     badge: "Bespoke",
   },
   {
@@ -48,7 +51,7 @@ export const products = [
     rating: 4.9,
     reviews: 132,
     availability: "In stock",
-    image: "/src/assets/hero.png",
+    image: heroImage,
     badge: "Popular",
   },
 ];
