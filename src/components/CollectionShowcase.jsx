@@ -1,15 +1,13 @@
-import watch from "../assets/watch.jpg";
-
 const PANELS = [
   {
-    alt: "XEROXII chronograph worn on the wrist alongside spare straps",
-    position: "20% 30%",
-    scale: "scale-100",
+    label: "Men's Collection",
+    alt: "Luxury men's chronograph wristwatch with leather strap",
+    src: "https://images.pexels.com/photos/28977357/pexels-photo-28977357.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
-    alt: "XEROXII chronograph dial detail with leather strap collection",
-    position: "60% 40%",
-    scale: "scale-125",
+    label: "Women's Collection",
+    alt: "Luxury women's gold wristwatch with diamond-studded bezel",
+    src: "https://images.pexels.com/photos/35991456/pexels-photo-35991456.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
 ];
 
@@ -27,12 +25,12 @@ export default function CollectionShowcase() {
 
       <div className="mt-16 grid grid-cols-1 gap-px bg-black/10 sm:mt-20 sm:grid-cols-2">
         {PANELS.map((panel) => (
-          <div key={panel.alt} className="group relative aspect-[4/3] overflow-hidden bg-[#e9e7e1] sm:aspect-[5/4]">
+          <div key={panel.label} className="group relative aspect-[4/3] overflow-hidden bg-[#e9e7e1] sm:aspect-[5/4]">
             <img
-              src={watch}
+              src={panel.src}
               alt={panel.alt}
-              style={{ objectPosition: panel.position }}
-              className={`h-full w-full object-cover mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-105 ${panel.scale}`}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           </div>
         ))}
