@@ -3,37 +3,25 @@ import watch from "../assets/watch.jpg";
 
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden border-b border-white/10 bg-black text-white">
-      <div className="page-shell grid min-h-[calc(100svh-72px)] items-center gap-12 py-14 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:py-24">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} className="max-w-xl">
-          <p className="eyebrow">Swiss craftsmanship · 2026 collection</p>
-          <h1 className="section-heading mt-6 text-5xl font-semibold leading-[0.94] text-white sm:text-6xl lg:text-7xl">
-            The art of time, reimagined.
+    <section id="home" className="relative -mt-[1px] min-h-[calc(100svh-4.5rem)] overflow-hidden border-b border-black/10 bg-[#e7e6e3] text-black">
+      <div className="page-shell relative grid min-h-[calc(100svh-4.5rem)] items-center gap-4 py-10 sm:py-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:py-20">
+        <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.75, ease: "easeOut" }} className="relative z-10 max-w-xl self-end pb-8 lg:self-center lg:pb-0">
+          <p className="eyebrow text-black/55">Iconic since 2026</p>
+          <h1 className="mt-5 max-w-[13ch] text-5xl font-light uppercase leading-[0.94] tracking-[0.08em] text-black sm:text-6xl lg:text-7xl">
+            XEROXII<br />
+            CHRONOGRAPH
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-8 text-zinc-400 sm:text-lg">
-            Discover sculpted chronographs, refined steel, and platinum details designed for collectors who value precision and presence.
+          <p className="mt-5 max-w-sm text-sm uppercase leading-7 tracking-[0.12em] text-black/65 sm:text-base">
+            Precision in motion. Designed for collectors who value presence.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#collections" className="button-primary">Explore watches</a>
-            <a href="#story" className="button-secondary">Our story</a>
-          </div>
-          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-5 text-xs uppercase tracking-[0.16em] text-zinc-500">
-            <span>Swiss movement</span>
-            <span>Platinum case</span>
-            <span>Limited edition</span>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="#collections" className="inline-flex min-h-12 items-center justify-center border border-black/35 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-black hover:text-white">Discover the watch</a>
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: "easeOut" }} className="relative">
-          <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-zinc-950 shadow-[0_30px_90px_rgba(0,0,0,0.42)]">
-            <img src={watch} alt="Luxury XEROXII watch" className="aspect-[4/5] w-full object-cover object-center sm:aspect-[5/6]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-              <p className="eyebrow text-zinc-300">Limited release</p>
-              <h2 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">Chronograph No. 01</h2>
-              <p className="mt-3 max-w-md text-sm leading-7 text-zinc-300">A matte black dial, polished steel bracelet, and sapphire crystal crafted for quiet confidence.</p>
-            </div>
-          </div>
+        <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: "easeOut" }} className="relative flex h-full min-h-[26rem] items-center justify-center lg:min-h-0">
+          <div className="absolute right-[12%] top-[15%] h-64 w-64 rounded-full bg-white/40 blur-3xl sm:h-96 sm:w-96" />
+          <img src={watch} alt="Luxury XEROXII watch" className="relative z-10 max-h-[72svh] w-full max-w-2xl object-contain contrast-110 grayscale-[0.12] drop-shadow-[0_28px_30px_rgba(0,0,0,0.2)]" />
         </motion.div>
       </div>
     </section>
