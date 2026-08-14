@@ -16,7 +16,21 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_35%,rgba(255,255,255,0.95),rgba(226,224,218,0.4)_45%,rgba(243,242,239,0)_75%)]"
       />
 
-      <div className="page-shell relative grid min-h-[calc(100svh-7.5rem)] grid-cols-1 items-center gap-10 py-10 sm:py-14 lg:grid-cols-[0.85fr_1fr_0.95fr] lg:gap-6 lg:py-16">
+      {/* Right: featured watch, full-bleed edge to edge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.06 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="absolute inset-y-0 right-0 hidden w-[42%] lg:block"
+      >
+        <img
+          src={watch}
+          alt="XEROXII luxury steel chronograph watch"
+          className="h-full w-full object-cover"
+        />
+      </motion.div>
+
+      <div className="page-shell relative grid min-h-[calc(100svh-7.5rem)] grid-cols-1 items-center gap-10 py-10 sm:py-14 lg:grid-cols-[0.9fr_1fr] lg:gap-6 lg:py-16 lg:pr-[38%]">
         {/* Left: typography + CTA */}
         <motion.div
           initial={{ opacity: 0, x: -24 }}
@@ -45,6 +59,15 @@ export default function Hero() {
             </a>
           </div>
         </motion.div>
+
+        {/* Mobile/tablet watch image, full-bleed edge to edge */}
+        <div className="relative order-3 -mx-4 aspect-[4/3] w-[calc(100%+2rem)] sm:-mx-6 sm:w-[calc(100%+3rem)] lg:hidden">
+          <img
+            src={watch}
+            alt="XEROXII luxury steel chronograph watch"
+            className="h-full w-full object-cover"
+          />
+        </div>
 
         {/* Center: archival collage */}
         <motion.div
@@ -103,23 +126,6 @@ export default function Hero() {
             <span className="text-[0.5rem] font-semibold uppercase tracking-[0.14em] text-black/40">
               No. 0042
             </span>
-          </div>
-        </motion.div>
-
-        {/* Right: featured watch */}
-        <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="relative order-3 flex h-full min-h-[24rem] items-center justify-center pr-0 lg:min-h-0 lg:pr-6"
-        >
-          <div className="absolute h-64 w-64 rounded-full bg-white/70 blur-3xl sm:h-80 sm:w-80" aria-hidden="true" />
-          <div className="relative z-10 aspect-[2/3] w-full max-w-xs overflow-hidden rounded-[2rem] shadow-[0_35px_60px_rgba(0,0,0,0.25)] sm:max-w-sm">
-            <img
-              src={watch}
-              alt="XEROXII luxury steel chronograph watch"
-              className="h-full w-full object-cover"
-            />
           </div>
         </motion.div>
       </div>
