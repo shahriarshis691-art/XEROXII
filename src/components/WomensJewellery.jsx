@@ -15,8 +15,8 @@ export default function WomensJewellery() {
   return (
     <section id="jewellery" className="relative bg-white">
       <div className="flex flex-col items-center text-center pt-20 sm:pt-28">
-        <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.35em] text-[#5a001a] sm:text-4xl">
-          W O M E N&apos;S&nbsp;&nbsp;J E W E L L E R Y
+        <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.15em] text-[#a3123a] sm:text-4xl">
+          Women&apos;s Jewellery
         </h2>
         <a
           href="#collections"
