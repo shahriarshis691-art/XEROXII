@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import watch from "../assets/hero.png";
 
+// Premium luxury hero banner image URL
+// Replace this URL with your generated luxury watch image
+const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1523170335258-f5b5b2b9b4c5?auto=compress&cs=tinysrgb&w=1600";
+
 export default function Hero() {
   return (
     <section
@@ -58,9 +62,13 @@ export default function Hero() {
       >
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#e9e7e1] sm:aspect-[21/9]">
           <img
-            src={watch}
-            alt="XEROXII luxury stainless steel watch lying horizontally on a clean studio surface"
+            src={HERO_IMAGE_URL}
+            alt="XEROXII luxury watch collection - premium stainless steel, chronograph, automatic, and titanium sports watches on brushed titanium and polished steel surfaces"
             className="h-full w-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = watch;
+            }}
           />
           {/* soft ground shadow / vignette for a high-key studio feel */}
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0)_55%,rgba(0,0,0,0.08)_100%)]" />
