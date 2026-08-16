@@ -1,12 +1,15 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import Seo from "./Seo";
 import { BRAND_PRODUCTS, BRAND_META } from "../data/brandProducts";
+import { parsePrice } from "../lib/productUtils";
+import { AppContext } from "../context/AppContext";
 
 export default function BrandPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { formatMoney } = useContext(AppContext);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -95,7 +98,7 @@ export default function BrandPage() {
                 {watch.title}
               </h3>
               <p className="mt-1.5 text-[0.7rem] font-medium tracking-[0.02em] text-black/80 sm:mt-2 sm:text-sm sm:tracking-[0.04em]">
-                {watch.priceBDT}
+                {formatMoney(parsePrice(watch))}
               </p>
             </motion.div>
           ))}

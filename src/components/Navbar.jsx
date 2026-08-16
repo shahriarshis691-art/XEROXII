@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiSearch, FiHeart, FiUser, FiMenu, FiX, FiShoppingBag } from "react-icons/fi";
 import { AppContext } from "../context/AppContext";
 import CartDrawer from "./CartDrawer";
+import LocationSwitcher from "./LocationSwitcher";
 
 const SUB_LINKS = [
   { label: "Watches", path: "/#watches" },
@@ -103,12 +104,13 @@ export default function Navbar() {
                 {menuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
               </button>
 
-              <div className="hidden gap-6 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-black/55 sm:flex">
+              <div className="hidden items-center gap-6 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-black/55 sm:flex">
                 {UTILITY_LINKS.map((link) => (
                   <Link key={link.path} to={link.path} className="transition hover:text-black">
                     {link.label}
                   </Link>
                 ))}
+                <LocationSwitcher />
               </div>
             </div>
 
@@ -124,6 +126,9 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center sm:gap-5">
+              <div className="sm:hidden">
+                <LocationSwitcher />
+              </div>
               <button type="button" aria-label="Search" className={iconBtnClass} onClick={handleSearchClick}>
                 <FiSearch size={17} />
               </button>
@@ -244,6 +249,9 @@ export default function Navbar() {
                     >
                       Account
                     </button>
+                  </li>
+                  <li className="border-b border-black/10">
+                    <LocationSwitcher variant="menu" onOpen={closeMenu} />
                   </li>
                 </ul>
               </nav>

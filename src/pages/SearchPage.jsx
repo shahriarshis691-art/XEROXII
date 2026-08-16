@@ -1,11 +1,13 @@
 import { useSearchParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import { searchProducts } from '../data/catalog';
-import { getProductPriceDisplay, getProductName } from '../lib/productUtils';
+import { parsePrice, getProductName } from '../lib/productUtils';
+import { AppContext } from '../context/AppContext';
 
 export default function SearchPage() {
+  const { formatMoney } = useContext(AppContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const [query, setQuery] = useState(initialQuery);
@@ -89,7 +91,7 @@ export default function SearchPage() {
                 <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">
                   {product.brand}
                 </p>
-                <p className="font-medium text-black">{getProductPriceDisplay(product)}</p>
+                <p className="font-medium text-black">{formatMoney(parsePrice(product))}</p>
               </Link>
             </motion.div>
           ))}

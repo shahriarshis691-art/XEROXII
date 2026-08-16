@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiMinus, FiPlus } from 'react-icons/fi';
-import { parsePrice, getProductName, formatPrice } from '../lib/productUtils';
+import { parsePrice, getProductName } from '../lib/productUtils';
+import { AppContext } from '../context/AppContext';
 
 export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, updateCartQuantity, cartTotal, cartItemCount }) {
+  const { formatMoney } = useContext(AppContext);
   useEffect(() => {
     if (!isOpen) return;
     document.body.style.overflow = 'hidden';
@@ -87,7 +89,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
                           </p>
                         )}
                         <p className="text-sm font-medium text-black mt-1">
-                          ৳ {parsePrice(item).toLocaleString()}
+                          {formatMoney(parsePrice(item))}
                         </p>
                         <div className="mt-2 flex items-center justify-between">
                           <div className="flex items-center border border-black/20">
@@ -114,15 +116,15 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
               <div className="space-y-3 border-t border-black/10 px-6 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Subtotal</span>
-                  <span>{formatPrice(cartTotal)}</span>
+                  <span>{formatMoney(cartTotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Tax (10%)</span>
-                  <span>{formatPrice(tax)}</span>
+                  <span>{formatMoney(tax)}</span>
                 </div>
                 <div className="flex justify-between border-t border-black/10 pt-2 font-semibold text-black">
                   <span>Total</span>
-                  <span>{formatPrice(total)}</span>
+                  <span>{formatMoney(total)}</span>
                 </div>
                 <Link
                   to="/checkout"

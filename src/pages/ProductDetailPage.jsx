@@ -8,7 +8,7 @@ import { FiHeart, FiPlus, FiMinus } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
 import { getProductById, getRelatedProducts } from '../data/catalog';
-import { parsePrice, getProductName, getProductPriceDisplay } from '../lib/productUtils';
+import { parsePrice, getProductName } from '../lib/productUtils';
 
 function VariantSelector({ label, options, value, onChange }) {
   if (!options?.length) return null;
@@ -38,7 +38,7 @@ function VariantSelector({ label, options, value, onChange }) {
 export default function ProductDetailPage() {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const { addToCart, toggleWishlist, isInWishlist } = useContext(AppContext);
+  const { addToCart, toggleWishlist, isInWishlist, formatMoney } = useContext(AppContext);
   const [quantity, setQuantity] = useState(1);
   const [liked, setLiked] = useState(false);
   const [product, setProduct] = useState(null);
@@ -201,7 +201,7 @@ export default function ProductDetailPage() {
 
             <div className="mb-8 pb-8 border-b border-black/20">
               <p className="text-sm uppercase tracking-[0.16em] text-black/60 mb-2">Price</p>
-              <p className="text-3xl sm:text-4xl font-light text-black">৳ {productPrice.toLocaleString()}</p>
+              <p className="text-3xl font-light text-black sm:text-4xl">{formatMoney(productPrice)}</p>
               {product.sku && <p className="mt-2 text-xs uppercase tracking-[0.16em] text-black/50">SKU: {product.sku}</p>}
             </div>
 
@@ -269,7 +269,7 @@ export default function ProductDetailPage() {
             <button type="button" className="inline-flex h-11 w-11 items-center justify-center" onClick={() => setQuantity(Math.min(stockLimit, quantity + 1))} aria-label="Increase"><FiPlus size={14} /></button>
           </div>
           <button type="button" onClick={handleAddToCart} className="min-h-11 min-w-0 flex-1 truncate bg-black px-3 py-3 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-white sm:text-xs sm:tracking-[0.16em]">
-            Add to Cart — ৳ {(productPrice * quantity).toLocaleString()}
+            Add to Cart — {formatMoney(productPrice * quantity)}
           </button>
         </div>
       </div>
@@ -296,7 +296,7 @@ export default function ProductDetailPage() {
                   </div>
                   <h3 className="mb-1 text-[0.65rem] font-semibold uppercase tracking-wide text-black sm:text-sm">{getProductName(item)}</h3>
                   <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">{item.brand}</p>
-                  <p className="font-medium text-black">{getProductPriceDisplay(item)}</p>
+                  <p className="font-medium text-black">{formatMoney(parsePrice(item))}</p>
                 </motion.div>
               ))}
             </div>

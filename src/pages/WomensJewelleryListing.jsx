@@ -7,11 +7,12 @@ import toast from "react-hot-toast";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
 import { AppContext } from "../context/AppContext";
 import { JEWELLERY_LISTING_PRODUCTS } from "../data/jewelleryProducts";
+import { parsePrice } from "../lib/productUtils";
 
 export default function WomensJewelleryListing() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selected, setSelected] = useState(null);
-  const { toggleWishlist, isInWishlist } = useContext(AppContext);
+  const { toggleWishlist, isInWishlist, formatMoney } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleWishlist = (product, e) => {
@@ -137,7 +138,7 @@ export default function WomensJewelleryListing() {
                   {product.category}
                 </p>
                 <p className="mt-3 text-[0.75rem] font-semibold text-black sm:text-sm">
-                  {product.price}
+                  {formatMoney(parsePrice(product))}
                 </p>
               </motion.div>
             ))}

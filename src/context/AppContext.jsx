@@ -4,6 +4,9 @@ import { readStorage, writeStorage } from '../lib/storage';
 import { persistOrder } from '../lib/orderService';
 import { getProductById } from '../data/catalog';
 import { onAuthStateChange } from '../lib/authService';
+import { getCountryByCode } from '../data/regions';
+import { formatAmountFromBDT, CURRENCY_CONFIG, EXCHANGE_RATES } from '../lib/currency';
+import { COUNTRY_STORAGE_KEY, COUNTRY_SET_STORAGE_KEY, DEFAULT_COUNTRY_CODE } from '../lib/constants';
 
 export const AppContext = createContext();
 
@@ -19,6 +22,12 @@ export function AppProvider({ children }) {
   const [profile, setProfile] = useState(() => readStorage('xeroxii_profile', {}));
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState(() => readStorage('xeroxii_orders', []));
+  const [countryCode, setCountryCode] = useState(() => readStorage(COUNTRY_STORAGE_KEY, DEFAULT_COUNTRY_CODE));
+  const [countrySet, setCountrySet] = useState(() => Boolean(readStorage(COUNTRY_SET_STORAGE_KEY, false)));
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
+
+  const selectedCountry = getCountryByCode(countryCode) ?? getCountryByCode(DEFAULT_COUNTRY_CODE);
+  const currencyCode = selectedCountry?.currency ?? 'BDT';
 
   useEffect(() => {
     writeStorage('xeroxii_cart', cart);
@@ -37,6 +46,21 @@ export function AppProvider({ children }) {
   }, [profile]);
 
   useEffect(() => {
+    writeStorage(COUNTRY_STORAGE_KEY, countryCode);
+  }, [countryCode]);
+
+  useEffect(() => {
+    if (!countrySet) return;
+    writeStorage(COUNTRY_SET_STORAGE_KEY, true);
+  }, [countrySet]);
+
+  useEffect(() => {
+    if (countrySet) return;
+    const timer = window.setTimeout(() => setLocationModalOpen(true), 500);
+    return () => window.clearTimeout(timer);
+  }, [countrySet]);
+
+  useEffect(() => {
     const { data: { subscription } } = onAuthStateChange((authUser) => {
       setUser(authUser);
     });
@@ -46,6 +70,33 @@ export function AppProvider({ children }) {
   const updateProfile = (updates) => {
     setProfile((prev) => ({ ...prev, ...updates }));
   };
+
+  const persistCountrySelection = (code) => {
+    const next = getCountryByCode(code)?.code ?? DEFAULT_COUNTRY_CODE;
+    setCountryCode(next);
+    setCountrySet(true);
+    writeStorage(COUNTRY_STORAGE_KEY, next);
+    writeStorage(COUNTRY_SET_STORAGE_KEY, true);
+    setLocationModalOpen(false);
+  };
+
+  const confirmCountry = (code) => {
+    persistCountrySelection(code);
+  };
+
+  const closeLocationModal = () => {
+    if (!countrySet) {
+      persistCountrySelection(DEFAULT_COUNTRY_CODE);
+      return;
+    }
+    setLocationModalOpen(false);
+  };
+
+  const openLocationModal = () => {
+    setLocationModalOpen(true);
+  };
+
+  const formatMoney = (amountBDT) => formatAmountFromBDT(amountBDT, currencyCode);
 
   const getStockLimit = (productId) => {
     const catalogProduct = getProductById(productId);
@@ -156,9 +207,9 @@ export function AppProvider({ children }) {
       shippingFee: 0,
       tax: currencyMeta?.tax ?? taxBDT,
       total: currencyMeta?.total ?? totalBDT,
-      currency: currencyMeta?.currency ?? 'BDT',
-      currencySymbol: currencyMeta?.currencySymbol ?? '৳',
-      exchangeRate: currencyMeta?.exchangeRate ?? 1,
+      currency: currencyMeta?.currency ?? currencyCode,
+      currencySymbol: currencyMeta?.currencySymbol ?? CURRENCY_CONFIG[currencyCode]?.symbol ?? '৳',
+      exchangeRate: currencyMeta?.exchangeRate ?? EXCHANGE_RATES[currencyCode] ?? 1,
       shippingInfo,
       paymentInfo: {
         method: paymentInfo.method,
@@ -206,6 +257,15 @@ export function AppProvider({ children }) {
     updateProfile,
     isLoading,
     setIsLoading,
+    countryCode,
+    country: selectedCountry,
+    currencyCode,
+    countrySet,
+    locationModalOpen,
+    confirmCountry,
+    closeLocationModal,
+    openLocationModal,
+    formatMoney,
   };
 
   return (

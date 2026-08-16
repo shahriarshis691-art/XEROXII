@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Seo from '../components/Seo';
 import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName } from '../lib/productUtils';
-import { formatCurrency, convertFromBDT, computeOrderTotals } from '../lib/currency';
+import { computeOrderTotals } from '../lib/currency';
 import toast from 'react-hot-toast';
 import { COUNTRIES, getSubdivisions, getStateLabel, getCountryName } from '../data/regions';
 
@@ -15,7 +15,7 @@ const inputClass = (hasError) =>
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
-  const { cart, cartTotal, placeOrder, profile } = useContext(AppContext);
+  const { cart, cartTotal, placeOrder, profile, countryCode: shopCountryCode, currencyCode, formatMoney, country } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: profile?.firstName || '',
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
     city: '',
     state: '',
     zipCode: '',
-    country: 'BD',
+    country: shopCountryCode || 'BD',
     paymentMethod: 'cod',
     cardNumber: '',
     cardName: '',
@@ -135,8 +135,6 @@ export default function CheckoutPage() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const selectedCountry = COUNTRIES.find((c) => c.code === formData.country);
-      const currencyCode = selectedCountry?.currency ?? 'BDT';
       const totals = computeOrderTotals(cartTotal, currencyCode);
 
       const order = await placeOrder(
@@ -179,13 +177,8 @@ export default function CheckoutPage() {
     }
   };
 
-  const selectedCountry = COUNTRIES.find((c) => c.code === formData.country);
-  const currencyCode = selectedCountry?.currency ?? 'BDT';
-  const { subtotal, tax, total } = computeOrderTotals(cartTotal, currencyCode);
   const subdivisions = getSubdivisions(formData.country);
   const stateLabel = getStateLabel(formData.country);
-
-  const formatLinePrice = (amountBDT) => formatCurrency(convertFromBDT(amountBDT, currencyCode), currencyCode);
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 pb-28 sm:py-16 lg:pb-16">
@@ -573,9 +566,9 @@ export default function CheckoutPage() {
               <h2 className="text-lg font-semibold uppercase tracking-wide text-black mb-6">
                 Order Summary
               </h2>
-              {selectedCountry && (
+              {country && (
                 <p className="text-xs uppercase tracking-[0.14em] text-black/50 mb-4">
-                  Prices in {currencyCode} · {selectedCountry.name}
+                  Prices in {currencyCode} · {country.name}
                 </p>
               )}
 
@@ -586,7 +579,7 @@ export default function CheckoutPage() {
                       {getProductName(item)} x {item.quantity}
                     </span>
                     <span className="font-medium">
-                      {formatLinePrice(parsePrice(item) * item.quantity)}
+                      {formatMoney(parsePrice(item) * item.quantity)}
                     </span>
                   </div>
                 ))}
@@ -595,7 +588,7 @@ export default function CheckoutPage() {
               <div className="space-y-3 mb-6 pb-6 border-b border-black/10">
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Subtotal</span>
-                  <span>{formatCurrency(subtotal, currencyCode)}</span>
+                  <span>{formatMoney(cartTotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Shipping</span>
@@ -603,14 +596,14 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Tax (10%)</span>
-                  <span>{formatCurrency(tax, currencyCode)}</span>
+                  <span>{formatMoney(Math.floor(cartTotal * 0.1))}</span>
                 </div>
               </div>
 
               <div className="flex justify-between mb-8">
                 <span className="font-semibold uppercase tracking-wide text-black">Total</span>
                 <span className="font-semibold text-lg text-black">
-                  {formatCurrency(total, currencyCode)}
+                  {formatMoney(cartTotal + Math.floor(cartTotal * 0.1))}
                 </span>
               </div>
 
@@ -631,7 +624,7 @@ export default function CheckoutPage() {
         <div className="page-shell flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="text-[0.6rem] uppercase tracking-[0.14em] text-black/50">Total</p>
-            <p className="truncate font-semibold text-black">{formatCurrency(total, currencyCode)}</p>
+            <p className="truncate font-semibold text-black">{formatMoney(cartTotal + Math.floor(cartTotal * 0.1))}</p>
           </div>
           <button
             type="submit"

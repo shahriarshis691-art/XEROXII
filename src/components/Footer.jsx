@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FiMail } from "react-icons/fi";
 import { FaFacebook, FaTwitter, FaPinterest, FaInstagram, FaYoutube } from "react-icons/fa";
 import toast from "react-hot-toast";
+import LocationSwitcher from "./LocationSwitcher";
 
 const FOOTER_LINKS = {
   company: [
@@ -194,7 +195,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-black/10 pt-8 text-center">
+        <div className="mt-12 flex flex-col items-center gap-4 border-t border-black/10 pt-8 text-center">
+          <LocationSwitcher variant="footer" />
           <span className="text-xl font-semibold uppercase tracking-widest text-black">
             Xeroxii<span className="text-black/40">.</span>com
           </span>

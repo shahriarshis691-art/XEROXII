@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductQuickViewModal from "./ProductQuickViewModal";
 import { FEATURED_PRODUCTS } from "../data/featuredProducts";
+import { parsePrice } from "../lib/productUtils";
+import { AppContext } from "../context/AppContext";
 
 export default function FeaturedWatches() {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
+  const { formatMoney } = useContext(AppContext);
 
   return (
     <section id="featured" className="relative bg-white py-20 sm:py-28">
@@ -59,7 +62,7 @@ export default function FeaturedWatches() {
                 {watch.title}
               </p>
               <p className="mt-1.5 text-[0.7rem] font-medium tracking-[0.02em] text-black/80 sm:mt-2 sm:text-sm sm:tracking-[0.04em]">
-                {watch.price}
+                {formatMoney(parsePrice(watch))}
               </p>
             </button>
           </motion.div>

@@ -1,9 +1,9 @@
 export const COUNTRIES = [
-  { code: 'BD', name: 'Bangladesh', currency: 'BDT' },
-  { code: 'US', name: 'United States', currency: 'USD' },
-  { code: 'GB', name: 'United Kingdom', currency: 'GBP' },
-  { code: 'JP', name: 'Japan', currency: 'JPY' },
-  { code: 'FR', name: 'France', currency: 'EUR' },
+  { code: 'BD', name: 'Bangladesh', currency: 'BDT', symbol: '৳', flag: '🇧🇩' },
+  { code: 'US', name: 'United States', currency: 'USD', symbol: '$', flag: '🇺🇸' },
+  { code: 'GB', name: 'United Kingdom', currency: 'GBP', symbol: '£', flag: '🇬🇧' },
+  { code: 'JP', name: 'Japan', currency: 'JPY', symbol: '¥', flag: '🇯🇵' },
+  { code: 'FR', name: 'France', currency: 'EUR', symbol: '€', flag: '🇫🇷' },
 ];
 
 export const SUBDIVISIONS = {
@@ -71,4 +71,10 @@ export function getStateLabel(countryCode) {
 
 export function getCountryName(countryCode) {
   return getCountryByCode(countryCode)?.name ?? countryCode;
+}
+
+export function getLocationLabel(countryCode) {
+  const country = getCountryByCode(countryCode);
+  if (!country) return 'Bangladesh · BDT';
+  return `${country.flag} ${country.currency}`;
 }

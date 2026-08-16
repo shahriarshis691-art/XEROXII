@@ -7,7 +7,7 @@ import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName } from '../lib/productUtils';
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateCartQuantity, cartTotal } = useContext(AppContext);
+  const { cart, removeFromCart, updateCartQuantity, cartTotal, formatMoney } = useContext(AppContext);
 
   const itemTotal = (item) => parsePrice(item) * item.quantity;
 
@@ -71,7 +71,7 @@ export default function CartPage() {
                         {item.brand}
                       </p>
                       <p className="text-sm sm:text-base font-medium text-black mb-4">
-                        ৳ {parsePrice(item).toLocaleString()}
+                        {formatMoney(parsePrice(item))}
                       </p>
 
                       {/* Quantity Selector */}
@@ -107,7 +107,7 @@ export default function CartPage() {
                         <FiX size={18} />
                       </button>
                       <p className="font-semibold text-black">
-                        ৳ {itemTotal(item).toLocaleString()}
+                        {formatMoney(itemTotal(item))}
                       </p>
                     </div>
                   </motion.div>
@@ -130,7 +130,7 @@ export default function CartPage() {
                 <div className="space-y-3 mb-6 pb-6 border-b border-black/10">
                   <div className="flex justify-between text-sm text-black/70">
                     <span>Subtotal</span>
-                    <span>৳ {cartTotal.toLocaleString()}</span>
+                    <span>{formatMoney(cartTotal)}</span>
                   </div>
                   <div className="flex justify-between text-sm text-black/70">
                     <span>Shipping</span>
@@ -138,14 +138,14 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between text-sm text-black/70">
                     <span>Tax (10%)</span>
-                    <span>৳ {Math.floor(cartTotal * 0.1).toLocaleString()}</span>
+                    <span>{formatMoney(Math.floor(cartTotal * 0.1))}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-between mb-8">
                   <span className="font-semibold uppercase tracking-wide text-black">Total</span>
                   <span className="font-semibold text-lg text-black">
-                    ৳ {(cartTotal + Math.floor(cartTotal * 0.1)).toLocaleString()}
+                    {formatMoney(cartTotal + Math.floor(cartTotal * 0.1))}
                   </span>
                 </div>
 

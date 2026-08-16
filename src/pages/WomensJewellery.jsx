@@ -1,10 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Seo from "../components/Seo";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
 import { JEWELLERY_LISTING_PRODUCTS } from "../data/jewelleryProducts";
 import { parsePrice } from "../lib/productUtils";
+import { AppContext } from "../context/AppContext";
 
 const CATEGORY_FILTERS = {
   all: () => true,
@@ -20,6 +21,7 @@ export default function WomensJewelleryPage() {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
+  const { formatMoney } = useContext(AppContext);
 
   const filteredProducts = useMemo(() => {
     const filterFn = CATEGORY_FILTERS[selectedCategory] || CATEGORY_FILTERS.all;
@@ -132,7 +134,7 @@ export default function WomensJewelleryPage() {
                   {product.collection}
                 </p>
                 <p className="mt-2 text-sm font-medium tracking-wider text-black sm:mt-3 sm:text-base">
-                  {product.price}
+                  {formatMoney(parsePrice(product))}
                 </p>
               </div>
 

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiHeart } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { AppContext } from "../context/AppContext";
-import { getProductName, getProductPriceDisplay } from "../lib/productUtils";
+import { getProductName, parsePrice } from "../lib/productUtils";
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +29,7 @@ const modalVariants = {
 
 export default function ProductQuickViewModal({ product, onClose }) {
   const [quantity, setQuantity] = useState(1);
-  const { addToCart, toggleWishlist, isInWishlist } = useContext(AppContext);
+  const { addToCart, toggleWishlist, isInWishlist, formatMoney } = useContext(AppContext);
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -141,7 +141,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
                 {product.title}
               </p>
               <p className="mt-4 text-lg font-medium text-black/80 sm:text-xl">
-                {getProductPriceDisplay(product)}
+                {formatMoney(parsePrice(product))}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
                 {product.description || "Expertly crafted with precision Swiss movement, sapphire crystal, and premium materials. Each piece undergoes rigorous quality assurance before delivery."}

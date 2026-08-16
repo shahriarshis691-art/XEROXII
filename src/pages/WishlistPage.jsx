@@ -5,10 +5,10 @@ import Seo from '../components/Seo';
 import { FiHeart, FiShoppingBag, FiX } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
-import { getProductName, getProductPriceDisplay } from '../lib/productUtils';
+import { getProductName, parsePrice } from '../lib/productUtils';
 
 export default function WishlistPage() {
-  const { wishlist, removeFromWishlist, addToCart } = useContext(AppContext);
+  const { wishlist, removeFromWishlist, addToCart, formatMoney } = useContext(AppContext);
 
   const handleMoveToCart = (product) => {
     addToCart(product, 1);
@@ -73,7 +73,7 @@ export default function WishlistPage() {
                   <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">
                     {item.brand}
                   </p>
-                  <p className="font-medium text-black">{getProductPriceDisplay(item)}</p>
+                  <p className="font-medium text-black">{formatMoney(parsePrice(item))}</p>
                 </Link>
                 <div className="mt-4 flex flex-col gap-2">
                   <button

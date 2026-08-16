@@ -23,6 +23,10 @@ export function convertFromBDT(amountBDT, currencyCode) {
   return Math.round(converted * factor) / factor;
 }
 
+export function formatAmountFromBDT(amountBDT, currencyCode = 'BDT') {
+  return formatCurrency(convertFromBDT(amountBDT, currencyCode), currencyCode);
+}
+
 export function formatCurrency(amount, currencyCode = 'BDT') {
   const config = CURRENCY_CONFIG[currencyCode] ?? CURRENCY_CONFIG.BDT;
   const formatted = Number(amount).toLocaleString(undefined, {

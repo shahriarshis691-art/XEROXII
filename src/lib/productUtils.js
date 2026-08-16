@@ -2,7 +2,7 @@
  * Parse numeric price from a product or cart item.
  * Supports `price`, `priceBDT`, and numeric values.
  */
-import { formatCurrency, convertFromBDT } from './currency';
+import { formatCurrency, convertFromBDT, formatAmountFromBDT } from './currency';
 export function parsePrice(item) {
   const raw = item?.price ?? item?.priceBDT;
   if (raw == null) return 0;
@@ -11,9 +11,9 @@ export function parsePrice(item) {
   return Number.isNaN(parsed) ? 0 : parsed;
 }
 
-/** Format a numeric amount as BDT display string. */
-export function formatPrice(amount) {
-  return `৳ ${amount.toLocaleString()}`;
+/** Format a numeric BDT amount using the shopper's selected currency. */
+export function formatPrice(amount, currencyCode = 'BDT') {
+  return formatAmountFromBDT(amount, currencyCode);
 }
 
 /** Get display name from product fields. */
@@ -21,9 +21,9 @@ export function getProductName(product) {
   return product?.name || product?.title || 'Product';
 }
 
-/** Get formatted price string for display. */
-export function getProductPriceDisplay(product) {
-  return product?.price || product?.priceBDT || formatPrice(parsePrice(product));
+/** Get formatted price string for display in the active currency. */
+export function getProductPriceDisplay(product, currencyCode = 'BDT') {
+  return formatPrice(parsePrice(product), currencyCode);
 }
 
 /**

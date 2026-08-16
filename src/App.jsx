@@ -8,6 +8,7 @@ import PageLoader from "./components/PageLoader";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
+import WelcomeLocationModal from "./components/WelcomeLocationModal";
 import { getStaticPageSlugs } from "./data/staticPages";
 
 const BrandDetailPage = lazy(() => import("./pages/BrandDetailPage"));
@@ -31,6 +32,7 @@ function App() {
         <BrowserRouter>
           <ErrorBoundary>
             <Navbar />
+            <WelcomeLocationModal />
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />
