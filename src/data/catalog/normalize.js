@@ -66,6 +66,7 @@ export function normalizeCatalogProduct(raw, defaults = {}) {
     src: raw.src || raw.image,
     tag: raw.tag || raw.badge || null,
     badge: raw.badge || raw.tag || null,
+    tags: raw.tags || (raw.tag ? [raw.tag.toLowerCase()] : []),
     sku: raw.sku || null,
     collection: raw.collection || null,
     description: raw.description || defaults.description || (type === 'jewellery'
