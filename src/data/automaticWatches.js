@@ -195,18 +195,4 @@ export const AUTOMATIC_WATCHES = [
     src: "https://images.pexels.com/photos/13190042/pexels-photo-13190042.jpeg?auto=compress&cs=tinysrgb&w=900&fit=crop",
     description: "Travel-ready GMT automatic with dual-time tracking and a jet-black rotating bezel.",
   },
-  {
-    id: "auto-xx-015",
-    name: "XEROXII Stealth Pilot Automatic",
-    title: "XEROXII Stealth Pilot Automatic",
-    brand: "XEROXII",
-    price: "৳ 35,000",
-    priceBDT: 35000,
-    collection: "Pilot Automatic",
-    tag: "Automatic",
-    tags: ["automatic", "luxury", "men", "collection", "pilot", "aviation"],
-    sku: "SKU-AUTO-015",
-    src: "https://images.pexels.com/photos/169677/pexels-photo-169677.jpeg?auto=compress&cs=tinysrgb&w=900&fit=crop",
-    description: "Aviation automatic with oversized crown, high-contrast dial, and pilot-style leather strap.",
-  },
 ];
