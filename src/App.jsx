@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Footer from "./components/Footer";
 import { getStaticPageSlugs } from "./data/staticPages";
 
+const BrandDetailPage = lazy(() => import("./pages/BrandDetailPage"));
 const BrandPage = lazy(() => import("./components/BrandPage"));
 const WomensJewelleryListing = lazy(() => import("./pages/WomensJewelleryListing"));
 const CartPage = lazy(() => import("./pages/CartPage"));
@@ -33,6 +34,7 @@ function App() {
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/brands/:slug" element={<BrandDetailPage />} />
                 <Route path="/brand/:slug" element={<BrandPage />} />
                 <Route path="/product/:productId" element={<ProductDetailPage />} />
                 <Route path="/womens-jewellery" element={<Navigate to="/womens-jewellery-listing" replace />} />

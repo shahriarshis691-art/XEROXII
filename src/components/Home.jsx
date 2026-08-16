@@ -1,4 +1,5 @@
 import Hero from "./Hero";
+import SisterBrands from "./SisterBrands";
 import BrandHeritageBanner from "./BrandHeritageBanner";
 import CollectionShowcase from "./CollectionShowcase";
 import WomensJewellery from "./WomensJewellery";
@@ -18,6 +19,7 @@ export default function Home() {
         jsonLd={organizationSchema()}
       />
       <Hero />
+      <SisterBrands />
       <BrandHeritageBanner />
       <CollectionShowcase />
       <WomensJewellery />

@@ -66,6 +66,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.xeroxii.com/brands/ceravo</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/brands/ghorwa-tea</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/brands/shis-fashion</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.xeroxii.com/collections</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -162,11 +177,6 @@
   </url>
   <url>
     <loc>https://www.xeroxii.com/product/auto-xx-014</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/auto-xx-015</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

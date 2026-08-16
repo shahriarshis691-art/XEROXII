@@ -12,6 +12,7 @@ const { WATCH_LISTING_PRODUCTS } = await import('../src/data/watchListingProduct
 const { AUTOMATIC_WATCHES } = await import('../src/data/automaticWatches.js');
 const { JEWELLERY_LISTING_PRODUCTS } = await import('../src/data/jewelleryProducts.js');
 const { getStaticPageSlugs } = await import('../src/data/staticPages.js');
+const { getAllSisterBrandSlugs } = await import('../src/data/brandsData.js');
 
 const productIds = new Set(
   [...BRAND_PRODUCTS, ...FEATURED_PRODUCTS, ...WATCH_LISTING_PRODUCTS, ...AUTOMATIC_WATCHES, ...JEWELLERY_LISTING_PRODUCTS]
@@ -25,6 +26,7 @@ const routes = new Set([
   '/womens-jewellery',
   '/womens-jewellery-listing',
   '/wishlist',
+  ...getAllSisterBrandSlugs().map((s) => `/brands/${s}`),
   ...getStaticPageSlugs().map((s) => `/${s}`),
   ...Object.values(BRAND_META).map((m) => `/brand/${m.slug}`),
   ...[...productIds].map((id) => `/product/${id}`),
