@@ -1,10 +1,11 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { BRAND_PRODUCTS, BRAND_META } from "../data/brandProducts";
 
 export default function BrandPage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -63,7 +64,8 @@ export default function BrandPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: (index % 4) * 0.08 }}
-              className="group text-center"
+              className="group text-center cursor-pointer"
+              onClick={() => navigate(`/product/${watch.id}`)}
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-[#e9e7e1]">
                 <img

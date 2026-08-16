@@ -10,6 +10,7 @@ import WomensJewelleryListing from "./pages/WomensJewelleryListing";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import Footer from "./components/Footer";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/brand/:slug" element={<BrandPage />} />
+            <Route path="/product/:productId" element={<ProductDetailPage />} />
             <Route path="/womens-jewellery" element={<WomensJewelleryPage />} />
             <Route path="/womens-jewellery-listing" element={<WomensJewelleryListing />} />
             <Route path="/cart" element={<CartPage />} />
