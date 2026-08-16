@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiSearch, FiHeart, FiUser, FiMenu, FiX } from "react-icons/fi";
 
-const SUB_LINKS = ["Watches", "Accessories", "Collections", "Services", "World of Xeroxii"];
+const SUB_LINKS = ["Watches", "Accessories", "Collections", "Services", "World of Xeroxii", "Women's Jewellery"];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
