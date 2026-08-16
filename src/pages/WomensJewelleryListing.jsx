@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiHeart } from "react-icons/fi";
+import toast from "react-hot-toast";
+import ProductQuickViewModal from "../components/ProductQuickViewModal";
+import { AppContext } from "../context/AppContext";
 
 const WOMENS_JEWELLERY_PRODUCTS = [
   {
@@ -80,6 +83,16 @@ const WOMENS_JEWELLERY_PRODUCTS = [
 
 export default function WomensJewelleryListing() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selected, setSelected] = useState(null);
+  const { toggleWishlist, isInWishlist } = useContext(AppContext);
+
+  const handleWishlist = (product, e) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+    toast.success(
+      isInWishlist(product.id) ? "Removed from wishlist" : "Added to wishlist"
+    );
+  };
 
   const categories = ["All", "Necklace", "Earrings", "Bracelet", "Ring", "Pendant", "Anklet", "Brooch"];
   
@@ -160,17 +173,26 @@ export default function WomensJewelleryListing() {
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/10">
-                    <span className="pointer-events-auto translate-y-4 rounded-full border border-black/20 bg-white/90 px-5 py-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black backdrop-blur-sm">
+                    <button
+                      type="button"
+                      onClick={() => setSelected(product)}
+                      className="pointer-events-auto translate-y-4 rounded-full border border-black/20 bg-white/90 px-5 py-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black backdrop-blur-sm"
+                    >
                       View Details
-                    </span>
+                    </button>
                   </div>
                   {product.badge && (
                     <span className="absolute left-2 top-2 bg-black px-2 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-white">
                       {product.badge}
                     </span>
                   )}
-                  <button className="absolute right-2 top-2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-black transition-all duration-300 group-hover:bg-black group-hover:text-white">
-                    <FiHeart size={18} />
+                  <button
+                    type="button"
+                    onClick={(e) => handleWishlist(product, e)}
+                    className="absolute right-2 top-2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-black transition-all duration-300 group-hover:bg-black group-hover:text-white"
+                    aria-label="Add to wishlist"
+                  >
+                    <FiHeart size={18} fill={isInWishlist(product.id) ? "currentColor" : "none"} />
                   </button>
                 </div>
                 <h3 className="text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:text-sm sm:tracking-[0.14em]">
@@ -187,6 +209,11 @@ export default function WomensJewelleryListing() {
           </motion.div>
         </div>
       </section>
+
+      <ProductQuickViewModal
+        product={selected}
+        onClose={() => setSelected(null)}
+      />
     </>
   );
 }

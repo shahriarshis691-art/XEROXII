@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiCheckCircle, FiDownload } from 'react-icons/fi';
 import { AppContext } from '../context/AppContext';
+import { parsePrice, getProductName, generateInvoiceText } from '../lib/productUtils';
 
 export default function OrderConfirmationPage() {
   const { orderId } = useParams();
@@ -45,11 +46,19 @@ export default function OrderConfirmationPage() {
     );
   }
 
-  const calculatePrice = (item) => {
-    const price = typeof item.price === 'string'
-      ? parseInt(item.price.replace(/[^\d]/g, ''))
-      : item.price;
-    return price;
+  const calculatePrice = (item) => parsePrice(item);
+
+  const handleDownloadInvoice = () => {
+    const text = generateInvoiceText(order);
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `xeroxii-invoice-${order.id}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -138,13 +147,13 @@ export default function OrderConfirmationPage() {
                     <div className="flex-shrink-0 w-16 h-20 bg-[#e9e7e1]">
                       <img
                         src={item.src || item.image}
-                        alt={item.name || item.title}
+                        alt={getProductName(item)}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-black text-sm sm:text-base mb-1">
-                        {item.name || item.title}
+                        {getProductName(item)}
                       </h3>
                       <p className="text-xs sm:text-sm text-black/60 mb-2">
                         Quantity: {item.quantity}
@@ -226,6 +235,7 @@ export default function OrderConfirmationPage() {
                   <div className="w-3 h-3 rounded-full bg-green-600" />
                   <p className="text-sm font-medium text-black">
                     {order.paymentInfo.method === 'card' && `Card ending in ${order.paymentInfo.last4}`}
+                    {order.paymentInfo.method === 'cod' && 'Cash on Delivery'}
                     {order.paymentInfo.method === 'paypal' && 'PayPal'}
                     {order.paymentInfo.method === 'bank' && 'Bank Transfer'}
                   </p>
@@ -236,6 +246,7 @@ export default function OrderConfirmationPage() {
               <div className="space-y-3">
                 <button
                   type="button"
+                  onClick={handleDownloadInvoice}
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-black/20 text-black text-sm font-medium uppercase tracking-[0.16em] hover:bg-black/5 transition"
                 >
                   <FiDownload size={16} />

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { normalizeProduct, parsePrice } from '../lib/productUtils';
 
 export const AppContext = createContext();
 
@@ -37,16 +38,17 @@ export function AppProvider({ children }) {
 
   // Cart operations
   const addToCart = (product, quantity = 1) => {
+    const normalized = normalizeProduct(product);
     setCart(prevCart => {
-      const existingItem = prevCart.find(item => item.id === product.id);
+      const existingItem = prevCart.find(item => item.id === normalized.id);
       if (existingItem) {
         return prevCart.map(item =>
-          item.id === product.id
+          item.id === normalized.id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
-      return [...prevCart, { ...product, quantity }];
+      return [...prevCart, { ...normalized, quantity }];
     });
   };
 
@@ -70,21 +72,20 @@ export function AppProvider({ children }) {
     setCart([]);
   };
 
-  const cartTotal = cart.reduce((total, item) => {
-    const price = typeof item.price === 'string'
-      ? parseInt(item.price.replace(/[^\d]/g, ''))
-      : item.price;
-    return total + (price * item.quantity);
-  }, 0);
+  const cartTotal = cart.reduce(
+    (total, item) => total + parsePrice(item) * item.quantity,
+    0
+  );
 
   const cartItemCount = cart.reduce((count, item) => count + item.quantity, 0);
 
   // Wishlist operations
   const addToWishlist = (product) => {
+    const normalized = normalizeProduct(product);
     setWishlist(prevWishlist => {
-      const exists = prevWishlist.find(item => item.id === product.id);
+      const exists = prevWishlist.find(item => item.id === normalized.id);
       if (exists) return prevWishlist;
-      return [...prevWishlist, product];
+      return [...prevWishlist, normalized];
     });
   };
 

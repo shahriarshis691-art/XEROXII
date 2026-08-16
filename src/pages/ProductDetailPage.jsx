@@ -5,6 +5,7 @@ import { FiHeart, FiPlus, FiMinus } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
 import { BRAND_PRODUCTS } from '../data/brandProducts';
+import { parsePrice, getProductName, getProductPriceDisplay } from '../lib/productUtils';
 
 export default function ProductDetailPage() {
   const { productId } = useParams();
@@ -43,12 +44,8 @@ export default function ProductDetailPage() {
     );
   }
 
-  const calculatePrice = (item) => {
-    const price = typeof item.price === 'string'
-      ? parseInt(item.price.replace(/[^\d]/g, ''))
-      : item.price;
-    return price;
-  };
+  const productName = getProductName(product);
+  const productPrice = parsePrice(product);
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
@@ -68,8 +65,6 @@ export default function ProductDetailPage() {
     navigate('/checkout');
   };
 
-  const productPrice = calculatePrice(product);
-
   return (
     <main className="min-h-screen bg-[#fafaf8]">
       {/* Breadcrumb */}
@@ -86,7 +81,7 @@ export default function ProductDetailPage() {
             <span aria-hidden="true">/</span>
             <span className="text-black">{product.brand || 'Product'}</span>
             <span aria-hidden="true">/</span>
-            <span className="text-black font-semibold truncate">{product.name}</span>
+            <span className="text-black font-semibold truncate">{productName}</span>
           </nav>
         </div>
       </div>
@@ -104,7 +99,7 @@ export default function ProductDetailPage() {
             <div className="w-full aspect-[3/4] bg-[#e9e7e1] overflow-hidden rounded-sm">
               <img
                 src={product.image || product.src}
-                alt={product.name}
+                alt={productName}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -126,7 +121,7 @@ export default function ProductDetailPage() {
 
             {/* Title */}
             <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-4">
-              {product.name}
+              {productName}
             </h1>
 
             {/* Brand & Category */}
@@ -279,13 +274,13 @@ export default function ProductDetailPage() {
                   />
                 </div>
                 <h3 className="font-semibold text-black text-sm uppercase tracking-wide mb-1">
-                  {item.name}
+                  {getProductName(item)}
                 </h3>
                 <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">
                   {item.brand}
                 </p>
                 <p className="font-medium text-black">
-                  {item.price || item.priceBDT}
+                  {getProductPriceDisplay(item)}
                 </p>
               </motion.div>
             ))}

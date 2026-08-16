@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiHeart } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { AppContext } from "../context/AppContext";
+import { getProductName, getProductPriceDisplay } from "../lib/productUtils";
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -120,7 +121,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
               <div className="aspect-[3/4] w-full bg-[#e9e7e1] sm:aspect-auto sm:h-full">
                 <img
                   src={product.src || product.image}
-                  alt={product.name}
+                  alt={getProductName(product)}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -133,13 +134,13 @@ export default function ProductQuickViewModal({ product, onClose }) {
                 </span>
               )}
               <h3 className="text-2xl font-semibold uppercase tracking-wide text-black sm:text-3xl">
-                {product.name}
+                {getProductName(product)}
               </h3>
               <p className="mt-2 text-sm uppercase tracking-[0.16em] text-black/50 sm:text-base">
                 {product.title}
               </p>
               <p className="mt-4 text-lg font-medium text-black/80 sm:text-xl">
-                {product.price || product.priceBDT}
+                {getProductPriceDisplay(product)}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
                 {product.description || "Expertly crafted with precision Swiss movement, sapphire crystal, and premium materials. Each piece undergoes rigorous quality assurance before delivery."}

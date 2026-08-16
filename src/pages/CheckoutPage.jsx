@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AppContext } from '../context/AppContext';
+import { parsePrice, getProductName } from '../lib/productUtils';
 import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
@@ -27,9 +28,13 @@ export default function CheckoutPage() {
   });
   const [errors, setErrors] = useState({});
 
-  // Redirect to cart if empty
+  useEffect(() => {
+    if (cart.length === 0) {
+      navigate('/cart');
+    }
+  }, [cart.length, navigate]);
+
   if (cart.length === 0) {
-    navigate('/cart');
     return null;
   }
 
@@ -49,7 +54,7 @@ export default function CheckoutPage() {
     if (!formData.zipCode.trim()) newErrors.zipCode = 'ZIP/Postal code is required';
     if (!formData.country.trim()) newErrors.country = 'Country is required';
 
-    // Payment validation
+    // Payment validation (card only — COD/PayPal/bank skip card fields)
     if (formData.paymentMethod === 'card') {
       if (!formData.cardNumber.trim()) newErrors.cardNumber = 'Card number is required';
       else if (!/^\d{16}$/.test(formData.cardNumber.replace(/\s/g, '')))
@@ -160,7 +165,7 @@ export default function CheckoutPage() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Checkout Form */}
-          <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-8">
+          <form id="checkout-form" onSubmit={handleSubmit} className="lg:col-span-2 space-y-8">
             {/* Shipping Information */}
             <motion.div
               className="border border-black/10 bg-white p-6 sm:p-8"
@@ -360,7 +365,7 @@ export default function CheckoutPage() {
               </h2>
 
               <div className="space-y-3 mb-6">
-                {['card', 'paypal', 'bank'].map(method => (
+                {['card', 'cod', 'paypal', 'bank'].map(method => (
                   <label key={method} className="flex items-center cursor-pointer hover:bg-black/5 p-3 rounded transition">
                     <input
                       type="radio"
@@ -372,6 +377,7 @@ export default function CheckoutPage() {
                     />
                     <span className="ml-3 text-sm font-medium uppercase tracking-[0.16em] text-black">
                       {method === 'card' && 'Credit / Debit Card'}
+                      {method === 'cod' && 'Cash on Delivery'}
                       {method === 'paypal' && 'PayPal'}
                       {method === 'bank' && 'Bank Transfer'}
                     </span>
@@ -467,6 +473,12 @@ export default function CheckoutPage() {
                 </div>
               )}
 
+              {formData.paymentMethod === 'cod' && (
+                <p className="text-sm text-black/60 p-4 bg-black/5 rounded">
+                  Pay with cash when your order is delivered. No online payment required.
+                </p>
+              )}
+
               {formData.paymentMethod === 'paypal' && (
                 <p className="text-sm text-black/60 p-4 bg-black/5 rounded">
                   You will be redirected to PayPal to complete your payment securely.
@@ -523,12 +535,10 @@ export default function CheckoutPage() {
                 {cart.map(item => (
                   <div key={item.id} className="flex justify-between text-sm text-black/70">
                     <span className="truncate mr-2">
-                      {item.name || item.title} x {item.quantity}
+                      {getProductName(item)} x {item.quantity}
                     </span>
                     <span className="font-medium">
-                      ৳ {((typeof item.price === 'string'
-                        ? parseInt(item.price.replace(/[^\d]/g, ''))
-                        : item.price) * item.quantity).toLocaleString()}
+                      ৳ {(parsePrice(item) * item.quantity).toLocaleString()}
                     </span>
                   </div>
                 ))}
@@ -558,7 +568,7 @@ export default function CheckoutPage() {
 
               <button
                 type="submit"
-                onClick={handleSubmit}
+                form="checkout-form"
                 disabled={isLoading}
                 className="w-full py-3 px-4 bg-black text-white text-sm font-medium uppercase tracking-[0.16em] hover:bg-black/90 disabled:bg-black/50 disabled:cursor-not-allowed transition"
               >

@@ -3,20 +3,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiMinus, FiPlus, FiX } from 'react-icons/fi';
 import { AppContext } from '../context/AppContext';
+import { parsePrice, getProductName } from '../lib/productUtils';
 
 export default function CartPage() {
   const { cart, removeFromCart, updateCartQuantity, cartTotal } = useContext(AppContext);
 
-  const calculatePrice = (item) => {
-    const price = typeof item.price === 'string'
-      ? parseInt(item.price.replace(/[^\d]/g, ''))
-      : item.price;
-    return price;
-  };
-
-  const itemTotal = (item) => {
-    return calculatePrice(item) * item.quantity;
-  };
+  const itemTotal = (item) => parsePrice(item) * item.quantity;
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
@@ -63,7 +55,7 @@ export default function CartPage() {
                     <div className="flex-shrink-0 w-20 h-24 sm:w-24 sm:h-32 bg-[#e9e7e1]">
                       <img
                         src={item.src || item.image}
-                        alt={item.name || item.title}
+                        alt={getProductName(item)}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -71,13 +63,13 @@ export default function CartPage() {
                     {/* Product Details */}
                     <div className="flex-1">
                       <h3 className="font-semibold text-black text-sm sm:text-base uppercase tracking-wide mb-1">
-                        {item.name || item.title}
+                        {getProductName(item)}
                       </h3>
                       <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-black/60 mb-3">
                         {item.brand}
                       </p>
                       <p className="text-sm sm:text-base font-medium text-black mb-4">
-                        ৳ {calculatePrice(item).toLocaleString()}
+                        ৳ {parsePrice(item).toLocaleString()}
                       </p>
 
                       {/* Quantity Selector */}

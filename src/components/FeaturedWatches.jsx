@@ -4,6 +4,7 @@ import ProductQuickViewModal from "./ProductQuickViewModal";
 
 const FEATURED = [
   {
+    id: "featured-aurum-platinum",
     name: "Aurum Platinum",
     title: "Men's Platinum Chronograph",
     price: "৳ 5,20,000",
@@ -11,6 +12,7 @@ const FEATURED = [
     badge: "EXCLUSIVE",
   },
   {
+    id: "featured-velvet-moonphase",
     name: "Velvet Moonphase",
     title: "Women's Moonphase Dial",
     price: "৳ 3,85,000",
@@ -18,12 +20,14 @@ const FEATURED = [
     badge: "NEW",
   },
   {
+    id: "featured-steel-command",
     name: "Steel Command",
     title: "Men's Tactical Display",
     price: "৳ 2,95,000",
     src: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=900",
   },
   {
+    id: "featured-blush-diver",
     name: "Blush Diver",
     title: "Women's Steel Diver",
     price: "৳ 2,60,000",
@@ -31,12 +35,14 @@ const FEATURED = [
     badge: "NEW",
   },
   {
+    id: "featured-carbon-fiber-x",
     name: "Carbon Fiber X",
     title: "Men's Racing Chronograph",
     price: "৳ 3,40,000",
     src: "https://images.pexels.com/photos/29638625/pexels-photo-29638625.jpeg?auto=compress&cs=tinysrgb&w=900",
   },
   {
+    id: "featured-ivory-classic",
     name: "Ivory Classic",
     title: "Women's Minimalist MOP",
     price: "৳ 2,15,000",
@@ -44,12 +50,14 @@ const FEATURED = [
     badge: "NEW",
   },
   {
+    id: "featured-obsidian-pro",
     name: "Obsidian Pro",
     title: "Men's All-Black Edition",
     price: "৳ 3,90,000",
     src: "https://images.pexels.com/photos/19979616/pexels-photo-19979616.jpeg?auto=compress&cs=tinysrgb&w=900",
   },
   {
+    id: "featured-golden-trio",
     name: "Golden Trio",
     title: "Women's Trio Set",
     price: "৳ 4,80,000",
@@ -75,7 +83,7 @@ export default function FeaturedWatches() {
       <div className="page-shell mt-14 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14">
         {FEATURED.map((watch, index) => (
           <motion.div
-            key={watch.name}
+            key={watch.id}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
