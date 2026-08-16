@@ -60,121 +60,14 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-            {/* Model placeholder representation */}
+            {/* Luxury jewellery product image display */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative h-[85%] w-[70%]">
-                {/* Abstract silhouette suggesting model with watch */}
-                <svg
-                  viewBox="0 0 200 300"
-                  className="h-full w-full drop-shadow-2xl"
-                  style={{ filter: "drop-shadow(0 0 30px rgba(180,140,100,0.3))" }}
-                >
-                  <defs>
-                    <linearGradient id="skin" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#d4a574" />
-                      <stop offset="50%" stopColor="#c49a6c" />
-                      <stop offset="100%" stopColor="#a67c52" />
-                    </linearGradient>
-                    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ffd700" />
-                      <stop offset="30%" stopColor="#daa520" />
-                      <stop offset="60%" stopColor="#b8860b" />
-                      <stop offset="100%" stopColor="#ffd700" />
-                    </linearGradient>
-                    <linearGradient id="hair" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#2a1810" />
-                      <stop offset="40%" stopColor="#1f120b" />
-                      <stop offset="100%" stopColor="#0d0805" />
-                    </linearGradient>
-                    <linearGradient id="lips" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#c41e3a" />
-                      <stop offset="100%" stopColor="#8b0000" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Hair */}
-                  <ellipse cx="100" cy="75" rx="55" ry="60" fill="url(#hair)" />
-                  <path
-                    d="M45 60 Q30 150 50 220 Q70 200 85 180 Q75 120 70 70 Z"
-                    fill="url(#hair)"
-                  />
-                  <path
-                    d="M155 60 Q170 150 150 220 Q130 200 115 180 Q125 120 130 70 Z"
-                    fill="url(#hair)"
-                  />
-
-                  {/* Face */}
-                  <ellipse cx="100" cy="80" rx="38" ry="45" fill="url(#skin)" />
-
-                  {/* Red lips */}
-                  <ellipse cx="100" cy="98" rx="12" ry="5" fill="url(#lips)" />
-
-                  {/* Eyes */}
-                  <ellipse cx="85" cy="72" rx="6" ry="3" fill="#1a1a1a" />
-                  <ellipse cx="115" cy="72" rx="6" ry="3" fill="#1a1a1a" />
-
-                  {/* Eyebrows */}
-                  <path
-                    d="M75 64 Q85 60 95 63"
-                    stroke="#2a1810"
-                    strokeWidth="2.5"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M105 63 Q115 60 125 64"
-                    stroke="#2a1810"
-                    strokeWidth="2.5"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-
-                  {/* Nose */}
-                  <path
-                    d="M100 78 L98 88 Q100 92 102 88 Z"
-                    fill="#b8956a"
-                    opacity="0.5"
-                  />
-
-                  {/* Neck and shoulders */}
-                  <path
-                    d="M80 120 L80 150 Q100 165 120 150 L120 120"
-                    fill="url(#skin)"
-                  />
-
-                  {/* Arm/hand resting on chin */}
-                  <path
-                    d="M120 150 Q140 140 155 130 Q160 125 158 118 Q155 112 148 115 Q138 120 125 130"
-                    fill="url(#skin)"
-                  />
-                  <circle cx="152" cy="112" r="10" fill="url(#skin)" />
-
-                  {/* Luxury wristwatch on wrist */}
-                  <g transform="translate(140, 118)">
-                    {/* Watch band */}
-                    <rect x="-4" y="-6" width="8" height="14" rx="2" fill="url(#gold)" />
-                    {/* Watch case */}
-                    <rect x="-10" y="-12" width="20" height="20" rx="3" fill="url(#gold)" />
-                    {/* Watch face */}
-                    <rect x="-7" y="-9" width="14" height="14" rx="2" fill="#0a0a0a" />
-                    {/* Watch markers */}
-                    <circle cx="0" cy="-5" r="0.8" fill="white" />
-                    <circle cx="4" cy="-2" r="0.8" fill="white" />
-                    <circle cx="4" cy="2" r="0.8" fill="white" />
-                    <circle cx="0" cy="4" r="0.8" fill="white" />
-                    <circle cx="-4" cy="2" r="0.8" fill="white" />
-                    <circle cx="-4" cy="-2" r="0.8" fill="white" />
-                    {/* Watch hands */}
-                    <line x1="0" y1="0" x2="0" y2="-3" stroke="white" strokeWidth="0.8" />
-                    <line x1="0" y1="0" x2="2" y2="-1" stroke="white" strokeWidth="0.6" />
-                    <circle cx="0" cy="0" r="1" fill="white" />
-                    {/* Diamond sparkle on bezel */}
-                    <circle cx="-5" cy="-6" r="1.5" fill="white" opacity="0.8" />
-                    <circle cx="5" cy="-6" r="1.2" fill="white" opacity="0.6" />
-                    <circle cx="-5" cy="6" r="1.2" fill="white" opacity="0.6" />
-                  </g>
-                </svg>
-              </div>
+              <img 
+                src="https://images.pexels.com/photos/1709857/pexels-photo-1709857.jpeg?auto=compress&cs=tinysrgb&w=800&h=900&fit=crop"
+                alt="Luxury Women's Jewellery"
+                className="h-full w-full object-cover drop-shadow-2xl"
+                style={{ filter: "drop-shadow(0 0 30px rgba(180,140,100,0.4))" }}
+              />
             </div>
 
             {/* Text overlay on model side */}
