@@ -45,7 +45,7 @@ export default function CartPage() {
               <div className="space-y-4">
                 {cart.map((item, index) => (
                   <motion.div
-                    key={item.id}
+                    key={item.cartLineId || item.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -76,7 +76,7 @@ export default function CartPage() {
                       <div className="flex items-center gap-3 border border-black/20 rounded w-fit px-2">
                         <button
                           type="button"
-                          onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity - 1)}
                           className="py-2 px-2 text-black hover:text-black/60 transition"
                           aria-label="Decrease quantity"
                         >
@@ -85,7 +85,7 @@ export default function CartPage() {
                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                         <button
                           type="button"
-                          onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity + 1)}
                           className="py-2 px-2 text-black hover:text-black/60 transition"
                           aria-label="Increase quantity"
                         >
@@ -98,7 +98,7 @@ export default function CartPage() {
                     <div className="flex flex-col items-end justify-between">
                       <button
                         type="button"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item.cartLineId || item.id)}
                         className="text-black/60 hover:text-black transition p-1"
                         aria-label="Remove item"
                       >

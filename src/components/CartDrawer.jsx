@@ -1,0 +1,148 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiX, FiMinus, FiPlus } from 'react-icons/fi';
+import { parsePrice, getProductName, formatPrice } from '../lib/productUtils';
+
+export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, updateCartQuantity, cartTotal, cartItemCount }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [isOpen, onClose]);
+
+  const tax = Math.floor(cartTotal * 0.1);
+  const total = cartTotal + tax;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            aria-hidden="true"
+          />
+          <motion.aside
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shopping cart"
+            className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white shadow-2xl"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+          >
+            <div className="flex items-center justify-between border-b border-black/10 px-6 py-5">
+              <div>
+                <h2 className="text-lg font-semibold uppercase tracking-wide text-black">Your Cart</h2>
+                <p className="text-xs uppercase tracking-[0.16em] text-black/50">
+                  {cartItemCount} item{cartItemCount !== 1 ? 's' : ''}
+                </p>
+              </div>
+              <button type="button" onClick={onClose} aria-label="Close cart" className="p-2 text-black/60 hover:text-black">
+                <FiX size={20} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {cart.length === 0 ? (
+                <div className="flex h-full flex-col items-center justify-center text-center">
+                  <p className="text-black/60 mb-6">Your cart is empty</p>
+                  <Link
+                    to="/"
+                    onClick={onClose}
+                    className="px-6 py-3 bg-black text-white text-xs font-medium uppercase tracking-[0.16em] hover:bg-black/90 transition"
+                  >
+                    Continue Shopping
+                  </Link>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map((item) => (
+                    <div key={item.cartLineId || item.id} className="flex gap-4 border border-black/10 p-3">
+                      <div className="h-20 w-16 flex-shrink-0 bg-[#e9e7e1]">
+                        <img src={item.src || item.image} alt={getProductName(item)} className="h-full w-full object-cover" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xs font-semibold uppercase tracking-wide text-black truncate">
+                          {getProductName(item)}
+                        </h3>
+                        {item.selectedVariants && (
+                          <p className="text-[0.65rem] text-black/50 mt-0.5">
+                            {Object.entries(item.selectedVariants).map(([k, v]) => `${k}: ${v}`).join(' · ')}
+                          </p>
+                        )}
+                        <p className="text-sm font-medium text-black mt-1">
+                          ৳ {parsePrice(item).toLocaleString()}
+                        </p>
+                        <div className="mt-2 flex items-center justify-between">
+                          <div className="flex items-center gap-2 border border-black/20 px-1">
+                            <button type="button" onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity - 1)} aria-label="Decrease">
+                              <FiMinus size={12} />
+                            </button>
+                            <span className="w-6 text-center text-xs">{item.quantity}</span>
+                            <button type="button" onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity + 1)} aria-label="Increase">
+                              <FiPlus size={12} />
+                            </button>
+                          </div>
+                          <button type="button" onClick={() => removeFromCart(item.cartLineId || item.id)} className="text-xs text-black/50 hover:text-black uppercase tracking-wide">
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {cart.length > 0 && (
+              <div className="border-t border-black/10 px-6 py-5 space-y-3">
+                <div className="flex justify-between text-sm text-black/70">
+                  <span>Subtotal</span>
+                  <span>{formatPrice(cartTotal)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-black/70">
+                  <span>Tax (10%)</span>
+                  <span>{formatPrice(tax)}</span>
+                </div>
+                <div className="flex justify-between font-semibold text-black pt-2 border-t border-black/10">
+                  <span>Total</span>
+                  <span>{formatPrice(total)}</span>
+                </div>
+                <Link
+                  to="/checkout"
+                  onClick={onClose}
+                  className="block w-full py-3 bg-black text-white text-sm font-medium uppercase tracking-[0.16em] text-center hover:bg-black/90 transition"
+                >
+                  Checkout
+                </Link>
+                <Link
+                  to="/cart"
+                  onClick={onClose}
+                  className="block w-full py-3 border border-black/20 text-black text-sm font-medium uppercase tracking-[0.16em] text-center hover:bg-black/5 transition"
+                >
+                  View Full Cart
+                </Link>
+              </div>
+            )}
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}

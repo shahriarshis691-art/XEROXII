@@ -14,6 +14,8 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import SearchPage from "./pages/SearchPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import StaticInfoPage from "./pages/StaticInfoPage";
+import WishlistPage from "./pages/WishlistPage";
+import AccountPage from "./pages/AccountPage";
 import Footer from "./components/Footer";
 import { getStaticPageSlugs } from "./data/staticPages";
 
@@ -34,11 +36,11 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-confirmation/:orderId" element={<OrderConfirmationPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/account" element={<AccountPage />} />
             {getStaticPageSlugs().map((slug) => (
               <Route key={slug} path={`/${slug}`} element={<StaticInfoPage slug={slug} />} />
             ))}
-            <Route path="/account" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Account page coming soon</p></div>} />
-            <Route path="/wishlist" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Wishlist page coming soon</p></div>} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />

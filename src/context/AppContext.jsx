@@ -3,13 +3,20 @@ import { normalizeProduct, parsePrice } from '../lib/productUtils';
 import { readStorage, writeStorage } from '../lib/storage';
 import { persistOrder } from '../lib/orderService';
 import { getProductById } from '../data/catalog';
+import { onAuthStateChange } from '../lib/authService';
 
 export const AppContext = createContext();
+
+function getCartLineId(productId, variants) {
+  if (!variants || !Object.keys(variants).length) return productId;
+  return `${productId}::${Object.entries(variants).map(([k, v]) => `${k}-${v}`).join('_')}`;
+}
 
 export function AppProvider({ children }) {
   const [cart, setCart] = useState(() => readStorage('xeroxii_cart', []));
   const [wishlist, setWishlist] = useState(() => readStorage('xeroxii_wishlist', []));
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(() => readStorage('xeroxii_profile', {}));
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState(() => readStorage('xeroxii_orders', []));
 
@@ -25,44 +32,69 @@ export function AppProvider({ children }) {
     writeStorage('xeroxii_orders', orders);
   }, [orders]);
 
+  useEffect(() => {
+    writeStorage('xeroxii_profile', profile);
+  }, [profile]);
+
+  useEffect(() => {
+    const { data: { subscription } } = onAuthStateChange((authUser) => {
+      setUser(authUser);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const updateProfile = (updates) => {
+    setProfile((prev) => ({ ...prev, ...updates }));
+  };
+
   const getStockLimit = (productId) => {
     const catalogProduct = getProductById(productId);
     return catalogProduct?.stock ?? 99;
   };
 
-  const addToCart = (product, quantity = 1) => {
+  const addToCart = (product, quantity = 1, options = {}) => {
     const normalized = normalizeProduct(product);
+    const variants = options.variants || product.selectedVariants || null;
+    const cartLineId = getCartLineId(normalized.id, variants);
     const stockLimit = getStockLimit(normalized.id);
 
     setCart(prevCart => {
-      const existingItem = prevCart.find(item => item.id === normalized.id);
+      const existingItem = prevCart.find(item => (item.cartLineId || item.id) === cartLineId);
       const currentQty = existingItem?.quantity ?? 0;
       const newQty = Math.min(currentQty + quantity, stockLimit);
 
       if (existingItem) {
         return prevCart.map(item =>
-          item.id === normalized.id ? { ...item, quantity: newQty } : item
+          (item.cartLineId || item.id) === cartLineId
+            ? { ...item, quantity: newQty }
+            : item
         );
       }
-      return [...prevCart, { ...normalized, quantity: Math.min(quantity, stockLimit) }];
+      return [...prevCart, {
+        ...normalized,
+        quantity: Math.min(quantity, stockLimit),
+        cartLineId,
+        selectedVariants: variants,
+      }];
     });
   };
 
-  const removeFromCart = (productId) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+  const removeFromCart = (cartLineId) => {
+    setCart(prevCart => prevCart.filter(item => (item.cartLineId || item.id) !== cartLineId));
   };
 
-  const updateCartQuantity = (productId, quantity) => {
+  const updateCartQuantity = (cartLineId, quantity) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(cartLineId);
       return;
     }
-    const stockLimit = getStockLimit(productId);
+    const item = cart.find(i => (i.cartLineId || i.id) === cartLineId);
+    const stockLimit = getStockLimit(item?.id);
     const cappedQty = Math.min(quantity, stockLimit);
 
     setCart(prevCart =>
       prevCart.map(item =>
-        item.id === productId ? { ...item, quantity: cappedQty } : item
+        (item.cartLineId || item.id) === cartLineId ? { ...item, quantity: cappedQty } : item
       )
     );
   };
@@ -160,6 +192,8 @@ export function AppProvider({ children }) {
     getOrderById,
     user,
     setUser,
+    profile,
+    updateProfile,
     isLoading,
     setIsLoading,
   };

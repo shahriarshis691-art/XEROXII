@@ -7,13 +7,13 @@ import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
-  const { cart, cartTotal, placeOrder } = useContext(AppContext);
+  const { cart, cartTotal, placeOrder, profile } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+    firstName: profile?.firstName || '',
+    lastName: profile?.lastName || '',
+    email: profile?.email || '',
+    phone: profile?.phone || '',
     address: '',
     city: '',
     state: '',
@@ -540,7 +540,7 @@ export default function CheckoutPage() {
 
               <div className="space-y-3 mb-6 pb-6 border-b border-black/10">
                 {cart.map(item => (
-                  <div key={item.id} className="flex justify-between text-sm text-black/70">
+                  <div key={item.cartLineId || item.id} className="flex justify-between text-sm text-black/70">
                     <span className="truncate mr-2">
                       {getProductName(item)} x {item.quantity}
                     </span>
