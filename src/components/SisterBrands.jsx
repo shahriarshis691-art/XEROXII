@@ -2,6 +2,33 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SISTER_BRANDS } from "../data/brandsData";
 
+function BrandLogo({ brand }) {
+  if (brand.logoImage) {
+    return (
+      <div
+        className="flex items-center justify-center px-6 py-8"
+        style={{ backgroundColor: brand.logoBg || "#0a0a0a" }}
+      >
+        <img
+          src={brand.logoImage}
+          alt={`${brand.name} logo`}
+          className="max-h-24 w-auto max-w-[85%] object-contain sm:max-h-28"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="flex h-28 items-center justify-center"
+      style={{ backgroundColor: brand.logoBg || "#0a0a0a" }}
+    >
+      <span className="text-2xl font-bold tracking-[0.25em] text-white">{brand.logo}</span>
+    </div>
+  );
+}
+
 export default function SisterBrands() {
   return (
     <section
@@ -31,17 +58,16 @@ export default function SisterBrands() {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="group flex flex-col overflow-hidden border border-black/10 bg-white shadow-sm transition hover:border-black/25 hover:shadow-md"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0a]">
+              <BrandLogo brand={brand} />
+
+              <div className="relative aspect-[16/9] overflow-hidden bg-[#0a0a0a]">
                 <img
                   src={brand.cardImage}
                   alt={brand.name}
                   loading="lazy"
                   className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center border border-white/30 bg-black/40 text-xs font-bold tracking-[0.2em] text-white backdrop-blur-sm">
-                  {brand.logo}
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
 
               <div className="flex flex-1 flex-col p-6 sm:p-7">
@@ -54,12 +80,22 @@ export default function SisterBrands() {
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-black/65">
                   {brand.tagline}
                 </p>
-                <Link
-                  to={`/brands/${brand.slug}`}
-                  className="mt-6 inline-flex min-h-11 items-center justify-center border border-black bg-black px-5 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-transparent hover:text-black sm:text-xs"
-                >
-                  Explore Brand
-                </Link>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    to={`/brands/${brand.slug}`}
+                    className="inline-flex min-h-11 flex-1 items-center justify-center border border-black bg-black px-5 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-transparent hover:text-black sm:text-xs"
+                  >
+                    Explore Brand
+                  </Link>
+                  <a
+                    href={brand.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 flex-1 items-center justify-center border border-black/20 px-5 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-black transition hover:border-black hover:bg-black hover:text-white sm:text-xs"
+                  >
+                    View Portfolio
+                  </a>
+                </div>
               </div>
             </motion.article>
           ))}
