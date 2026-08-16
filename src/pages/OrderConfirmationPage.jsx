@@ -91,7 +91,7 @@ export default function OrderConfirmationPage() {
               <FiCheckCircle size={60} className="text-green-600" />
             </motion.div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-4">
+          <h1 className="mb-4 text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">
             Order Confirmed
           </h1>
           <p className="text-lg text-black/70 mb-2">Thank you for your purchase!</p>

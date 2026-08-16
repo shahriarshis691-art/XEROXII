@@ -17,7 +17,7 @@ export default function CollectionShowcase() {
       <div className="page-shell flex justify-center">
         <a
           href="#watches"
-          className="inline-flex min-h-12 items-center justify-center border border-black/25 bg-transparent px-8 py-4 text-xs font-semibold uppercase tracking-[0.22em] text-black transition-all duration-300 hover:border-black hover:bg-black hover:text-white"
+          className="inline-flex min-h-12 w-full max-w-xs items-center justify-center border border-black/25 bg-transparent px-8 py-4 text-xs font-semibold uppercase tracking-[0.22em] text-black transition-all duration-300 hover:border-black hover:bg-black hover:text-white sm:w-auto"
         >
           Shop the Collection
         </a>

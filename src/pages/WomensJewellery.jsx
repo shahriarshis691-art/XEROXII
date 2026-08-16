@@ -52,7 +52,7 @@ export default function WomensJewelleryPage() {
       {/* Header / Hero */}
       <div className="relative bg-[#f8f6f3] py-16 sm:py-24">
         <div className="page-shell flex flex-col items-center text-center">
-          <h1 className="font-display text-4xl font-semibold uppercase tracking-[0.12em] text-[#a3123a] sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-3xl font-semibold uppercase tracking-[0.1em] text-[#a3123a] sm:text-5xl sm:tracking-[0.12em] lg:text-6xl">
             Women&apos;s Jewellery
           </h1>
           <a
@@ -67,12 +67,12 @@ export default function WomensJewelleryPage() {
       {/* Filter & Sort Bar */}
       <div className="sticky top-0 z-20 border-b border-black/10 bg-white/95 py-4 backdrop-blur-sm">
         <div className="page-shell flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="no-scrollbar flex w-full flex-nowrap items-center justify-start gap-2 overflow-x-auto sm:w-auto sm:flex-wrap sm:justify-center">
             {categories.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setSelectedCategory(cat.value)}
-                className={`px-4 py-2 text-xs font-medium uppercase tracking-wide transition-colors sm:text-sm ${selectedCategory === cat.value
+                className={`min-h-11 shrink-0 px-4 py-2 text-xs font-medium uppercase tracking-wide transition-colors sm:text-sm ${selectedCategory === cat.value
                     ? "bg-black text-white"
                     : "text-black/70 hover:bg-black/5 hover:text-black"
                   }`}
@@ -88,7 +88,7 @@ export default function WomensJewelleryPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="rounded-sm border border-black/20 bg-white px-3 py-2 text-xs font-medium uppercase tracking-wide text-black focus:border-black focus:outline-none sm:text-sm"
+              className="min-h-11 rounded-sm border border-black/20 bg-white px-3 py-2 text-xs font-medium uppercase tracking-wide text-black focus:border-black focus:outline-none sm:text-sm"
             >
               <option value="newest">Newest First</option>
               <option value="price-asc">Price: Low to High</option>
@@ -102,7 +102,7 @@ export default function WomensJewelleryPage() {
       <div className="page-shell py-12 sm:py-16">
         <motion.div
           layout
-          className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4"
+          className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3 xl:grid-cols-4"
         >
           {filteredProducts.map((product, index) => (
             <motion.div
@@ -136,21 +136,21 @@ export default function WomensJewelleryPage() {
                 </p>
               </div>
 
-              <div className="mt-4 flex justify-center gap-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="mt-4 flex flex-col justify-center gap-2 opacity-100 transition-opacity duration-300 sm:flex-row sm:gap-3 lg:opacity-0 lg:group-hover:opacity-100">
                 <button
                   type="button"
                   onClick={() => {
                     setSelectedProduct(product);
                     setIsQuickViewOpen(true);
                   }}
-                  className="rounded-sm border border-black/20 bg-white px-4 py-2 text-xs font-medium uppercase tracking-wider text-black transition-all duration-300 hover:border-black hover:bg-black hover:text-white"
+                  className="min-h-11 rounded-sm border border-black/20 bg-white px-3 py-2 text-[0.65rem] font-medium uppercase tracking-wider text-black transition-all duration-300 hover:border-black hover:bg-black hover:text-white sm:px-4 sm:text-xs"
                 >
                   Quick View
                 </button>
                 <button
                   type="button"
                   onClick={() => navigate(`/product/${product.id}`)}
-                  className="rounded-sm bg-black px-4 py-2 text-xs font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-black/90"
+                  className="min-h-11 rounded-sm bg-black px-3 py-2 text-[0.65rem] font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-black/90 sm:px-4 sm:text-xs"
                 >
                   View Details
                 </button>

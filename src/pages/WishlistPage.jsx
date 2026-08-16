@@ -25,7 +25,7 @@ export default function WishlistPage() {
       <Seo title="Wishlist" description="Your saved luxury watches and jewellery at XEROXII." path="/wishlist" noindex />
       <div className="page-shell">
         <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-2">
+          <h1 className="mb-2 text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">
             Wishlist
           </h1>
           <p className="text-sm uppercase tracking-[0.16em] text-black/60">
@@ -49,7 +49,7 @@ export default function WishlistPage() {
             </Link>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 sm:gap-x-6 sm:gap-y-12">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-12 lg:grid-cols-3 xl:grid-cols-4">
             {wishlist.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -67,7 +67,7 @@ export default function WishlistPage() {
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="font-semibold text-black text-sm uppercase tracking-wide mb-1">
+                  <h3 className="mb-1 text-[0.65rem] font-semibold uppercase tracking-wide text-black sm:text-sm">
                     {getProductName(item)}
                   </h3>
                   <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">
@@ -75,11 +75,11 @@ export default function WishlistPage() {
                   </p>
                   <p className="font-medium text-black">{getProductPriceDisplay(item)}</p>
                 </Link>
-                <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center">
+                <div className="mt-4 flex flex-col gap-2">
                   <button
                     type="button"
                     onClick={() => handleMoveToCart(item)}
-                    className="flex items-center justify-center gap-2 px-4 py-2 bg-black text-white text-xs font-medium uppercase tracking-[0.16em] hover:bg-black/90 transition"
+                    className="flex min-h-11 items-center justify-center gap-2 bg-black px-3 py-2 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-white transition hover:bg-black/90 sm:text-xs"
                   >
                     <FiShoppingBag size={14} />
                     Add to Cart
@@ -87,7 +87,7 @@ export default function WishlistPage() {
                   <button
                     type="button"
                     onClick={() => handleRemove(item.id)}
-                    className="flex items-center justify-center gap-2 px-4 py-2 border border-black/20 text-black text-xs font-medium uppercase tracking-[0.16em] hover:bg-black/5 transition"
+                    className="flex min-h-11 items-center justify-center gap-2 border border-black/20 px-3 py-2 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-black transition hover:bg-black/5 sm:text-xs"
                     aria-label="Remove from wishlist"
                   >
                     <FiX size={14} />

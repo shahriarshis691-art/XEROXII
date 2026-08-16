@@ -29,7 +29,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[80] bg-black/50 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -40,7 +40,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
             role="dialog"
             aria-modal="true"
             aria-label="Shopping cart"
-            className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white shadow-2xl"
+            className="fixed right-0 top-0 z-[80] flex h-dvh max-h-dvh w-full max-w-md flex-col bg-white shadow-2xl"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -53,7 +53,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
                   {cartItemCount} item{cartItemCount !== 1 ? 's' : ''}
                 </p>
               </div>
-              <button type="button" onClick={onClose} aria-label="Close cart" className="p-2 text-black/60 hover:text-black">
+              <button type="button" onClick={onClose} aria-label="Close cart" className="inline-flex h-11 w-11 items-center justify-center p-2 text-black/60 hover:text-black">
                 <FiX size={20} />
               </button>
             </div>
@@ -65,7 +65,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
                   <Link
                     to="/"
                     onClick={onClose}
-                    className="px-6 py-3 bg-black text-white text-xs font-medium uppercase tracking-[0.16em] hover:bg-black/90 transition"
+                    className="min-h-11 px-6 py-3 bg-black text-white text-xs font-medium uppercase tracking-[0.16em] hover:bg-black/90 transition inline-flex items-center justify-center"
                   >
                     Continue Shopping
                   </Link>
@@ -90,16 +90,16 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
                           ৳ {parsePrice(item).toLocaleString()}
                         </p>
                         <div className="mt-2 flex items-center justify-between">
-                          <div className="flex items-center gap-2 border border-black/20 px-1">
-                            <button type="button" onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity - 1)} aria-label="Decrease">
+                          <div className="flex items-center border border-black/20">
+                            <button type="button" className="inline-flex h-11 w-11 items-center justify-center" onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity - 1)} aria-label="Decrease">
                               <FiMinus size={12} />
                             </button>
                             <span className="w-6 text-center text-xs">{item.quantity}</span>
-                            <button type="button" onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity + 1)} aria-label="Increase">
+                            <button type="button" className="inline-flex h-11 w-11 items-center justify-center" onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity + 1)} aria-label="Increase">
                               <FiPlus size={12} />
                             </button>
                           </div>
-                          <button type="button" onClick={() => removeFromCart(item.cartLineId || item.id)} className="text-xs text-black/50 hover:text-black uppercase tracking-wide">
+                          <button type="button" onClick={() => removeFromCart(item.cartLineId || item.id)} className="min-h-11 px-1 text-xs uppercase tracking-wide text-black/50 hover:text-black">
                             Remove
                           </button>
                         </div>
@@ -111,7 +111,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
             </div>
 
             {cart.length > 0 && (
-              <div className="border-t border-black/10 px-6 py-5 space-y-3">
+              <div className="space-y-3 border-t border-black/10 px-6 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Subtotal</span>
                   <span>{formatPrice(cartTotal)}</span>
@@ -120,21 +120,21 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart, upda
                   <span>Tax (10%)</span>
                   <span>{formatPrice(tax)}</span>
                 </div>
-                <div className="flex justify-between font-semibold text-black pt-2 border-t border-black/10">
+                <div className="flex justify-between border-t border-black/10 pt-2 font-semibold text-black">
                   <span>Total</span>
                   <span>{formatPrice(total)}</span>
                 </div>
                 <Link
                   to="/checkout"
                   onClick={onClose}
-                  className="block w-full py-3 bg-black text-white text-sm font-medium uppercase tracking-[0.16em] text-center hover:bg-black/90 transition"
+                  className="block min-h-11 w-full bg-black py-3 text-center text-sm font-medium uppercase tracking-[0.16em] text-white transition hover:bg-black/90"
                 >
                   Checkout
                 </Link>
                 <Link
                   to="/cart"
                   onClick={onClose}
-                  className="block w-full py-3 border border-black/20 text-black text-sm font-medium uppercase tracking-[0.16em] text-center hover:bg-black/5 transition"
+                  className="block min-h-11 w-full border border-black/20 py-3 text-center text-sm font-medium uppercase tracking-[0.16em] text-black transition hover:bg-black/5"
                 >
                   View Full Cart
                 </Link>

@@ -17,7 +17,7 @@ export default function CartPage() {
       <div className="page-shell">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-2">
+          <h1 className="mb-2 text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">
             Shopping Cart
           </h1>
           <p className="text-sm uppercase tracking-[0.16em] text-black/60">
@@ -63,7 +63,7 @@ export default function CartPage() {
                     </div>
 
                     {/* Product Details */}
-                    <div className="flex-1">
+                    <div className="min-w-0 flex-1">
                       <h3 className="font-semibold text-black text-sm sm:text-base uppercase tracking-wide mb-1">
                         {getProductName(item)}
                       </h3>
@@ -75,11 +75,11 @@ export default function CartPage() {
                       </p>
 
                       {/* Quantity Selector */}
-                      <div className="flex items-center gap-3 border border-black/20 rounded w-fit px-2">
+                      <div className="flex w-fit items-center border border-black/20">
                         <button
                           type="button"
                           onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity - 1)}
-                          className="py-2 px-2 text-black hover:text-black/60 transition"
+                          className="inline-flex h-11 w-11 items-center justify-center text-black transition hover:text-black/60"
                           aria-label="Decrease quantity"
                         >
                           <FiMinus size={14} />
@@ -88,7 +88,7 @@ export default function CartPage() {
                         <button
                           type="button"
                           onClick={() => updateCartQuantity(item.cartLineId || item.id, item.quantity + 1)}
-                          className="py-2 px-2 text-black hover:text-black/60 transition"
+                          className="inline-flex h-11 w-11 items-center justify-center text-black transition hover:text-black/60"
                           aria-label="Increase quantity"
                         >
                           <FiPlus size={14} />
@@ -151,13 +151,13 @@ export default function CartPage() {
 
                 <Link
                   to="/checkout"
-                  className="block w-full py-3 px-4 bg-black text-white text-sm font-medium uppercase tracking-[0.16em] text-center hover:bg-black/90 transition mb-3"
+                  className="mb-3 block min-h-11 w-full bg-black px-4 py-3 text-center text-sm font-medium uppercase tracking-[0.16em] text-white transition hover:bg-black/90"
                 >
                   Proceed to Checkout
                 </Link>
                 <Link
                   to="/"
-                  className="block w-full py-3 px-4 border border-black/20 text-black text-sm font-medium uppercase tracking-[0.16em] text-center hover:bg-black/5 transition"
+                  className="block min-h-11 w-full border border-black/20 px-4 py-3 text-center text-sm font-medium uppercase tracking-[0.16em] text-black transition hover:bg-black/5"
                 >
                   Continue Shopping
                 </Link>

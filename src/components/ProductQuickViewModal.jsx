@@ -76,7 +76,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
     <AnimatePresence>
       {product && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6"
+          className="fixed inset-0 z-[70] flex items-end justify-center px-0 sm:items-center sm:px-6"
           variants={backdropVariants}
           initial="hidden"
           animate="visible"
@@ -95,13 +95,13 @@ export default function ProductQuickViewModal({ product, onClose }) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-sm bg-white shadow-2xl sm:flex-row"
+            className="relative flex max-h-[92dvh] w-full max-w-4xl flex-col overflow-hidden rounded-t-sm bg-white shadow-2xl sm:max-h-[90vh] sm:flex-row sm:rounded-sm"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label="Close quick view"
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center text-black/70 transition hover:text-black"
+              className="absolute right-2 top-2 z-10 inline-flex h-11 w-11 items-center justify-center text-black/70 transition hover:text-black sm:right-4 sm:top-4"
             >
               <svg
                 width="18"
@@ -119,7 +119,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
             </button>
 
             <div className="flex-shrink-0 sm:w-1/2">
-              <div className="aspect-[3/4] w-full bg-[#e9e7e1] sm:aspect-auto sm:h-full">
+              <div className="aspect-[4/3] max-h-[36vh] w-full bg-[#e9e7e1] sm:aspect-auto sm:h-full sm:max-h-none">
                 <img
                   src={product.src || product.image}
                   alt={getProductName(product)}
@@ -128,13 +128,13 @@ export default function ProductQuickViewModal({ product, onClose }) {
               </div>
             </div>
 
-            <div className="flex flex-1 flex-col justify-center px-6 py-8 sm:px-10 sm:py-10 overflow-y-auto">
+            <div className="flex flex-1 flex-col justify-center overflow-y-auto px-5 py-6 sm:px-10 sm:py-10">
               {product.badge && (
                 <span className="mb-4 inline-block w-fit bg-black px-3 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-white">
                   {product.badge}
                 </span>
               )}
-              <h3 className="text-2xl font-semibold uppercase tracking-wide text-black sm:text-3xl">
+              <h3 className="break-words text-xl font-semibold uppercase tracking-wide text-black sm:text-3xl">
                 {getProductName(product)}
               </h3>
               <p className="mt-2 text-sm uppercase tracking-[0.16em] text-black/50 sm:text-base">
@@ -152,11 +152,11 @@ export default function ProductQuickViewModal({ product, onClose }) {
                 <span className="text-sm font-medium uppercase tracking-[0.16em] text-black/60">
                   Quantity
                 </span>
-                <div className="flex items-center gap-3 border border-black/20 rounded px-2">
+                <div className="flex items-center border border-black/20">
                   <button
                     type="button"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="py-2 px-2 text-black hover:text-black/60 transition"
+                    className="inline-flex h-11 w-11 items-center justify-center text-black transition hover:text-black/60"
                     aria-label="Decrease quantity"
                   >
                     −
@@ -165,7 +165,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
                   <button
                     type="button"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="py-2 px-2 text-black hover:text-black/60 transition"
+                    className="inline-flex h-11 w-11 items-center justify-center text-black transition hover:text-black/60"
                     aria-label="Increase quantity"
                   >
                     +
@@ -177,7 +177,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <button 
                   type="button" 
-                  className="flex-1 button-primary"
+                  className="button-primary min-h-11 flex-1"
                   onClick={handleAddToCart}
                 >
                   Add to Cart
@@ -186,7 +186,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
                   <Link
                     to={`/product/${product.id}`}
                     onClick={onClose}
-                    className="flex-1 flex items-center justify-center button-secondary text-center"
+                    className="button-secondary flex min-h-11 flex-1 items-center justify-center text-center"
                   >
                     Full Details
                   </Link>
@@ -194,7 +194,7 @@ export default function ProductQuickViewModal({ product, onClose }) {
                 <button
                   type="button"
                   onClick={handleWishlist}
-                  className="flex items-center justify-center gap-2 button-secondary sm:flex-none sm:px-4"
+                  className="button-secondary flex min-h-11 items-center justify-center gap-2 sm:flex-none sm:px-4"
                   aria-label="Add to wishlist"
                 >
                   <FiHeart 

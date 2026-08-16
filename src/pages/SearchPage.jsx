@@ -31,20 +31,20 @@ export default function SearchPage() {
       />
       <div className="page-shell">
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <h1 className="text-4xl font-light uppercase tracking-wide text-black mb-6">
+          <h1 className="mb-6 text-3xl font-light uppercase tracking-wide text-black sm:text-4xl">
             Search
           </h1>
-          <form onSubmit={handleSubmit} className="flex gap-3">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search watches, brands, collections..."
-              className="flex-1 px-4 py-3 border border-black/20 bg-white text-black placeholder:text-black/40 focus:outline-none focus:ring-1 focus:ring-black/50"
+              className="min-h-11 min-w-0 flex-1 border border-black/20 bg-white px-4 py-3 text-base text-black placeholder:text-black/40 focus:outline-none focus:ring-1 focus:ring-black/50 sm:text-sm"
             />
             <button
               type="submit"
-              className="px-6 py-3 bg-black text-white text-sm font-medium uppercase tracking-[0.16em] hover:bg-black/90 transition"
+              className="min-h-11 bg-black px-6 py-3 text-sm font-medium uppercase tracking-[0.16em] text-white transition hover:bg-black/90"
             >
               Search
             </button>
@@ -66,7 +66,7 @@ export default function SearchPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-12 lg:grid-cols-3 xl:grid-cols-4">
           {results.map((product, index) => (
             <motion.div
               key={product.id}
@@ -83,7 +83,7 @@ export default function SearchPage() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-semibold text-black text-sm uppercase tracking-wide mb-1">
+                <h3 className="mb-1 text-[0.65rem] font-semibold uppercase tracking-wide text-black sm:text-sm">
                   {getProductName(product)}
                 </h3>
                 <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">

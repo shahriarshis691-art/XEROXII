@@ -55,7 +55,7 @@ export default function BrandPage() {
           <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50">
             {brandName} Collection
           </p>
-          <h1 className="section-heading mt-3 text-4xl font-semibold uppercase tracking-wide text-black sm:text-5xl lg:text-6xl">
+          <h1 className="section-heading mt-3 text-3xl font-semibold uppercase tracking-wide text-black sm:text-5xl lg:text-6xl">
             {brandName.toUpperCase()}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-black/70 sm:text-lg">
@@ -63,7 +63,7 @@ export default function BrandPage() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-14">
+        <div className="mt-12 grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 xl:gap-y-14">
           {products.map((watch, index) => (
             <motion.div
               key={watch.id}

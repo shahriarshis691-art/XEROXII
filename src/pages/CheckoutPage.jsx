@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import { COUNTRIES, getSubdivisions, getStateLabel, getCountryName } from '../data/regions';
 
 const inputClass = (hasError) =>
-  `w-full px-4 py-3 border text-black bg-white focus:outline-none focus:ring-1 focus:ring-black/50 ${
+  `w-full max-w-full px-4 py-3 min-h-11 border text-base text-black bg-white focus:outline-none focus:ring-1 focus:ring-black/50 ${
     hasError ? 'border-red-500' : 'border-black/20'
   }`;
 
@@ -188,12 +188,12 @@ export default function CheckoutPage() {
   const formatLinePrice = (amountBDT) => formatCurrency(convertFromBDT(amountBDT, currencyCode), currencyCode);
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
+    <main className="min-h-screen bg-[#fafaf8] py-8 pb-28 sm:py-16 lg:pb-16">
       <Seo title="Checkout" description="Complete your XEROXII order securely." path="/checkout" noindex />
       <div className="page-shell">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-2">
+          <h1 className="mb-2 text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">
             Checkout
           </h1>
           <p className="text-sm uppercase tracking-[0.16em] text-black/60">
@@ -618,12 +618,29 @@ export default function CheckoutPage() {
                 type="submit"
                 form="checkout-form"
                 disabled={isLoading}
-                className="w-full py-3 px-4 bg-black text-white text-sm font-medium uppercase tracking-[0.16em] hover:bg-black/90 disabled:bg-black/50 disabled:cursor-not-allowed transition"
+                className="hidden min-h-11 w-full bg-black px-4 py-3 text-sm font-medium uppercase tracking-[0.16em] text-white transition hover:bg-black/90 disabled:cursor-not-allowed disabled:bg-black/50 lg:block"
               >
                 {isLoading ? 'Processing...' : 'Place Order'}
               </button>
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 pt-3 backdrop-blur-sm lg:hidden" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
+        <div className="page-shell flex items-center gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-[0.6rem] uppercase tracking-[0.14em] text-black/50">Total</p>
+            <p className="truncate font-semibold text-black">{formatCurrency(total, currencyCode)}</p>
+          </div>
+          <button
+            type="submit"
+            form="checkout-form"
+            disabled={isLoading}
+            className="inline-flex min-h-11 shrink-0 items-center justify-center bg-black px-5 text-xs font-medium uppercase tracking-[0.16em] text-white disabled:bg-black/50"
+          >
+            {isLoading ? 'Processing...' : 'Place Order'}
+          </button>
         </div>
       </div>
     </main>

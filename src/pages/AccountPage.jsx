@@ -77,7 +77,7 @@ export default function AccountPage() {
       <Seo title="My Account" description="View your order history and manage your XEROXII profile." path="/account" noindex />
       <div className="page-shell">
         <div className="mb-10">
-          <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-2">
+          <h1 className="mb-2 text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">
             My Account
           </h1>
           <p className="text-sm uppercase tracking-[0.16em] text-black/60">
@@ -86,7 +86,7 @@ export default function AccountPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
-          <nav className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible">
+          <nav className="no-scrollbar flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
             {[
               { id: 'orders', label: 'Order History' },
               { id: 'profile', label: 'Profile' },
@@ -99,7 +99,7 @@ export default function AccountPage() {
                   if (tab.id === 'auth' && user) handleSignOut();
                   else setActiveTab(tab.id);
                 }}
-                className={`whitespace-nowrap px-4 py-3 text-xs font-medium uppercase tracking-[0.16em] transition ${
+                className={`min-h-11 shrink-0 whitespace-nowrap px-4 py-3 text-xs font-medium uppercase tracking-[0.16em] transition ${
                   activeTab === tab.id
                     ? 'bg-black text-white'
                     : 'border border-black/20 text-black hover:bg-black/5'

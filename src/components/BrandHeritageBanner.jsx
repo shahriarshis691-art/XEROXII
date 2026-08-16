@@ -38,7 +38,7 @@ export default function BrandHeritageBanner() {
           <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50">
             Our Legacy
           </p>
-          <h2 className="section-heading text-4xl font-semibold uppercase tracking-wide text-black sm:text-5xl lg:text-6xl">
+          <h2 className="section-heading text-3xl font-semibold uppercase tracking-wide text-black sm:text-5xl lg:text-6xl">
             Crafted for<br />
             Eternity
           </h2>

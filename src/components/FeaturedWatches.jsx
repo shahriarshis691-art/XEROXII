@@ -19,7 +19,7 @@ export default function FeaturedWatches() {
         </h2>
       </div>
 
-      <div className="page-shell mt-14 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14">
+      <div className="page-shell mt-14 grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-12 lg:grid-cols-3 lg:gap-y-14">
         {FEATURED_PRODUCTS.map((watch, index) => (
           <motion.div
             key={watch.id}
@@ -41,17 +41,17 @@ export default function FeaturedWatches() {
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/10">
+              <div className="pointer-events-none absolute inset-0 flex items-end justify-center bg-black/0 p-2 transition-all duration-500 group-hover:bg-black/10 sm:items-center sm:p-0">
                 <button
                   type="button"
                   onClick={() => setSelected(watch)}
-                  className="pointer-events-auto translate-y-4 rounded-full border border-black/20 bg-white/90 px-5 py-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black backdrop-blur-sm"
+                  className="pointer-events-auto min-h-11 w-full max-w-[10.5rem] translate-y-0 rounded-full border border-black/20 bg-white/90 px-4 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black opacity-100 backdrop-blur-sm transition-all duration-500 sm:w-auto sm:translate-y-4 sm:px-5 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
                 >
                   View Details
                 </button>
               </div>
             </div>
-            <button type="button" onClick={() => navigate(`/product/${watch.id}`)} className="mt-3 w-full text-left">
+            <button type="button" onClick={() => navigate(`/product/${watch.id}`)} className="mt-3 w-full min-w-0 text-left">
               <h3 className="text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:mt-5 sm:text-sm sm:tracking-[0.14em]">
                 {watch.name}
               </h3>

@@ -102,7 +102,7 @@ export default function BrandDetailPage() {
                 <h1 className="text-3xl font-bold uppercase tracking-[0.12em] text-white sm:text-4xl lg:text-5xl">
                   {brand.name}
                 </h1>
-                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-white/55 sm:text-sm">
+                <p className="mt-2 text-xs uppercase tracking-[0.16em] text-white/55 sm:text-sm sm:tracking-[0.2em]">
                   {brand.category}
                 </p>
                 <p className="mt-4 max-w-2xl text-sm uppercase tracking-[0.14em] text-white/80 sm:text-base">
@@ -113,7 +113,7 @@ export default function BrandDetailPage() {
                 href={brand.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 border border-white bg-white px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-black transition hover:bg-transparent hover:text-white sm:px-8 sm:text-xs"
+                className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 border border-white bg-white px-6 py-3 text-center text-[0.65rem] font-bold uppercase tracking-[0.16em] text-black transition hover:bg-transparent hover:text-white sm:w-auto sm:px-8 sm:text-xs"
               >
                 {brand.websiteCta || "Visit Website"}
                 <FiExternalLink size={14} />

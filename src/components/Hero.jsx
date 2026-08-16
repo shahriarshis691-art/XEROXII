@@ -103,7 +103,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 24, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
-        className="pointer-events-none absolute right-[-4%] top-[8%] z-20 h-[58%] w-[58%] sm:right-[2%] sm:top-[6%] sm:h-[72%] sm:w-[48%] lg:right-[4%] lg:top-[4%] lg:h-[88%] lg:w-[42%]"
+        className="pointer-events-none absolute right-[-12%] top-[2%] z-20 h-[36%] w-[56%] sm:right-[2%] sm:top-[6%] sm:h-[72%] sm:w-[48%] lg:right-[4%] lg:top-[4%] lg:h-[88%] lg:w-[42%]"
       >
         <motion.img
           src={HERO_WATCH}
@@ -131,7 +131,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="max-w-[min(100%,520px)]"
         >
-          <p className="text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.9] tracking-[0.06em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+          <p className="text-[clamp(1.75rem,8vw,4.5rem)] font-black uppercase leading-[0.9] tracking-[0.04em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] sm:tracking-[0.06em]">
             Chrono
             <br />
             Force
@@ -151,7 +151,7 @@ export default function Hero() {
             className="space-y-4"
           >
             <div className="inline-flex flex-wrap items-stretch gap-0 border border-white/25 bg-black/45 backdrop-blur-sm">
-              <div className="flex min-w-[120px] flex-col justify-center border-r border-white/20 px-4 py-3 sm:min-w-[140px] sm:px-5">
+              <div className="flex min-w-0 flex-1 flex-col justify-center border-r border-white/20 px-4 py-3 sm:min-w-[140px] sm:flex-none sm:px-5">
                 <span className="text-[0.55rem] font-bold uppercase tracking-[0.22em] text-white/90 sm:text-[0.6rem]">
                   Official
                 </span>
@@ -159,7 +159,7 @@ export default function Hero() {
                   Heritage
                 </span>
               </div>
-              <div className="flex min-w-[120px] flex-col justify-center px-4 py-3 sm:min-w-[140px] sm:px-5">
+              <div className="flex min-w-0 flex-1 flex-col justify-center px-4 py-3 sm:min-w-[140px] sm:flex-none sm:px-5">
                 <span className="text-[0.55rem] font-bold uppercase tracking-[0.22em] text-[#d4af37] sm:text-[0.6rem]">
                   XEROXII
                 </span>
@@ -173,16 +173,16 @@ export default function Hero() {
               XEROXII TIMEPIECE CO., LTD. | Engineered for Precision
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 to="/search?q=automatic"
-                className="inline-flex min-h-11 items-center justify-center border border-white bg-white px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-black transition hover:bg-transparent hover:text-white sm:px-8 sm:text-xs"
+                className="inline-flex min-h-11 w-full items-center justify-center border border-white bg-white px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-black transition hover:bg-transparent hover:text-white sm:w-auto sm:px-8 sm:text-xs"
               >
                 Discover Collection
               </Link>
               <Link
                 to="/brand/seiko"
-                className="inline-flex min-h-11 items-center justify-center border border-white/35 bg-black/40 px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition hover:border-white hover:bg-white hover:text-black sm:px-8 sm:text-xs"
+                className="inline-flex min-h-11 w-full items-center justify-center border border-white/35 bg-black/40 px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition hover:border-white hover:bg-white hover:text-black sm:w-auto sm:px-8 sm:text-xs"
               >
                 Pre-Order
               </Link>
@@ -202,13 +202,13 @@ export default function Hero() {
                 Flagship Series
               </span>
             </div>
-            <h1 className="text-[clamp(2rem,5vw,3.25rem)] font-bold uppercase tracking-[0.18em] text-white">
+            <h1 className="break-words text-[clamp(1.75rem,8vw,3.25rem)] font-bold uppercase tracking-[0.12em] text-white sm:tracking-[0.18em]">
               XEROXII
             </h1>
-            <p className="mt-1 text-sm font-light uppercase tracking-[0.35em] text-white/80 sm:text-base">
+            <p className="mt-1 text-sm font-light uppercase tracking-[0.28em] text-white/80 sm:text-base sm:tracking-[0.35em]">
               Automatic
             </p>
-            <p className="mt-3 text-[clamp(1.5rem,3.5vw,2.25rem)] font-black uppercase tracking-[0.12em] text-white">
+            <p className="mt-3 break-words text-[clamp(1.35rem,6vw,2.25rem)] font-black uppercase leading-tight tracking-[0.08em] text-white sm:tracking-[0.12em]">
               XX-200 Apex
             </p>
           </motion.div>

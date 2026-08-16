@@ -28,7 +28,7 @@ export default function WomensJewellery() {
           <p className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/45">
             Curated Collection
           </p>
-          <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.15em] text-[#a3123a] sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.1em] text-[#a3123a] sm:text-4xl sm:tracking-[0.15em] lg:text-5xl">
             Women&apos;s Jewellery
           </h2>
           <Link

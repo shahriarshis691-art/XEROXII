@@ -40,7 +40,7 @@ export default function SisterBrands() {
 
       <div
         role="list"
-        className="flex flex-row flex-nowrap items-center gap-8 overflow-x-auto overscroll-x-contain scroll-smooth snap-x snap-mandatory no-scrollbar px-[var(--page-gutter)] touch-pan-x md:justify-center md:gap-12 md:overflow-x-visible"
+        className="flex w-full max-w-[100vw] flex-row flex-nowrap items-center gap-6 overflow-x-auto overscroll-x-contain scroll-smooth snap-x snap-mandatory no-scrollbar px-[var(--page-gutter)] touch-pan-x sm:gap-8 md:justify-center md:gap-12 md:overflow-x-visible"
       >
         {SISTER_BRANDS.map((brand) => {
           const lightMark = Boolean(brand.logoImage && brand.logoBg === "#ffffff");
@@ -51,7 +51,7 @@ export default function SisterBrands() {
               role="listitem"
               to={`/brands/${brand.slug}`}
               aria-label={`Explore ${brand.name}`}
-              className="group flex shrink-0 snap-center flex-col items-center justify-center gap-3 py-1 transition duration-300 hover:opacity-70 active:scale-[0.98] md:hover:scale-[1.04] md:hover:opacity-100"
+              className="group flex min-h-11 shrink-0 snap-start flex-col items-center justify-center gap-3 py-1 transition duration-300 hover:opacity-70 active:scale-[0.98] md:snap-center md:hover:scale-[1.04] md:hover:opacity-100"
             >
               <div
                 className={`flex h-16 w-[11rem] items-center justify-center md:h-20 ${

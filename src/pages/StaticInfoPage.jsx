@@ -25,7 +25,7 @@ export default function StaticInfoPage({ slug }) {
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50">
           {page.subtitle}
         </p>
-        <h1 className="mt-3 text-4xl font-light uppercase tracking-wide text-black sm:text-5xl">
+        <h1 className="mt-3 break-words text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">
           {page.title}
         </h1>
         <div className="mt-10 space-y-6 border-t border-black/10 pt-10">

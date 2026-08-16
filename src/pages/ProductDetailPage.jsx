@@ -123,7 +123,7 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] pb-24 lg:pb-0">
+    <main className="min-h-screen bg-[#fafaf8] pb-[calc(5.5rem+env(safe-area-inset-bottom))] lg:pb-0">
       <Seo
         title={productName}
         description={product.description}
@@ -143,7 +143,7 @@ export default function ProductDetailPage() {
 
       <div className="border-b border-black/10 bg-white">
         <div className="page-shell py-4">
-          <nav className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-black/50">
+          <nav className="flex min-w-0 flex-wrap items-center gap-2 overflow-hidden text-[0.65rem] uppercase tracking-[0.18em] text-black/50">
             <Link to="/" className="transition hover:text-black">Home</Link>
             <span aria-hidden="true">/</span>
             <Link to={product.type === 'jewellery' ? '/womens-jewellery-listing' : '/#watches'} className="transition hover:text-black">
@@ -171,13 +171,13 @@ export default function ProductDetailPage() {
               />
             </div>
             {gallery.length > 1 && (
-              <div className="flex gap-2">
+              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
                 {gallery.map((img, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => setActiveImage(i)}
-                    className={`h-20 w-16 overflow-hidden border-2 transition ${activeImage === i ? 'border-black' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                    className={`h-20 w-16 shrink-0 overflow-hidden border-2 transition ${activeImage === i ? 'border-black' : 'border-transparent opacity-60 hover:opacity-100'}`}
                   >
                     <img src={img} alt="" className="h-full w-full object-cover" />
                   </button>
@@ -193,7 +193,7 @@ export default function ProductDetailPage() {
               </span>
             )}
 
-            <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-4">{productName}</h1>
+            <h1 className="mb-4 break-words text-3xl font-light uppercase tracking-wide text-black sm:text-5xl">{productName}</h1>
             <p className="text-sm uppercase tracking-[0.16em] text-black/60 mb-2">{product.brand}</p>
             {product.title !== productName && (
               <p className="text-base text-black/70 mb-6 leading-relaxed">{product.title}</p>
@@ -261,14 +261,14 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Mobile sticky action bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-black/10 bg-white/95 backdrop-blur-sm p-4 lg:hidden">
-        <div className="page-shell flex items-center gap-3">
-          <div className="flex items-center gap-2 border border-black/20 px-2 py-1">
-            <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} aria-label="Decrease"><FiMinus size={14} /></button>
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 p-3 backdrop-blur-sm lg:hidden" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
+        <div className="page-shell flex items-center gap-2 px-0 sm:gap-3">
+          <div className="flex shrink-0 items-center border border-black/20">
+            <button type="button" className="inline-flex h-11 w-11 items-center justify-center" onClick={() => setQuantity(Math.max(1, quantity - 1))} aria-label="Decrease"><FiMinus size={14} /></button>
             <span className="w-6 text-center text-sm">{quantity}</span>
-            <button type="button" onClick={() => setQuantity(Math.min(stockLimit, quantity + 1))} aria-label="Increase"><FiPlus size={14} /></button>
+            <button type="button" className="inline-flex h-11 w-11 items-center justify-center" onClick={() => setQuantity(Math.min(stockLimit, quantity + 1))} aria-label="Increase"><FiPlus size={14} /></button>
           </div>
-          <button type="button" onClick={handleAddToCart} className="flex-1 py-3 bg-black text-white text-xs font-medium uppercase tracking-[0.16em]">
+          <button type="button" onClick={handleAddToCart} className="min-h-11 min-w-0 flex-1 truncate bg-black px-3 py-3 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-white sm:text-xs sm:tracking-[0.16em]">
             Add to Cart — ৳ {(productPrice * quantity).toLocaleString()}
           </button>
         </div>
@@ -281,7 +281,7 @@ export default function ProductDetailPage() {
               <p className="text-sm uppercase tracking-[0.16em] text-black/60 mb-2">Related Items</p>
               <h2 className="text-3xl sm:text-4xl font-light uppercase tracking-wide text-black">You Might Also Like</h2>
             </div>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-14">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 xl:gap-y-14">
               {relatedProducts.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -294,7 +294,7 @@ export default function ProductDetailPage() {
                   <div className="relative aspect-[4/5] overflow-hidden bg-[#e9e7e1] mb-4">
                     <img src={item.image} alt={getProductName(item)} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
-                  <h3 className="font-semibold text-black text-sm uppercase tracking-wide mb-1">{getProductName(item)}</h3>
+                  <h3 className="mb-1 text-[0.65rem] font-semibold uppercase tracking-wide text-black sm:text-sm">{getProductName(item)}</h3>
                   <p className="text-xs uppercase tracking-[0.16em] text-black/60 mb-2">{item.brand}</p>
                   <p className="font-medium text-black">{getProductPriceDisplay(item)}</p>
                 </motion.div>

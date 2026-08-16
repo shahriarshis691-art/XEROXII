@@ -91,7 +91,7 @@ export default function Footer() {
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="ml-3 flex-shrink-0 text-black transition hover:text-black/70 disabled:opacity-50"
+                  className="ml-3 inline-flex h-11 w-11 flex-shrink-0 items-center justify-center text-black transition hover:text-black/70 disabled:opacity-50"
                   disabled={isSubscribing}
                 >
                   <FiMail size={18} />
@@ -104,7 +104,7 @@ export default function Footer() {
                   key={label}
                   href={url}
                   aria-label={label}
-                  className="text-black/70 transition hover:text-black"
+                  className="inline-flex h-11 w-11 items-center justify-center text-black/70 transition hover:text-black"
                 >
                   <Icon size={18} />
                 </a>

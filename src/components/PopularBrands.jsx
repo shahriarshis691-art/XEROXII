@@ -46,12 +46,12 @@ export default function PopularBrands() {
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50">
           Trusted Names
         </p>
-        <h2 className="section-heading mt-3 text-4xl font-semibold uppercase tracking-wide text-black sm:text-5xl">
+          <h2 className="section-heading mt-3 text-3xl font-semibold uppercase tracking-wide text-black sm:text-5xl">
           Popular Brands
         </h2>
       </div>
 
-      <div className="page-shell grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5">
+      <div className="page-shell grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-5 lg:gap-5">
         {BRANDS.map((brand, index) => (
           <div
             key={brand.name}

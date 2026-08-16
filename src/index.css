@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 body {
@@ -33,6 +34,12 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
 }
 
 button {
@@ -156,6 +163,14 @@ img {
 @media (min-width: 768px) {
   .hero-parallax-bg {
     background-attachment: fixed;
+  }
+}
+
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
   }
 }
 

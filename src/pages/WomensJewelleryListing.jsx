@@ -54,7 +54,7 @@ export default function WomensJewelleryListing() {
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50">
               Luxury Collection
             </p>
-            <h1 className="section-heading mt-3 text-4xl font-semibold uppercase tracking-wide text-black sm:text-5xl lg:text-6xl">
+            <h1 className="section-heading mt-3 text-3xl font-semibold uppercase tracking-wide text-black sm:text-5xl lg:text-6xl">
               Women&apos;s Jewellery
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-black/70 sm:text-lg">
@@ -63,12 +63,12 @@ export default function WomensJewelleryListing() {
           </div>
 
           {/* Category Filter */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-12 flex flex-nowrap items-center justify-start gap-3 overflow-x-auto no-scrollbar pb-1 sm:flex-wrap sm:justify-center">
             {categories.map(category => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 text-sm font-semibold uppercase tracking-[0.1em] transition-all ${
+                className={`min-h-11 shrink-0 px-5 py-2 text-sm font-semibold uppercase tracking-[0.1em] transition-all sm:px-6 ${
                   selectedCategory === category
                     ? "bg-black text-white"
                     : "border border-black/20 text-black hover:border-black hover:bg-black hover:text-white"
@@ -85,7 +85,7 @@ export default function WomensJewelleryListing() {
       <section className="bg-white py-20 sm:py-28">
         <div className="page-shell">
           <motion.div
-            className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-14"
+            className="grid grid-cols-2 gap-x-3 gap-y-8 md:gap-x-6 md:gap-y-12 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 xl:gap-y-14"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -105,11 +105,11 @@ export default function WomensJewelleryListing() {
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/10">
+                  <div className="pointer-events-none absolute inset-0 flex items-end justify-center bg-black/0 p-2 transition-all duration-500 group-hover:bg-black/10 sm:items-center sm:p-0">
                     <button
                       type="button"
                       onClick={() => setSelected(product)}
-                      className="pointer-events-auto translate-y-4 rounded-full border border-black/20 bg-white/90 px-5 py-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black backdrop-blur-sm"
+                      className="pointer-events-auto min-h-11 w-full max-w-[10.5rem] translate-y-0 rounded-full border border-black/20 bg-white/90 px-4 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-black opacity-100 backdrop-blur-sm transition-all duration-500 sm:w-auto sm:translate-y-4 sm:px-5 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
                     >
                       View Details
                     </button>
