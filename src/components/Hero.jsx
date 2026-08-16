@@ -15,29 +15,34 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full overflow-hidden border-b border-white/10 bg-[#0f0f0f] text-white"
+      className="relative w-full overflow-hidden border-b border-white/10 bg-[#0a0a0a] text-white"
     >
-      {/* Honeycomb mesh grill background with warm metallic rim */}
+      {/* Premium luxury watch background image */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: HONEYCOMB_SVG,
-          backgroundRepeat: "repeat",
-          backgroundSize: "28px 49px",
+          backgroundImage: `url('https://images.pexels.com/photos/2311365/pexels-photo-2311365.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       />
 
-      {/* Soft backlighting glow */}
+      {/* Dark overlay for readability */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,rgba(180,140,100,0.12),rgba(0,0,0,0)_60%)]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/75"
       />
 
-      {/* Warm metallic rim highlights */}
+      {/* Premium metallic accent lights */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(200,170,120,0.08),rgba(0,0,0,0)_50%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(215,175,110,0.15),rgba(0,0,0,0)_50%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_60%,rgba(180,140,100,0.1),rgba(0,0,0,0)_40%)]"
       />
 
       {/* Hero content container — 21:9 aspect ratio */}
@@ -261,12 +266,18 @@ export default function Hero() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="absolute right-0 top-0 h-full w-[62%]"
         >
-          {/* Showcase background */}
-          <div className="relative h-full w-full bg-gradient-to-l from-[#1a1a1a] via-[#141414] to-[#0f0f0f]">
-            {/* Soft backlighting for watches */}
+          {/* Showcase background with premium gradient */}
+          <div className="relative h-full w-full bg-gradient-to-l from-[#0d0d0d] via-[#1a1a1a] to-transparent">
+            {/* Premium watch spotlight lighting */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(180,140,100,0.1),rgba(0,0,0,0)_60%)]"
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(215,175,110,0.15),rgba(0,0,0,0)_70%)]"
+            />
+
+            {/* Luxury chrome reflection */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.03)_0%,transparent_50%)]"
             />
 
             {/* Watch showcase line-up */}
