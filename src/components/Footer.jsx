@@ -203,18 +203,3 @@ export default function Footer() {
     </footer>
   );
 }
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-12 border-t border-black/10 pt-8 text-center">
-          <span className="text-xl font-semibold uppercase tracking-widest text-black">
-            Xeroxii<span className="text-black/40">.</span>com
-          </span>
-        </div>
-      </div>
-    </footer>
-  );
-}
