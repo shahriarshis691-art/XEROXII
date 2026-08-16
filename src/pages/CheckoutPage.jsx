@@ -4,7 +4,14 @@ import { motion } from 'framer-motion';
 import Seo from '../components/Seo';
 import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName } from '../lib/productUtils';
+import { formatCurrency, convertFromBDT, computeOrderTotals } from '../lib/currency';
 import toast from 'react-hot-toast';
+import { COUNTRIES, getSubdivisions, getStateLabel, getCountryName } from '../data/regions';
+
+const inputClass = (hasError) =>
+  `w-full px-4 py-3 border text-black bg-white focus:outline-none focus:ring-1 focus:ring-black/50 ${
+    hasError ? 'border-red-500' : 'border-black/20'
+  }`;
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -19,7 +26,7 @@ export default function CheckoutPage() {
     city: '',
     state: '',
     zipCode: '',
-    country: '',
+    country: 'BD',
     paymentMethod: 'cod',
     cardNumber: '',
     cardName: '',
@@ -85,6 +92,17 @@ export default function CheckoutPage() {
     }
   };
 
+  const handleCountryChange = (e) => {
+    const countryCode = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      country: countryCode,
+      state: '',
+    }));
+    if (errors.country) setErrors(prev => ({ ...prev, country: '' }));
+    if (errors.state) setErrors(prev => ({ ...prev, state: '' }));
+  };
+
   const handleCardNumberChange = (e) => {
     let value = e.target.value.replace(/\s/g, '');
     if (!/^\d*$/.test(value)) value = value.replace(/\D/g, '');
@@ -117,6 +135,10 @@ export default function CheckoutPage() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
 
+      const selectedCountry = COUNTRIES.find((c) => c.code === formData.country);
+      const currencyCode = selectedCountry?.currency ?? 'BDT';
+      const totals = computeOrderTotals(cartTotal, currencyCode);
+
       const order = await placeOrder(
         {
           firstName: formData.firstName,
@@ -127,14 +149,16 @@ export default function CheckoutPage() {
           city: formData.city,
           state: formData.state,
           zipCode: formData.zipCode,
-          country: formData.country,
+          country: getCountryName(formData.country),
+          countryCode: formData.country,
         },
         {
           method: formData.paymentMethod,
           cardLast4: formData.paymentMethod === 'card'
             ? formData.cardNumber.replace(/\s/g, '').slice(-4)
             : null,
-        }
+        },
+        totals
       );
 
       if (order) {
@@ -155,8 +179,13 @@ export default function CheckoutPage() {
     }
   };
 
-  const tax = Math.floor(cartTotal * 0.1);
-  const total = cartTotal + tax;
+  const selectedCountry = COUNTRIES.find((c) => c.code === formData.country);
+  const currencyCode = selectedCountry?.currency ?? 'BDT';
+  const { subtotal, tax, total } = computeOrderTotals(cartTotal, currencyCode);
+  const subdivisions = getSubdivisions(formData.country);
+  const stateLabel = getStateLabel(formData.country);
+
+  const formatLinePrice = (amountBDT) => formatCurrency(convertFromBDT(amountBDT, currencyCode), currencyCode);
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
@@ -283,6 +312,50 @@ export default function CheckoutPage() {
                 )}
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium uppercase tracking-[0.16em] text-black/70 mb-2">
+                    Country
+                  </label>
+                  <select
+                    name="country"
+                    value={formData.country}
+                    onChange={handleCountryChange}
+                    className={inputClass(errors.country)}
+                  >
+                    <option value="">Select country</option>
+                    {COUNTRIES.map((c) => (
+                      <option key={c.code} value={c.code}>{c.name}</option>
+                    ))}
+                  </select>
+                  {errors.country && (
+                    <p className="text-red-500 text-xs mt-1">{errors.country}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-medium uppercase tracking-[0.16em] text-black/70 mb-2">
+                    {stateLabel}
+                  </label>
+                  <select
+                    name="state"
+                    value={formData.state}
+                    onChange={handleInputChange}
+                    disabled={!formData.country}
+                    className={`${inputClass(errors.state)} disabled:cursor-not-allowed disabled:bg-black/5 disabled:text-black/40`}
+                  >
+                    <option value="">
+                      {formData.country ? `Select ${stateLabel.toLowerCase()}` : 'Select country first'}
+                    </option>
+                    {subdivisions.map((region) => (
+                      <option key={region} value={region}>{region}</option>
+                    ))}
+                  </select>
+                  {errors.state && (
+                    <p className="text-red-500 text-xs mt-1">{errors.state}</p>
+                  )}
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium uppercase tracking-[0.16em] text-black/70 mb-2">
@@ -304,27 +377,6 @@ export default function CheckoutPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium uppercase tracking-[0.16em] text-black/70 mb-2">
-                    State/Province
-                  </label>
-                  <input
-                    type="text"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border text-black placeholder:text-black/40 bg-white focus:outline-none focus:ring-1 focus:ring-black/50 ${
-                      errors.state ? 'border-red-500' : 'border-black/20'
-                    }`}
-                    placeholder="NY"
-                  />
-                  {errors.state && (
-                    <p className="text-red-500 text-xs mt-1">{errors.state}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                <div>
-                  <label className="block text-sm font-medium uppercase tracking-[0.16em] text-black/70 mb-2">
                     ZIP/Postal Code
                   </label>
                   <input
@@ -339,24 +391,6 @@ export default function CheckoutPage() {
                   />
                   {errors.zipCode && (
                     <p className="text-red-500 text-xs mt-1">{errors.zipCode}</p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-medium uppercase tracking-[0.16em] text-black/70 mb-2">
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border text-black placeholder:text-black/40 bg-white focus:outline-none focus:ring-1 focus:ring-black/50 ${
-                      errors.country ? 'border-red-500' : 'border-black/20'
-                    }`}
-                    placeholder="United States"
-                  />
-                  {errors.country && (
-                    <p className="text-red-500 text-xs mt-1">{errors.country}</p>
                   )}
                 </div>
               </div>
@@ -539,6 +573,11 @@ export default function CheckoutPage() {
               <h2 className="text-lg font-semibold uppercase tracking-wide text-black mb-6">
                 Order Summary
               </h2>
+              {selectedCountry && (
+                <p className="text-xs uppercase tracking-[0.14em] text-black/50 mb-4">
+                  Prices in {currencyCode} · {selectedCountry.name}
+                </p>
+              )}
 
               <div className="space-y-3 mb-6 pb-6 border-b border-black/10">
                 {cart.map(item => (
@@ -547,7 +586,7 @@ export default function CheckoutPage() {
                       {getProductName(item)} x {item.quantity}
                     </span>
                     <span className="font-medium">
-                      ৳ {(parsePrice(item) * item.quantity).toLocaleString()}
+                      {formatLinePrice(parsePrice(item) * item.quantity)}
                     </span>
                   </div>
                 ))}
@@ -556,7 +595,7 @@ export default function CheckoutPage() {
               <div className="space-y-3 mb-6 pb-6 border-b border-black/10">
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Subtotal</span>
-                  <span>৳ {cartTotal.toLocaleString()}</span>
+                  <span>{formatCurrency(subtotal, currencyCode)}</span>
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Shipping</span>
@@ -564,14 +603,14 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Tax (10%)</span>
-                  <span>৳ {tax.toLocaleString()}</span>
+                  <span>{formatCurrency(tax, currencyCode)}</span>
                 </div>
               </div>
 
               <div className="flex justify-between mb-8">
                 <span className="font-semibold uppercase tracking-wide text-black">Total</span>
                 <span className="font-semibold text-lg text-black">
-                  ৳ {total.toLocaleString()}
+                  {formatCurrency(total, currencyCode)}
                 </span>
               </div>
 

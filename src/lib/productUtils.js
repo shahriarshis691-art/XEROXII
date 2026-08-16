@@ -2,6 +2,7 @@
  * Parse numeric price from a product or cart item.
  * Supports `price`, `priceBDT`, and numeric values.
  */
+import { formatCurrency, convertFromBDT } from './currency';
 export function parsePrice(item) {
   const raw = item?.price ?? item?.priceBDT;
   if (raw == null) return 0;
@@ -51,24 +52,29 @@ export function normalizeProduct(product) {
 
 /** Generate a downloadable invoice text for an order. */
 export function generateInvoiceText(order) {
+  const currencyCode = order.currency ?? 'BDT';
+  const fmt = (amount) => formatCurrency(amount, currencyCode);
+  const fmtItem = (item) => {
+    const bdt = parsePrice(item) * item.quantity;
+    return fmt(order.currency && order.currency !== 'BDT' ? convertFromBDT(bdt, currencyCode) : bdt);
+  };
+
   const lines = [
     'XEROXII — ORDER INVOICE',
     '========================',
     `Order ID: ${order.id}`,
     `Date: ${new Date(order.createdAt).toLocaleString()}`,
     `Status: ${order.status}`,
+    `Currency: ${currencyCode}`,
     '',
     'ITEMS',
     '-----',
-    ...order.items.map((item) => {
-      const unitPrice = parsePrice(item);
-      return `${getProductName(item)} x${item.quantity} — ${formatPrice(unitPrice * item.quantity)}`;
-    }),
+    ...order.items.map((item) => `${getProductName(item)} x${item.quantity} — ${fmtItem(item)}`),
     '',
-    `Subtotal: ${formatPrice(order.subtotal)}`,
+    `Subtotal: ${fmt(order.subtotal)}`,
     `Shipping: Free`,
-    `Tax (10%): ${formatPrice(order.tax)}`,
-    `Total: ${formatPrice(order.total)}`,
+    `Tax (10%): ${fmt(order.tax)}`,
+    `Total: ${fmt(order.total)}`,
     '',
     'SHIPPING ADDRESS',
     '----------------',

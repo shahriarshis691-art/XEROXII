@@ -139,16 +139,26 @@ export function AppProvider({ children }) {
     return `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
   };
 
-  const placeOrder = async (shippingInfo, paymentInfo) => {
+  const placeOrder = async (shippingInfo, paymentInfo, currencyMeta = null) => {
     if (cart.length === 0) return null;
+
+    const subtotalBDT = cartTotal;
+    const taxBDT = Math.floor(cartTotal * 0.1);
+    const totalBDT = subtotalBDT + taxBDT;
 
     const order = {
       id: generateOrderId(),
       items: cart,
-      subtotal: cartTotal,
+      subtotalBDT,
+      taxBDT,
+      totalBDT,
+      subtotal: currencyMeta?.subtotal ?? subtotalBDT,
       shippingFee: 0,
-      tax: Math.floor(cartTotal * 0.1),
-      total: cartTotal + Math.floor(cartTotal * 0.1),
+      tax: currencyMeta?.tax ?? taxBDT,
+      total: currencyMeta?.total ?? totalBDT,
+      currency: currencyMeta?.currency ?? 'BDT',
+      currencySymbol: currencyMeta?.currencySymbol ?? '৳',
+      exchangeRate: currencyMeta?.exchangeRate ?? 1,
       shippingInfo,
       paymentInfo: {
         method: paymentInfo.method,

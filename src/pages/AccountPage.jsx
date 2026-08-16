@@ -4,7 +4,8 @@ import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
-import { formatPrice, getProductName } from '../lib/productUtils';
+import { getProductName } from '../lib/productUtils';
+import { formatOrderMoney } from '../lib/currency';
 import { isAuthEnabled, signInWithEmail, signUpWithEmail, signOut } from '../lib/authService';
 
 export default function AccountPage() {
@@ -137,7 +138,7 @@ export default function AccountPage() {
                       <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-black/10">
                         <div>
                           <p className="text-sm text-black/70">
-                            {order.items.length} item{order.items.length !== 1 ? 's' : ''} · {formatPrice(order.total)}
+                            {order.items.length} item{order.items.length !== 1 ? 's' : ''} · {formatOrderMoney(order.total, order)}
                           </p>
                           <span className="inline-flex items-center gap-1.5 mt-1 text-xs uppercase tracking-wide text-black">
                             <span className="h-1.5 w-1.5 rounded-full bg-green-600" />

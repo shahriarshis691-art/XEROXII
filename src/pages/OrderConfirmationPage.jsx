@@ -5,6 +5,7 @@ import Seo from '../components/Seo';
 import { FiCheckCircle, FiDownload } from 'react-icons/fi';
 import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName, generateInvoiceText } from '../lib/productUtils';
+import { formatCurrency, convertFromBDT } from '../lib/currency';
 
 export default function OrderConfirmationPage() {
   const { orderId } = useParams();
@@ -47,7 +48,15 @@ export default function OrderConfirmationPage() {
     );
   }
 
-  const calculatePrice = (item) => parsePrice(item);
+  const currencyCode = order.currency ?? 'BDT';
+  const fmt = (amount) => formatCurrency(amount, currencyCode);
+  const fmtItemTotal = (item) => {
+    const bdt = parsePrice(item) * item.quantity;
+    const amount = order.currency && order.currency !== 'BDT'
+      ? convertFromBDT(bdt, currencyCode)
+      : bdt;
+    return fmt(amount);
+  };
 
   const handleDownloadInvoice = () => {
     const text = generateInvoiceText(order);
@@ -161,7 +170,7 @@ export default function OrderConfirmationPage() {
                         Quantity: {item.quantity}
                       </p>
                       <p className="text-sm font-medium text-black">
-                        ৳ {(calculatePrice(item) * item.quantity).toLocaleString()}
+                        {fmtItemTotal(item)}
                       </p>
                     </div>
                   </motion.div>
@@ -205,11 +214,16 @@ export default function OrderConfirmationPage() {
               <h2 className="text-lg font-semibold uppercase tracking-wide text-black mb-6">
                 Order Summary
               </h2>
+              {order.currency && (
+                <p className="text-xs uppercase tracking-[0.14em] text-black/50 mb-4">
+                  Charged in {order.currency}
+                </p>
+              )}
 
               <div className="space-y-3 mb-6 pb-6 border-b border-black/10">
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Subtotal</span>
-                  <span>৳ {order.subtotal.toLocaleString()}</span>
+                  <span>{fmt(order.subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Shipping</span>
@@ -217,14 +231,14 @@ export default function OrderConfirmationPage() {
                 </div>
                 <div className="flex justify-between text-sm text-black/70">
                   <span>Tax (10%)</span>
-                  <span>৳ {order.tax.toLocaleString()}</span>
+                  <span>{fmt(order.tax)}</span>
                 </div>
               </div>
 
               <div className="flex justify-between mb-8 pb-8 border-b border-black/10">
                 <span className="font-semibold uppercase tracking-wide text-black">Total</span>
                 <span className="font-semibold text-lg text-black">
-                  ৳ {order.total.toLocaleString()}
+                  {fmt(order.total)}
                 </span>
               </div>
 
