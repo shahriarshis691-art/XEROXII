@@ -4,7 +4,6 @@ import CollectionShowcase from "./CollectionShowcase";
 import WomensJewellery from "./WomensJewellery";
 import WatchListing from "./WatchListing";
 import FeaturedWatches from "./FeaturedWatches";
-import TestimonialsCarousel from "./TestimonialsCarousel";
 import PopularBrands from "./PopularBrands";
 
 export default function Home() {
@@ -16,7 +15,6 @@ export default function Home() {
       <WomensJewellery />
       <WatchListing />
       <FeaturedWatches />
-      <TestimonialsCarousel />
       <PopularBrands />
     </>
   );
