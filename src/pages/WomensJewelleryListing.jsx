@@ -100,7 +100,7 @@ export default function WomensJewelleryListing() {
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#f3f2ef] mb-4">
                   <img
-                    src={product.image}
+                    src={product.image || product.src}
                     alt={product.name}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

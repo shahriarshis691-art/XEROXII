@@ -9,11 +9,11 @@ const BASE = 'https://www.xeroxii.com';
 const { BRAND_PRODUCTS, BRAND_META } = await import('../src/data/brandProducts.js');
 const { FEATURED_PRODUCTS } = await import('../src/data/featuredProducts.js');
 const { WATCH_LISTING_PRODUCTS } = await import('../src/data/watchListingProducts.js');
-const { JEWELLERY_PAGE_PRODUCTS, JEWELLERY_LISTING_PRODUCTS } = await import('../src/data/jewelleryProducts.js');
+const { JEWELLERY_LISTING_PRODUCTS } = await import('../src/data/jewelleryProducts.js');
 const { getStaticPageSlugs } = await import('../src/data/staticPages.js');
 
 const productIds = new Set(
-  [...BRAND_PRODUCTS, ...FEATURED_PRODUCTS, ...WATCH_LISTING_PRODUCTS, ...JEWELLERY_PAGE_PRODUCTS, ...JEWELLERY_LISTING_PRODUCTS]
+  [...BRAND_PRODUCTS, ...FEATURED_PRODUCTS, ...WATCH_LISTING_PRODUCTS, ...JEWELLERY_LISTING_PRODUCTS]
     .map((p) => p.id)
     .filter(Boolean)
 );

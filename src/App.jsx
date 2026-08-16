@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "react-hot-toast";
 import { AppProvider } from "./context/AppContext";
@@ -11,7 +11,6 @@ import Footer from "./components/Footer";
 import { getStaticPageSlugs } from "./data/staticPages";
 
 const BrandPage = lazy(() => import("./components/BrandPage"));
-const WomensJewelleryPage = lazy(() => import("./pages/WomensJewellery"));
 const WomensJewelleryListing = lazy(() => import("./pages/WomensJewelleryListing"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
@@ -36,7 +35,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/brand/:slug" element={<BrandPage />} />
                 <Route path="/product/:productId" element={<ProductDetailPage />} />
-                <Route path="/womens-jewellery" element={<WomensJewelleryPage />} />
+                <Route path="/womens-jewellery" element={<Navigate to="/womens-jewellery-listing" replace />} />
                 <Route path="/womens-jewellery-listing" element={<WomensJewelleryListing />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />

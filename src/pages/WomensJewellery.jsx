@@ -3,8 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Seo from "../components/Seo";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
-import { JEWELLERY_PAGE_PRODUCTS } from "../data/jewelleryProducts";
+import { JEWELLERY_LISTING_PRODUCTS } from "../data/jewelleryProducts";
 import { parsePrice } from "../lib/productUtils";
+
+const CATEGORY_FILTERS = {
+  all: () => true,
+  necklaces: (p) => p.category === "Necklace" || p.category === "Pendant",
+  rings: (p) => p.category === "Ring",
+  bracelets: (p) => p.category === "Bracelet",
+  earrings: (p) => p.category === "Earrings",
+};
 
 export default function WomensJewelleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -14,9 +22,8 @@ export default function WomensJewelleryPage() {
   const navigate = useNavigate();
 
   const filteredProducts = useMemo(() => {
-    let filtered = selectedCategory === "all"
-      ? JEWELLERY_PAGE_PRODUCTS
-      : JEWELLERY_PAGE_PRODUCTS.filter((p) => p.category === selectedCategory);
+    const filterFn = CATEGORY_FILTERS[selectedCategory] || CATEGORY_FILTERS.all;
+    let filtered = JEWELLERY_LISTING_PRODUCTS.filter(filterFn);
 
     if (sortBy === "price-asc") {
       return [...filtered].sort((a, b) => parsePrice(a) - parsePrice(b));
@@ -109,7 +116,7 @@ export default function WomensJewelleryPage() {
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-[#f8f6f3]">
                 <img
-                  src={product.src}
+                  src={product.image || product.src}
                   alt={product.name}
                   loading="lazy"
                   className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"

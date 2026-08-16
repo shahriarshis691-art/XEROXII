@@ -17,7 +17,7 @@ const FOOTER_LINKS = {
     { label: "Brands", path: "/" },
     { label: "Collections", path: "/collections" },
     { label: "Men", path: "/men" },
-    { label: "Women", path: "/womens-jewellery" },
+    { label: "Women", path: "/womens-jewellery-listing" },
     { label: "New", path: "/new" },
     { label: "Sale", path: "/sale" },
   ],

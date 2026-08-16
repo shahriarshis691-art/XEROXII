@@ -10,7 +10,7 @@ const SUB_LINKS = [
   { label: "Collections", path: "/collections" },
   { label: "Services", path: "/services" },
   { label: "World of Xeroxii", path: "/about" },
-  { label: "Women's Jewellery", path: "/womens-jewellery" },
+  { label: "Women's Jewellery", path: "/womens-jewellery-listing" },
 ];
 
 export default function Navbar() {

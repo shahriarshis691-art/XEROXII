@@ -171,21 +171,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.xeroxii.com/product/er002</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/er006</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/er010</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.xeroxii.com/product/featured-aurum-platinum</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -316,21 +301,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.xeroxii.com/product/nj001</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/nj005</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/nj009</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.xeroxii.com/product/orient-1</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -367,36 +337,6 @@
   </url>
   <url>
     <loc>https://www.xeroxii.com/product/orient-8</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/r004</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/r008</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/r012</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/rb003</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/rb007</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/rb011</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

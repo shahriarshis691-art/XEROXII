@@ -1,14 +1,13 @@
 import { BRAND_PRODUCTS } from '../brandProducts';
 import { FEATURED_PRODUCTS } from '../featuredProducts';
 import { WATCH_LISTING_PRODUCTS } from '../watchListingProducts';
-import { JEWELLERY_PAGE_PRODUCTS, JEWELLERY_LISTING_PRODUCTS } from '../jewelleryProducts';
+import { JEWELLERY_LISTING_PRODUCTS } from '../jewelleryProducts';
 import { normalizeCatalogProduct } from './normalize';
 
 const SOURCES = [
   ...BRAND_PRODUCTS.map((p) => normalizeCatalogProduct(p, { category: 'watches', type: 'watch', brand: p.brand, source: 'brand' })),
   ...FEATURED_PRODUCTS.map((p) => normalizeCatalogProduct(p, { category: 'watches', type: 'watch', brand: 'XEROXII Featured', source: 'featured' })),
   ...WATCH_LISTING_PRODUCTS.map((p) => normalizeCatalogProduct(p, { category: 'watches', type: 'watch', brand: 'XEROXII Collection', source: 'watch-listing' })),
-  ...JEWELLERY_PAGE_PRODUCTS.map((p) => normalizeCatalogProduct(p, { category: p.category, type: 'jewellery', source: 'jewellery-page' })),
   ...JEWELLERY_LISTING_PRODUCTS.map((p) => normalizeCatalogProduct(p, { category: p.category.toLowerCase(), type: 'jewellery', source: 'jewellery-listing' })),
 ];
 
