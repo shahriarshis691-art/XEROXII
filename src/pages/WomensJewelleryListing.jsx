@@ -9,7 +9,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Diamond Sapphire Necklace",
     category: "Necklace",
     price: "৳ 2,85,000",
-    image: "https://images.pexels.com/photos/29986280/pexels-photo-29986280.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Bestseller",
     description: "Exquisite diamond and royal blue sapphire necklace set in 18K white gold"
   },
@@ -18,7 +18,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Diamond Chandelier Earrings",
     category: "Earrings",
     price: "৳ 1,95,000",
-    image: "https://images.pexels.com/photos/3266700/pexels-photo-3266700.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Luxury",
     description: "Pair of luxurious diamond and gemstone chandelier drop earrings"
   },
@@ -27,7 +27,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Pearl & Diamond Bracelet",
     category: "Bracelet",
     price: "৳ 1,65,000",
-    image: "https://images.pexels.com/photos/34895/pearls-and-shells.jpg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1927257/pexels-photo-1927257.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Premium",
     description: "Elegant pearl and diamond bracelet in 18K gold"
   },
@@ -36,7 +36,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Solitaire Diamond Ring",
     category: "Ring",
     price: "৳ 3,50,000",
-    image: "https://images.pexels.com/photos/1857422/pexels-photo-1857422.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/942884/pexels-photo-942884.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Engagement",
     description: "Classic solitaire diamond ring with elegant band"
   },
@@ -45,7 +45,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Rose Gold Pendant Necklace",
     category: "Necklace",
     price: "৳ 1,75,000",
-    image: "https://images.pexels.com/photos/36813409/pexels-photo-36813409.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/2661256/pexels-photo-2661256.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "New",
     description: "Rose gold pendant necklace with embedded gemstones"
   },
@@ -54,7 +54,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Luxury Diamond Anklet",
     category: "Anklet",
     price: "৳ 1,45,000",
-    image: "https://images.pexels.com/photos/1661211/pexels-photo-1661211.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Exclusive",
     description: "Premium diamond-studded anklet with adjustable fit"
   },
@@ -63,7 +63,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Vintage Diamond Brooch",
     category: "Brooch",
     price: "৳ 2,25,000",
-    image: "https://images.pexels.com/photos/5012616/pexels-photo-5012616.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Vintage",
     description: "Stunning vintage-inspired diamond brooch"
   },
@@ -72,7 +72,7 @@ const WOMENS_JEWELLERY_PRODUCTS = [
     name: "Emerald Heart Pendant",
     category: "Pendant",
     price: "৳ 2,10,000",
-    image: "https://images.pexels.com/photos/28977357/pexels-photo-28977357.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1435407/pexels-photo-1435407.jpeg?auto=compress&cs=tinysrgb&w=900",
     badge: "Luxury",
     description: "Heart-shaped emerald pendant with diamond halo"
   },
