@@ -96,21 +96,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.xeroxii.com/product/anklet-1</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/bracelet-1</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/brooch-1</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.xeroxii.com/product/casio-1</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -182,11 +167,6 @@
   </url>
   <url>
     <loc>https://www.xeroxii.com/product/citizen-7</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/earring-1</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -286,12 +266,52 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.xeroxii.com/product/necklace-1</loc>
+    <loc>https://www.xeroxii.com/product/jw-001</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.xeroxii.com/product/necklace-2</loc>
+    <loc>https://www.xeroxii.com/product/jw-002</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-003</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-004</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-005</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-006</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-007</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-008</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-009</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.xeroxii.com/product/jw-010</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -351,11 +371,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.xeroxii.com/product/pendant-1</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.xeroxii.com/product/r004</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -382,11 +397,6 @@
   </url>
   <url>
     <loc>https://www.xeroxii.com/product/rb011</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.xeroxii.com/product/ring-1</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
