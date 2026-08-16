@@ -17,14 +17,14 @@ export default function Hero() {
       id="home"
       className="relative w-full overflow-hidden border-b border-white/10 bg-[#0a0a0a] text-white"
     >
-      {/* Premium luxury watch background image */}
+      {/* Premium luxury women's jewellery background image */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: `url('https://images.pexels.com/photos/2311365/pexels-photo-2311365.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+          backgroundImage: `url('https://images.pexels.com/photos/1279365/pexels-photo-1279365.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center right",
           backgroundAttachment: "fixed",
         }}
       />
