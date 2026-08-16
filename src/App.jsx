@@ -11,7 +11,11 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import SearchPage from "./pages/SearchPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import StaticInfoPage from "./pages/StaticInfoPage";
 import Footer from "./components/Footer";
+import { getStaticPageSlugs } from "./data/staticPages";
 
 function App() {
   return (
@@ -29,12 +33,13 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-confirmation/:orderId" element={<OrderConfirmationPage />} />
-            {/* Placeholder routes - will be implemented */}
+            <Route path="/search" element={<SearchPage />} />
+            {getStaticPageSlugs().map((slug) => (
+              <Route key={slug} path={`/${slug}`} element={<StaticInfoPage slug={slug} />} />
+            ))}
             <Route path="/account" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Account page coming soon</p></div>} />
             <Route path="/wishlist" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Wishlist page coming soon</p></div>} />
-            <Route path="/contact" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Contact page coming soon</p></div>} />
-            <Route path="/boutique" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Boutique page coming soon</p></div>} />
-            <Route path="/search" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Search page coming soon</p></div>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

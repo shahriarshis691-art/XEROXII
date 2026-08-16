@@ -1,90 +1,17 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiHeart } from "react-icons/fi";
 import toast from "react-hot-toast";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
 import { AppContext } from "../context/AppContext";
-
-const WOMENS_JEWELLERY_PRODUCTS = [
-  {
-    id: "necklace-1",
-    name: "Diamond Sapphire Necklace",
-    category: "Necklace",
-    price: "৳ 2,85,000",
-    image: "https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Bestseller",
-    description: "Exquisite diamond and royal blue sapphire necklace set in 18K white gold"
-  },
-  {
-    id: "earring-1",
-    name: "Diamond Chandelier Earrings",
-    category: "Earrings",
-    price: "৳ 1,95,000",
-    image: "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Luxury",
-    description: "Pair of luxurious diamond and gemstone chandelier drop earrings"
-  },
-  {
-    id: "bracelet-1",
-    name: "Pearl & Diamond Bracelet",
-    category: "Bracelet",
-    price: "৳ 1,65,000",
-    image: "https://images.pexels.com/photos/1927257/pexels-photo-1927257.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Premium",
-    description: "Elegant pearl and diamond bracelet in 18K gold"
-  },
-  {
-    id: "ring-1",
-    name: "Solitaire Diamond Ring",
-    category: "Ring",
-    price: "৳ 3,50,000",
-    image: "https://images.pexels.com/photos/942884/pexels-photo-942884.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Engagement",
-    description: "Classic solitaire diamond ring with elegant band"
-  },
-  {
-    id: "necklace-2",
-    name: "Rose Gold Pendant Necklace",
-    category: "Necklace",
-    price: "৳ 1,75,000",
-    image: "https://images.pexels.com/photos/2661256/pexels-photo-2661256.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "New",
-    description: "Rose gold pendant necklace with embedded gemstones"
-  },
-  {
-    id: "anklet-1",
-    name: "Luxury Diamond Anklet",
-    category: "Anklet",
-    price: "৳ 1,45,000",
-    image: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Exclusive",
-    description: "Premium diamond-studded anklet with adjustable fit"
-  },
-  {
-    id: "brooch-1",
-    name: "Vintage Diamond Brooch",
-    category: "Brooch",
-    price: "৳ 2,25,000",
-    image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Vintage",
-    description: "Stunning vintage-inspired diamond brooch"
-  },
-  {
-    id: "pendant-1",
-    name: "Emerald Heart Pendant",
-    category: "Pendant",
-    price: "৳ 2,10,000",
-    image: "https://images.pexels.com/photos/1435407/pexels-photo-1435407.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "Luxury",
-    description: "Heart-shaped emerald pendant with diamond halo"
-  },
-];
+import { JEWELLERY_LISTING_PRODUCTS } from "../data/jewelleryProducts";
 
 export default function WomensJewelleryListing() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selected, setSelected] = useState(null);
   const { toggleWishlist, isInWishlist } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleWishlist = (product, e) => {
     e.stopPropagation();
@@ -97,8 +24,8 @@ export default function WomensJewelleryListing() {
   const categories = ["All", "Necklace", "Earrings", "Bracelet", "Ring", "Pendant", "Anklet", "Brooch"];
   
   const filteredProducts = selectedCategory === "All" 
-    ? WOMENS_JEWELLERY_PRODUCTS 
-    : WOMENS_JEWELLERY_PRODUCTS.filter(p => p.category === selectedCategory);
+    ? JEWELLERY_LISTING_PRODUCTS 
+    : JEWELLERY_LISTING_PRODUCTS.filter(p => p.category === selectedCategory);
 
   return (
     <>
@@ -196,7 +123,9 @@ export default function WomensJewelleryListing() {
                   </button>
                 </div>
                 <h3 className="text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:text-sm sm:tracking-[0.14em]">
-                  {product.name}
+                  <button type="button" onClick={() => navigate(`/product/${product.id}`)} className="hover:opacity-70 transition">
+                    {product.name}
+                  </button>
                 </h3>
                 <p className="mt-1.5 text-[0.7rem] font-medium tracking-[0.02em] text-black/60 sm:text-xs sm:tracking-[0.04em]">
                   {product.category}

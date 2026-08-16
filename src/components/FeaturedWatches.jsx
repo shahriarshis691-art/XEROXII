@@ -1,73 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProductQuickViewModal from "./ProductQuickViewModal";
-
-const FEATURED = [
-  {
-    id: "featured-aurum-platinum",
-    name: "Aurum Platinum",
-    title: "Men's Platinum Chronograph",
-    price: "৳ 5,20,000",
-    src: "https://images.pexels.com/photos/1432234/pexels-photo-1432234.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "EXCLUSIVE",
-  },
-  {
-    id: "featured-velvet-moonphase",
-    name: "Velvet Moonphase",
-    title: "Women's Moonphase Dial",
-    price: "৳ 3,85,000",
-    src: "https://images.pexels.com/photos/5421375/pexels-photo-5421375.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "NEW",
-  },
-  {
-    id: "featured-steel-command",
-    name: "Steel Command",
-    title: "Men's Tactical Display",
-    price: "৳ 2,95,000",
-    src: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=900",
-  },
-  {
-    id: "featured-blush-diver",
-    name: "Blush Diver",
-    title: "Women's Steel Diver",
-    price: "৳ 2,60,000",
-    src: "https://images.pexels.com/photos/1034065/pexels-photo-1034065.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "NEW",
-  },
-  {
-    id: "featured-carbon-fiber-x",
-    name: "Carbon Fiber X",
-    title: "Men's Racing Chronograph",
-    price: "৳ 3,40,000",
-    src: "https://images.pexels.com/photos/29638625/pexels-photo-29638625.jpeg?auto=compress&cs=tinysrgb&w=900",
-  },
-  {
-    id: "featured-ivory-classic",
-    name: "Ivory Classic",
-    title: "Women's Minimalist MOP",
-    price: "৳ 2,15,000",
-    src: "https://images.pexels.com/photos/27531462/pexels-photo-27531462.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "NEW",
-  },
-  {
-    id: "featured-obsidian-pro",
-    name: "Obsidian Pro",
-    title: "Men's All-Black Edition",
-    price: "৳ 3,90,000",
-    src: "https://images.pexels.com/photos/19979616/pexels-photo-19979616.jpeg?auto=compress&cs=tinysrgb&w=900",
-  },
-  {
-    id: "featured-golden-trio",
-    name: "Golden Trio",
-    title: "Women's Trio Set",
-    price: "৳ 4,80,000",
-    src: "https://images.pexels.com/photos/13190042/pexels-photo-13190042.jpeg?auto=compress&cs=tinysrgb&w=900",
-    badge: "LIMITED",
-  },
-];
+import { FEATURED_PRODUCTS } from "../data/featuredProducts";
 
 export default function FeaturedWatches() {
   const [selected, setSelected] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <section id="featured" className="relative bg-white py-20 sm:py-28">
@@ -81,7 +20,7 @@ export default function FeaturedWatches() {
       </div>
 
       <div className="page-shell mt-14 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14">
-        {FEATURED.map((watch, index) => (
+        {FEATURED_PRODUCTS.map((watch, index) => (
           <motion.div
             key={watch.id}
             initial={{ opacity: 0, y: 40 }}
@@ -112,23 +51,22 @@ export default function FeaturedWatches() {
                 </button>
               </div>
             </div>
-            <h3 className="mt-3 text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:mt-5 sm:text-sm sm:tracking-[0.14em]">
-              {watch.name}
-            </h3>
-            <p className="mt-1 text-[0.55rem] uppercase leading-tight tracking-[0.06em] text-black/50 sm:text-[0.6875rem] sm:tracking-[0.16em]">
-              {watch.title}
-            </p>
-            <p className="mt-1.5 text-[0.7rem] font-medium tracking-[0.02em] text-black/80 sm:mt-2 sm:text-sm sm:tracking-[0.04em]">
-              {watch.price}
-            </p>
+            <button type="button" onClick={() => navigate(`/product/${watch.id}`)} className="mt-3 w-full text-left">
+              <h3 className="text-[0.65rem] font-semibold uppercase leading-tight tracking-[0.08em] text-black sm:mt-5 sm:text-sm sm:tracking-[0.14em]">
+                {watch.name}
+              </h3>
+              <p className="mt-1 text-[0.55rem] uppercase leading-tight tracking-[0.06em] text-black/50 sm:text-[0.6875rem] sm:tracking-[0.16em]">
+                {watch.title}
+              </p>
+              <p className="mt-1.5 text-[0.7rem] font-medium tracking-[0.02em] text-black/80 sm:mt-2 sm:text-sm sm:tracking-[0.04em]">
+                {watch.price}
+              </p>
+            </button>
           </motion.div>
         ))}
       </div>
 
-      <ProductQuickViewModal
-        product={selected}
-        onClose={() => setSelected(null)}
-      />
+      <ProductQuickViewModal product={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

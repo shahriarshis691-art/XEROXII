@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiHeart } from "react-icons/fi";
 import toast from "react-hot-toast";
@@ -181,10 +182,19 @@ export default function ProductQuickViewModal({ product, onClose }) {
                 >
                   Add to Cart
                 </button>
+                {product.id && (
+                  <Link
+                    to={`/product/${product.id}`}
+                    onClick={onClose}
+                    className="flex-1 flex items-center justify-center button-secondary text-center"
+                  >
+                    Full Details
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={handleWishlist}
-                  className="flex items-center justify-center gap-2 button-secondary"
+                  className="flex items-center justify-center gap-2 button-secondary sm:flex-none sm:px-4"
                   aria-label="Add to wishlist"
                 >
                   <FiHeart 

@@ -4,7 +4,7 @@ import { FiSearch, FiHeart, FiUser, FiMenu, FiX, FiShoppingBag } from "react-ico
 import { AppContext } from "../context/AppContext";
 
 const SUB_LINKS = [
-  { label: "Watches", path: "/" },
+  { label: "Watches", path: "/#watches" },
   { label: "Accessories", path: "/accessories" },
   { label: "Collections", path: "/collections" },
   { label: "Services", path: "/services" },
@@ -15,11 +15,22 @@ const SUB_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { cartItemCount, wishlist } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
     setSearchOpen(!searchOpen);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (q) {
+      navigate(`/search?q=${encodeURIComponent(q)}`);
+      setSearchOpen(false);
+      setSearchQuery("");
+    }
   };
 
   const handleWishlistClick = () => {
@@ -110,14 +121,16 @@ export default function Navbar() {
       {/* Search bar */}
       {searchOpen && (
         <div className="border-b border-black/10 bg-white/50 backdrop-blur-sm">
-          <div className="page-shell py-4">
+          <form onSubmit={handleSearchSubmit} className="page-shell py-4">
             <input
-              type="text"
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search watches, brands, collections..."
               className="w-full bg-transparent text-sm outline-none placeholder:text-black/40 border-b border-black/20 pb-2"
               autoFocus
             />
-          </div>
+          </form>
         </div>
       )}
 

@@ -1,144 +1,29 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
-
-const PRODUCTS = [
-  {
-    id: "nj001",
-    name: "Diamond Aurora Necklace",
-    category: "necklaces",
-    price: "$12,500",
-    sku: "SKU-NJ-001",
-    collection: "Celestial Collection",
-    src: "https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "er002",
-    name: "Emerald Eclipse Earrings",
-    category: "earrings",
-    price: "$8,750",
-    sku: "SKU-ER-002",
-    collection: "Celestial Collection",
-    src: "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "rb003",
-    name: "Rose Gold Bracelet",
-    category: "bracelets",
-    price: "$6,900",
-    sku: "SKU-RB-003",
-    collection: "Romance Collection",
-    src: "https://images.pexels.com/photos/1927257/pexels-photo-1927257.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "r004",
-    name: "Pearl Rose Cocktail Ring",
-    category: "rings",
-    price: "$4,850",
-    sku: "SKU-R-004",
-    collection: "Romance Collection",
-    src: "https://images.pexels.com/photos/942884/pexels-photo-942884.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "nj005",
-    name: "Sapphire Ocean Necklace",
-    category: "necklaces",
-    price: "€9,200",
-    sku: "SKU-NJ-005",
-    collection: "Ocean Collection",
-    src: "https://images.pexels.com/photos/2661256/pexels-photo-2661256.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "er006",
-    name: "Pearl Serenity Earrings",
-    category: "earrings",
-    price: "£5,900",
-    sku: "SKU-ER-006",
-    collection: "Ocean Collection",
-    src: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "rb007",
-    name: "Platinum Grace Bracelet",
-    category: "bracelets",
-    price: "€7,350",
-    sku: "SKU-RB-007",
-    collection: "Grace Collection",
-    src: "https://images.pexels.com/photos/1435407/pexels-photo-1435407.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "r008",
-    name: "Gold Emerald Statement Ring",
-    category: "rings",
-    price: "$11,200",
-    sku: "SKU-R-008",
-    collection: "Grace Collection",
-    src: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "nj009",
-    name: "Ruby Passion Necklace",
-    category: "necklaces",
-    price: "€10,800",
-    sku: "SKU-NJ-009",
-    collection: "Passion Collection",
-    src: "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "er010",
-    name: "Crystal Infinity Earrings",
-    category: "earrings",
-    price: "$7,450",
-    sku: "SKU-ER-010",
-    collection: "Passion Collection",
-    src: "https://images.pexels.com/photos/2098833/pexels-photo-2098833.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "rb011",
-    name: "Cobalt Midnight Bracelet",
-    category: "bracelets",
-    price: "£8,600",
-    sku: "SKU-RB-011",
-    collection: "Midnight Collection",
-    src: "https://images.pexels.com/photos/947885/pexels-photo-947885.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-  {
-    id: "r012",
-    name: "Black Diamond Solitaire Ring",
-    category: "rings",
-    price: "$15,200",
-    sku: "SKU-R-012",
-    collection: "Midnight Collection",
-    src: "https://images.pexels.com/photos/167703/pexels-photo-167703.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  },
-];
+import { JEWELLERY_PAGE_PRODUCTS } from "../data/jewelleryProducts";
+import { parsePrice } from "../lib/productUtils";
 
 export default function WomensJewelleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const navigate = useNavigate();
 
   const filteredProducts = useMemo(() => {
     let filtered = selectedCategory === "all"
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.category === selectedCategory);
+      ? JEWELLERY_PAGE_PRODUCTS
+      : JEWELLERY_PAGE_PRODUCTS.filter((p) => p.category === selectedCategory);
 
     if (sortBy === "price-asc") {
-      return filtered.sort((a, b) => {
-        const priceA = parseFloat(a.price.replace(/[^0-9.]/g, ""));
-        const priceB = parseFloat(b.price.replace(/[^0-9.]/g, ""));
-        return priceA - priceB;
-      });
+      return [...filtered].sort((a, b) => parsePrice(a) - parsePrice(b));
     }
     if (sortBy === "price-desc") {
-      return filtered.sort((a, b) => {
-        const priceA = parseFloat(a.price.replace(/[^0-9.]/g, ""));
-        const priceB = parseFloat(b.price.replace(/[^0-9.]/g, ""));
-        return priceB - priceA;
-      });
+      return [...filtered].sort((a, b) => parsePrice(b) - parsePrice(a));
     }
-    return filtered.sort((a, b) => b.id.localeCompare(a.id));
+    return [...filtered].sort((a, b) => b.id.localeCompare(a.id));
   }, [selectedCategory, sortBy]);
 
   const categories = [
@@ -251,9 +136,10 @@ export default function WomensJewelleryPage() {
                 </button>
                 <button
                   type="button"
+                  onClick={() => navigate(`/product/${product.id}`)}
                   className="rounded-sm bg-black px-4 py-2 text-xs font-medium uppercase tracking-wider text-white transition-all duration-300 hover:bg-black/90"
                 >
-                  Enquire
+                  View Details
                 </button>
               </div>
             </motion.div>

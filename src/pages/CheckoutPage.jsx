@@ -19,7 +19,7 @@ export default function CheckoutPage() {
     state: '',
     zipCode: '',
     country: '',
-    paymentMethod: 'card',
+    paymentMethod: 'cod',
     cardNumber: '',
     cardName: '',
     cardExpiry: '',
@@ -116,7 +116,7 @@ export default function CheckoutPage() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const order = placeOrder(
+      const order = await placeOrder(
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -130,13 +130,20 @@ export default function CheckoutPage() {
         },
         {
           method: formData.paymentMethod,
-          cardLast4: formData.paymentMethod === 'card' 
-            ? formData.cardNumber.slice(-4)
+          cardLast4: formData.paymentMethod === 'card'
+            ? formData.cardNumber.replace(/\s/g, '').slice(-4)
             : null,
         }
       );
 
       if (order) {
+        setFormData((prev) => ({
+          ...prev,
+          cardNumber: '',
+          cardName: '',
+          cardExpiry: '',
+          cardCvc: '',
+        }));
         toast.success('Order placed successfully!');
         navigate(`/order-confirmation/${order.id}`);
       }

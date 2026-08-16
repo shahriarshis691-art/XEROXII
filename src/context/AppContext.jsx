@@ -1,54 +1,50 @@
 import { createContext, useState, useEffect } from 'react';
 import { normalizeProduct, parsePrice } from '../lib/productUtils';
+import { readStorage, writeStorage } from '../lib/storage';
+import { persistOrder } from '../lib/orderService';
+import { getProductById } from '../data/catalog';
 
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('xeroxii_cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
-  const [wishlist, setWishlist] = useState(() => {
-    const savedWishlist = localStorage.getItem('xeroxii_wishlist');
-    return savedWishlist ? JSON.parse(savedWishlist) : [];
-  });
-
+  const [cart, setCart] = useState(() => readStorage('xeroxii_cart', []));
+  const [wishlist, setWishlist] = useState(() => readStorage('xeroxii_wishlist', []));
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [orders, setOrders] = useState(() => {
-    const savedOrders = localStorage.getItem('xeroxii_orders');
-    return savedOrders ? JSON.parse(savedOrders) : [];
-  });
+  const [orders, setOrders] = useState(() => readStorage('xeroxii_orders', []));
 
-  // Persist cart to localStorage
   useEffect(() => {
-    localStorage.setItem('xeroxii_cart', JSON.stringify(cart));
+    writeStorage('xeroxii_cart', cart);
   }, [cart]);
 
-  // Persist wishlist to localStorage
   useEffect(() => {
-    localStorage.setItem('xeroxii_wishlist', JSON.stringify(wishlist));
+    writeStorage('xeroxii_wishlist', wishlist);
   }, [wishlist]);
 
-  // Persist orders to localStorage
   useEffect(() => {
-    localStorage.setItem('xeroxii_orders', JSON.stringify(orders));
+    writeStorage('xeroxii_orders', orders);
   }, [orders]);
 
-  // Cart operations
+  const getStockLimit = (productId) => {
+    const catalogProduct = getProductById(productId);
+    return catalogProduct?.stock ?? 99;
+  };
+
   const addToCart = (product, quantity = 1) => {
     const normalized = normalizeProduct(product);
+    const stockLimit = getStockLimit(normalized.id);
+
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === normalized.id);
+      const currentQty = existingItem?.quantity ?? 0;
+      const newQty = Math.min(currentQty + quantity, stockLimit);
+
       if (existingItem) {
         return prevCart.map(item =>
-          item.id === normalized.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
+          item.id === normalized.id ? { ...item, quantity: newQty } : item
         );
       }
-      return [...prevCart, { ...normalized, quantity }];
+      return [...prevCart, { ...normalized, quantity: Math.min(quantity, stockLimit) }];
     });
   };
 
@@ -61,9 +57,12 @@ export function AppProvider({ children }) {
       removeFromCart(productId);
       return;
     }
+    const stockLimit = getStockLimit(productId);
+    const cappedQty = Math.min(quantity, stockLimit);
+
     setCart(prevCart =>
       prevCart.map(item =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === productId ? { ...item, quantity: cappedQty } : item
       )
     );
   };
@@ -79,7 +78,6 @@ export function AppProvider({ children }) {
 
   const cartItemCount = cart.reduce((count, item) => count + item.quantity, 0);
 
-  // Wishlist operations
   const addToWishlist = (product) => {
     const normalized = normalizeProduct(product);
     setWishlist(prevWishlist => {
@@ -105,20 +103,19 @@ export function AppProvider({ children }) {
     }
   };
 
-  // Order operations
   const generateOrderId = () => {
     return `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
   };
 
-  const placeOrder = (shippingInfo, paymentInfo) => {
+  const placeOrder = async (shippingInfo, paymentInfo) => {
     if (cart.length === 0) return null;
 
     const order = {
       id: generateOrderId(),
       items: cart,
       subtotal: cartTotal,
-      shippingFee: 0, // Can be dynamic based on address
-      tax: Math.floor(cartTotal * 0.1), // 10% tax
+      shippingFee: 0,
+      tax: Math.floor(cartTotal * 0.1),
       total: cartTotal + Math.floor(cartTotal * 0.1),
       shippingInfo,
       paymentInfo: {
@@ -129,13 +126,15 @@ export function AppProvider({ children }) {
       createdAt: new Date().toISOString(),
     };
 
+    await persistOrder(order);
+
     setOrders(prevOrders => [...prevOrders, order]);
     clearCart();
     return order;
   };
 
   const getOrderHistory = () => {
-    return orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return [...orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   const getOrderById = (orderId) => {
@@ -143,7 +142,6 @@ export function AppProvider({ children }) {
   };
 
   const value = {
-    // Cart
     cart,
     addToCart,
     removeFromCart,
@@ -151,21 +149,15 @@ export function AppProvider({ children }) {
     clearCart,
     cartTotal,
     cartItemCount,
-
-    // Wishlist
     wishlist,
     addToWishlist,
     removeFromWishlist,
     toggleWishlist,
     isInWishlist,
-
-    // Orders
     orders,
     placeOrder,
     getOrderHistory,
     getOrderById,
-
-    // User
     user,
     setUser,
     isLoading,
