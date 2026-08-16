@@ -1,47 +1,72 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FiMail } from "react-icons/fi";
 import { FaFacebook, FaTwitter, FaPinterest, FaInstagram, FaYoutube } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const FOOTER_LINKS = {
   company: [
-    { label: "Our Story", href: "#" },
-    { label: "Reviews", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "VIP Text Club", href: "#" },
-    { label: "100% Authentic", href: "#" },
+    { label: "Our Story", path: "/about" },
+    { label: "Reviews", path: "/reviews" },
+    { label: "Blog", path: "/blog" },
+    { label: "VIP Text Club", path: "/vip" },
+    { label: "100% Authentic", path: "/authenticity" },
     { label: "contact@xeroxii.com", href: "mailto:contact@xeroxii.com" },
   ],
   shop: [
-    { label: "Brands", href: "#" },
-    { label: "Collections", href: "#" },
-    { label: "Men", href: "#" },
-    { label: "Women", href: "#" },
-    { label: "New", href: "#" },
-    { label: "Sale", href: "#" },
+    { label: "Brands", path: "/" },
+    { label: "Collections", path: "/collections" },
+    { label: "Men", path: "/men" },
+    { label: "Women", path: "/womens-jewellery" },
+    { label: "New", path: "/new" },
+    { label: "Sale", path: "/sale" },
   ],
   customerService: [
-    { label: "My Account", href: "#" },
-    { label: "Navidium Protection", href: "#" },
-    { label: "Shipping", href: "#" },
-    { label: "Returns", href: "#" },
-    { label: "FAQ", href: "#" },
-    { label: "Contact Us", href: "#" },
+    { label: "My Account", path: "/account" },
+    { label: "Navidium Protection", path: "/protection" },
+    { label: "Shipping", path: "/shipping" },
+    { label: "Returns", path: "/returns" },
+    { label: "FAQ", path: "/faq" },
+    { label: "Contact Us", path: "/contact" },
   ],
   legal: [
-    { label: "Terms of Service", href: "#" },
-    { label: "Accessibility", href: "#" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", path: "/terms" },
+    { label: "Accessibility", path: "/accessibility" },
+    { label: "Privacy Policy", path: "/privacy" },
   ],
 };
 
-const SOCIAL_ICONS = [
-  { Icon: FaFacebook, label: "Facebook" },
-  { Icon: FaTwitter, label: "Twitter" },
-  { Icon: FaPinterest, label: "Pinterest" },
-  { Icon: FaInstagram, label: "Instagram" },
-  { Icon: FaYoutube, label: "YouTube" },
+const SOCIAL_LINKS = [
+  { Icon: FaFacebook, label: "Facebook", url: "#" },
+  { Icon: FaTwitter, label: "Twitter", url: "#" },
+  { Icon: FaPinterest, label: "Pinterest", url: "#" },
+  { Icon: FaInstagram, label: "Instagram", url: "#" },
+  { Icon: FaYoutube, label: "YouTube", url: "#" },
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubscribing(true);
+    
+    // Simulate subscription
+    setTimeout(() => {
+      localStorage.setItem("xeroxii_subscriber", email);
+      toast.success("Thanks for subscribing!");
+      setEmail("");
+      setIsSubscribing(false);
+    }, 500);
+  };
+
   return (
     <footer className="bg-white text-black">
       <div className="page-shell pt-12 pb-8 lg:pt-16 lg:pb-10">
@@ -53,25 +78,31 @@ export default function Footer() {
             <p className="mt-3 text-sm leading-relaxed text-black/70">
               Subscribe to get special offers, free giveaways, and exclusive deals.
             </p>
-            <div className="mt-5 flex items-center border-b border-black pb-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full bg-transparent text-sm outline-none placeholder:text-black/40"
-              />
-              <button
-                type="submit"
-                aria-label="Subscribe"
-                className="ml-3 flex-shrink-0 text-black transition hover:text-black/70"
-              >
-                <FiMail size={18} />
-              </button>
-            </div>
+            <form onSubmit={handleSubscribe} className="mt-5">
+              <div className="flex items-center border-b border-black pb-2">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-transparent text-sm outline-none placeholder:text-black/40"
+                  disabled={isSubscribing}
+                />
+                <button
+                  type="submit"
+                  aria-label="Subscribe"
+                  className="ml-3 flex-shrink-0 text-black transition hover:text-black/70 disabled:opacity-50"
+                  disabled={isSubscribing}
+                >
+                  <FiMail size={18} />
+                </button>
+              </div>
+            </form>
             <div className="mt-6 flex items-center gap-5">
-              {SOCIAL_ICONS.map(({ Icon, label }) => (
+              {SOCIAL_LINKS.map(({ Icon, label, url }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={url}
                   aria-label={label}
                   className="text-black/70 transition hover:text-black"
                 >
@@ -88,12 +119,21 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.company.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="text-sm text-black/70 transition hover:text-black"
-                  >
-                    {item.label}
-                  </a>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="text-sm text-black/70 transition hover:text-black"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className="text-sm text-black/70 transition hover:text-black"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -106,12 +146,12 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.shop.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.path}
                     className="text-sm text-black/70 transition hover:text-black"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -124,12 +164,12 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.customerService.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.path}
                     className="text-sm text-black/70 transition hover:text-black"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -142,12 +182,27 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.legal.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.path}
                     className="text-sm text-black/70 transition hover:text-black"
                   >
                     {item.label}
-                  </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-black/10 pt-8 text-center">
+          <span className="text-xl font-semibold uppercase tracking-widest text-black">
+            Xeroxii<span className="text-black/40">.</span>com
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}
                 </li>
               ))}
             </ul>

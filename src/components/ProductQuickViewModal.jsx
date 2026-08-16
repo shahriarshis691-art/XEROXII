@@ -1,5 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiHeart } from "react-icons/fi";
+import toast from "react-hot-toast";
+import { AppContext } from "../context/AppContext";
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -23,6 +26,16 @@ const modalVariants = {
 };
 
 export default function ProductQuickViewModal({ product, onClose }) {
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart, toggleWishlist, isInWishlist } = useContext(AppContext);
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    if (product) {
+      setLiked(isInWishlist(product.id));
+    }
+  }, [product, isInWishlist]);
+
   useEffect(() => {
     if (!product) return;
     const handleKey = (e) => {
@@ -37,6 +50,25 @@ export default function ProductQuickViewModal({ product, onClose }) {
       document.body.classList.remove("modal-open");
     };
   }, [product, onClose]);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addToCart(product, quantity);
+    toast.success(`Added ${quantity} item${quantity > 1 ? "s" : ""} to cart`);
+    setQuantity(1);
+  };
+
+  const handleWishlist = () => {
+    if (!product) return;
+    toggleWishlist(product);
+    setLiked(!liked);
+    toast.success(liked ? "Removed from wishlist" : "Added to wishlist");
+  };
+
+  const handleContinueBrowsing = () => {
+    setQuantity(1);
+    onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -87,14 +119,14 @@ export default function ProductQuickViewModal({ product, onClose }) {
             <div className="flex-shrink-0 sm:w-1/2">
               <div className="aspect-[3/4] w-full bg-[#e9e7e1] sm:aspect-auto sm:h-full">
                 <img
-                  src={product.src}
+                  src={product.src || product.image}
                   alt={product.name}
                   className="h-full w-full object-cover"
                 />
               </div>
             </div>
 
-            <div className="flex flex-1 flex-col justify-center px-6 py-8 sm:px-10 sm:py-10">
+            <div className="flex flex-1 flex-col justify-center px-6 py-8 sm:px-10 sm:py-10 overflow-y-auto">
               {product.badge && (
                 <span className="mb-4 inline-block w-fit bg-black px-3 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-white">
                   {product.badge}
@@ -107,25 +139,69 @@ export default function ProductQuickViewModal({ product, onClose }) {
                 {product.title}
               </p>
               <p className="mt-4 text-lg font-medium text-black/80 sm:text-xl">
-                {product.price}
+                {product.price || product.priceBDT}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
-                Expertly crafted with precision Swiss movement, sapphire crystal,
-                and premium materials. Each piece undergoes rigorous quality
-                assurance before delivery.
+                {product.description || "Expertly crafted with precision Swiss movement, sapphire crystal, and premium materials. Each piece undergoes rigorous quality assurance before delivery."}
               </p>
+
+              {/* Quantity Selector */}
+              <div className="mt-6 flex items-center gap-4">
+                <span className="text-sm font-medium uppercase tracking-[0.16em] text-black/60">
+                  Quantity
+                </span>
+                <div className="flex items-center gap-3 border border-black/20 rounded px-2">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="py-2 px-2 text-black hover:text-black/60 transition"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span className="w-8 text-center font-medium">{quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="py-2 px-2 text-black hover:text-black/60 transition"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <button type="button" className="button-primary">
+                <button 
+                  type="button" 
+                  className="flex-1 button-primary"
+                  onClick={handleAddToCart}
+                >
                   Add to Cart
                 </button>
                 <button
                   type="button"
-                  className="button-secondary"
-                  onClick={onClose}
+                  onClick={handleWishlist}
+                  className="flex items-center justify-center gap-2 button-secondary"
+                  aria-label="Add to wishlist"
                 >
-                  Continue Browsing
+                  <FiHeart 
+                    size={18} 
+                    fill={liked ? "currentColor" : "none"}
+                    color={liked ? "currentColor" : "currentColor"}
+                  />
+                  <span>{liked ? "Saved" : "Save"}</span>
                 </button>
               </div>
+
+              <button
+                type="button"
+                className="mt-3 py-3 px-4 text-sm font-medium uppercase tracking-[0.16em] text-black/60 hover:text-black transition"
+                onClick={handleContinueBrowsing}
+              >
+                Continue Browsing
+              </button>
             </div>
           </motion.div>
         </motion.div>

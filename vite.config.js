@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    minify: false,
-    cssMinify: false,
+    minify: 'terser',
+    cssMinify: true,
     sourcemap: false,
     reportCompressedSize: false,
     chunkSizeWarningLimit: 1000,
