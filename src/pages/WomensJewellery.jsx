@@ -10,7 +10,7 @@ const PRODUCTS = [
     price: "$12,500",
     sku: "SKU-NJ-001",
     collection: "Celestial Collection",
-    src: "https://images.pexels.com/photos/2103651/pexels-photo-2103651.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "er002",
@@ -19,7 +19,7 @@ const PRODUCTS = [
     price: "$8,750",
     sku: "SKU-ER-002",
     collection: "Celestial Collection",
-    src: "https://images.pexels.com/photos/1899552/pexels-photo-1899552.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "rb003",
@@ -28,7 +28,7 @@ const PRODUCTS = [
     price: "$6,900",
     sku: "SKU-RB-003",
     collection: "Romance Collection",
-    src: "https://images.pexels.com/photos/1927906/pexels-photo-1927906.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/1927257/pexels-photo-1927257.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "r004",
@@ -37,7 +37,7 @@ const PRODUCTS = [
     price: "$4,850",
     sku: "SKU-R-004",
     collection: "Romance Collection",
-    src: "https://images.pexels.com/photos/3734161/pexels-photo-3734161.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/942884/pexels-photo-942884.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "nj005",
@@ -46,7 +46,7 @@ const PRODUCTS = [
     price: "€9,200",
     sku: "SKU-NJ-005",
     collection: "Ocean Collection",
-    src: "https://images.pexels.com/photos/1764488/pexels-photo-1764488.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/2661256/pexels-photo-2661256.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "er006",
@@ -55,7 +55,7 @@ const PRODUCTS = [
     price: "£5,900",
     sku: "SKU-ER-006",
     collection: "Ocean Collection",
-    src: "https://images.pexels.com/photos/1779637/pexels-photo-1779637.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "rb007",
@@ -64,7 +64,7 @@ const PRODUCTS = [
     price: "€7,350",
     sku: "SKU-RB-007",
     collection: "Grace Collection",
-    src: "https://images.pexels.com/photos/1734382/pexels-photo-1734382.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/1435407/pexels-photo-1435407.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "r008",
@@ -73,7 +73,7 @@ const PRODUCTS = [
     price: "$11,200",
     sku: "SKU-R-008",
     collection: "Grace Collection",
-    src: "https://images.pexels.com/photos/177037/pexels-photo-177037.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "nj009",
@@ -82,7 +82,7 @@ const PRODUCTS = [
     price: "€10,800",
     sku: "SKU-NJ-009",
     collection: "Passion Collection",
-    src: "https://images.pexels.com/photos/1447126/pexels-photo-1447126.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "er010",
@@ -91,7 +91,7 @@ const PRODUCTS = [
     price: "$7,450",
     sku: "SKU-ER-010",
     collection: "Passion Collection",
-    src: "https://images.pexels.com/photos/1893555/pexels-photo-1893555.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/2098833/pexels-photo-2098833.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "rb011",
@@ -100,7 +100,7 @@ const PRODUCTS = [
     price: "£8,600",
     sku: "SKU-RB-011",
     collection: "Midnight Collection",
-    src: "https://images.pexels.com/photos/1668532/pexels-photo-1668532.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/947885/pexels-photo-947885.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     id: "r012",
@@ -109,7 +109,7 @@ const PRODUCTS = [
     price: "$15,200",
     sku: "SKU-R-012",
     collection: "Midnight Collection",
-    src: "https://images.pexels.com/photos/2947023/pexels-photo-2947023.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "https://images.pexels.com/photos/167703/pexels-photo-167703.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
 ];
 

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 const PANELS = [
   {
     label: "Necklace Showcase",
-    alt: "Luxury diamond and royal blue sapphire necklace set against a premium dark leather texture",
-    src: "https://images.pexels.com/photos/29986280/pexels-photo-29986280.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    alt: "Luxury diamond necklace detail shot",
+    src: "https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
   {
     label: "Earrings Showcase",
-    alt: "Pair of exquisite luxury diamond and pink gemstone chandelier drop earrings displayed on a metallic pedestal in front of an architectural backdrop",
-    src: "https://images.pexels.com/photos/3266700/pexels-photo-3266700.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    alt: "Luxury gold and gemstone earrings product shot",
+    src: "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=1600",
   },
 ];
 
