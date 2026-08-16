@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Seo from "../components/Seo";
 import { FiHeart } from "react-icons/fi";
 import toast from "react-hot-toast";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
@@ -29,6 +30,11 @@ export default function WomensJewelleryListing() {
 
   return (
     <>
+      <Seo
+        title="Jewellery Collection"
+        description="Shop women's fine jewellery — necklaces, rings, earrings, bracelets, and more at XEROXII."
+        path="/womens-jewellery-listing"
+      />
       {/* Header */}
       <div className="bg-[#f3f2ef] text-black">
         <div className="page-shell pt-10 pb-6 sm:pt-14 sm:pb-8">

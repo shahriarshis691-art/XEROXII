@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { FiHeart, FiShoppingBag, FiX } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
@@ -22,9 +22,7 @@ export default function WishlistPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
-      <Helmet>
-        <title>Wishlist | XEROXII</title>
-      </Helmet>
+      <Seo title="Wishlist" description="Your saved luxury watches and jewellery at XEROXII." path="/wishlist" noindex />
       <div className="page-shell">
         <div className="mb-12">
           <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-2">

@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Seo from "../components/Seo";
 import ProductQuickViewModal from "../components/ProductQuickViewModal";
 import { JEWELLERY_PAGE_PRODUCTS } from "../data/jewelleryProducts";
 import { parsePrice } from "../lib/productUtils";
@@ -36,6 +37,11 @@ export default function WomensJewelleryPage() {
 
   return (
     <section className="relative bg-white">
+      <Seo
+        title="Women's Jewellery"
+        description="Discover fine necklaces, rings, earrings, and bracelets curated for timeless elegance."
+        path="/womens-jewellery"
+      />
       {/* Header / Hero */}
       <div className="relative bg-[#f8f6f3] py-16 sm:py-24">
         <div className="page-shell flex flex-col items-center text-center">

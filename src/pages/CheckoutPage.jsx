@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Seo from '../components/Seo';
 import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName } from '../lib/productUtils';
 import toast from 'react-hot-toast';
@@ -159,6 +160,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
+      <Seo title="Checkout" description="Complete your XEROXII order securely." path="/checkout" noindex />
       <div className="page-shell">
         {/* Header */}
         <div className="mb-12">

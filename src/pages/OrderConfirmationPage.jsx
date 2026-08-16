@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Seo from '../components/Seo';
 import { FiCheckCircle, FiDownload } from 'react-icons/fi';
 import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName, generateInvoiceText } from '../lib/productUtils';
@@ -63,6 +64,7 @@ export default function OrderConfirmationPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
+      <Seo title="Order Confirmed" description="Your XEROXII order has been placed successfully." path={`/order-confirmation/${orderId}`} noindex />
       <div className="page-shell">
         {/* Success Message */}
         <motion.div

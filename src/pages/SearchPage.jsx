@@ -1,6 +1,6 @@
 import { useSearchParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import { searchProducts } from '../data/catalog';
 import { getProductPriceDisplay, getProductName } from '../lib/productUtils';
@@ -23,10 +23,12 @@ export default function SearchPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-12 sm:py-20">
-      <Helmet>
-        <title>{initialQuery ? `Search: ${initialQuery}` : 'Search'} | XEROXII</title>
-        <meta name="description" content="Search luxury watches and jewellery at XEROXII." />
-      </Helmet>
+      <Seo
+        title={initialQuery ? `Search: ${initialQuery}` : 'Search'}
+        description="Search luxury watches and jewellery at XEROXII."
+        path={initialQuery ? `/search?q=${encodeURIComponent(initialQuery)}` : '/search'}
+        noindex={Boolean(initialQuery)}
+      />
       <div className="page-shell">
         <div className="max-w-2xl mx-auto text-center mb-12">
           <h1 className="text-4xl font-light uppercase tracking-wide text-black mb-6">

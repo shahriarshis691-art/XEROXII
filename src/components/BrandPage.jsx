@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import Seo from "./Seo";
 import { BRAND_PRODUCTS, BRAND_META } from "../data/brandProducts";
 
 export default function BrandPage() {
@@ -32,6 +33,11 @@ export default function BrandPage() {
 
   return (
     <section className="relative bg-[#f3f2ef] min-h-screen">
+      <Seo
+        title={`${brandName} Watches`}
+        description={meta.tagline}
+        path={`/brand/${slug}`}
+      />
       <div className="page-shell pt-10 pb-6 sm:pt-14 sm:pb-8">
         <nav className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-black/50">
           <Link to="/" className="transition hover:text-black">

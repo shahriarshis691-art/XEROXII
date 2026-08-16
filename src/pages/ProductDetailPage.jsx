@@ -1,7 +1,9 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useContext, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
+import { productSchema, breadcrumbSchema } from '../lib/schema';
+import OptimizedImage from '../components/OptimizedImage';
 import { FiHeart, FiPlus, FiMinus } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
@@ -122,10 +124,22 @@ export default function ProductDetailPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] pb-24 lg:pb-0">
-      <Helmet>
-        <title>{productName} | XEROXII</title>
-        <meta name="description" content={product.description} />
-      </Helmet>
+      <Seo
+        title={productName}
+        description={product.description}
+        path={`/product/${product.id}`}
+        image={product.image}
+        type="product"
+        jsonLd={[
+          productSchema(product),
+          breadcrumbSchema([
+            { name: 'Home', url: '/' },
+            { name: product.type === 'jewellery' ? 'Jewellery' : 'Watches', url: product.type === 'jewellery' ? '/womens-jewellery-listing' : '/#watches' },
+            { name: product.brand, url: null },
+            { name: productName, url: `/product/${product.id}` },
+          ]),
+        ]}
+      />
 
       <div className="border-b border-black/10 bg-white">
         <div className="page-shell py-4">
@@ -147,7 +161,14 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
             <div className="w-full aspect-[3/4] bg-[#e9e7e1] overflow-hidden rounded-sm mb-4">
-              <img src={gallery[activeImage]} alt={productName} className="w-full h-full object-cover" />
+              <OptimizedImage
+                src={gallery[activeImage]}
+                alt={productName}
+                className="w-full h-full object-cover"
+                priority
+                width={800}
+                height={1067}
+              />
             </div>
             {gallery.length > 1 && (
               <div className="flex gap-2">

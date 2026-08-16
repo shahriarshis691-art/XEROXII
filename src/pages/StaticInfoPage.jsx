@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { getStaticPage } from '../data/staticPages';
 
 export default function StaticInfoPage({ slug }) {
@@ -20,10 +20,7 @@ export default function StaticInfoPage({ slug }) {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-12 sm:py-20">
-      <Helmet>
-        <title>{page.title} | XEROXII</title>
-        <meta name="description" content={page.subtitle} />
-      </Helmet>
+      <Seo title={page.title} description={page.subtitle} path={`/${slug}`} />
       <div className="page-shell max-w-3xl">
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50">
           {page.subtitle}

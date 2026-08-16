@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { AppContext } from '../context/AppContext';
@@ -73,9 +73,7 @@ export default function AccountPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
-      <Helmet>
-        <title>My Account | XEROXII</title>
-      </Helmet>
+      <Seo title="My Account" description="View your order history and manage your XEROXII profile." path="/account" noindex />
       <div className="page-shell">
         <div className="mb-10">
           <h1 className="text-4xl sm:text-5xl font-light uppercase tracking-wide text-black mb-2">

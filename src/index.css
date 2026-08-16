@@ -141,22 +141,10 @@ img {
   }
 }
 
-.testimonials-swiper {
-  overflow: hidden;
-}
-
-.testimonials-swiper .swiper-pagination-bullet {
-  width: 6px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.25);
-  opacity: 1;
-  transition: all 300ms ease;
-}
-
-.testimonials-swiper .swiper-pagination-bullet-active {
-  width: 18px;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.85);
+@media (min-width: 768px) {
+  .hero-parallax-bg {
+    background-attachment: fixed;
+  }
 }
 
 body.modal-open {

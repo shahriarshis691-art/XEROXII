@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Seo from '../components/Seo';
 import { FiMinus, FiPlus, FiX } from 'react-icons/fi';
 import { AppContext } from '../context/AppContext';
 import { parsePrice, getProductName } from '../lib/productUtils';
@@ -12,6 +13,7 @@ export default function CartPage() {
 
   return (
     <main className="min-h-screen bg-[#fafaf8] py-8 sm:py-16">
+      <Seo title="Shopping Cart" description="Review items in your XEROXII shopping cart." path="/cart" noindex />
       <div className="page-shell">
         {/* Header */}
         <div className="mb-12">

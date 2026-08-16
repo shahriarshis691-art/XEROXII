@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 
 export default function NotFoundPage() {
   return (
     <main className="min-h-screen bg-[#fafaf8] flex items-center justify-center py-16">
-      <Helmet>
-        <title>Page Not Found | XEROXII</title>
-      </Helmet>
+      <Seo title="Page Not Found" description="The page you are looking for may have been moved or no longer exists." path="/404" noindex />
       <div className="page-shell text-center">
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/50 mb-4">
           404
