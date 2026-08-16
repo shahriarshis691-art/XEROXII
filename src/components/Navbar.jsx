@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiSearch, FiHeart, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { FiSearch, FiHeart, FiUser, FiMenu, FiX, FiShoppingBag } from "react-icons/fi";
 import { AppContext } from "../context/AppContext";
 
 const SUB_LINKS = [
@@ -28,6 +28,10 @@ export default function Navbar() {
 
   const handleAccountClick = () => {
     navigate("/account");
+  };
+
+  const handleCartClick = () => {
+    navigate("/cart");
   };
 
   return (
@@ -86,11 +90,19 @@ export default function Navbar() {
             >
               <FiUser size={17} />
             </button>
-            {cartItemCount > 0 && (
-              <span className="ml-2 text-[0.65rem] font-semibold bg-black text-white px-2 py-1 rounded">
-                {cartItemCount}
-              </span>
-            )}
+            <button
+              type="button"
+              aria-label="Shopping cart"
+              className="relative transition hover:text-black"
+              onClick={handleCartClick}
+            >
+              <FiShoppingBag size={17} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 flex items-center justify-center h-4 w-4 bg-black text-white text-[0.6rem] rounded-full font-semibold">
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>

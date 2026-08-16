@@ -15,6 +15,10 @@ export function AppProvider({ children }) {
 
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [orders, setOrders] = useState(() => {
+    const savedOrders = localStorage.getItem('xeroxii_orders');
+    return savedOrders ? JSON.parse(savedOrders) : [];
+  });
 
   // Persist cart to localStorage
   useEffect(() => {
@@ -25,6 +29,11 @@ export function AppProvider({ children }) {
   useEffect(() => {
     localStorage.setItem('xeroxii_wishlist', JSON.stringify(wishlist));
   }, [wishlist]);
+
+  // Persist orders to localStorage
+  useEffect(() => {
+    localStorage.setItem('xeroxii_orders', JSON.stringify(orders));
+  }, [orders]);
 
   // Cart operations
   const addToCart = (product, quantity = 1) => {
@@ -95,6 +104,43 @@ export function AppProvider({ children }) {
     }
   };
 
+  // Order operations
+  const generateOrderId = () => {
+    return `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+  };
+
+  const placeOrder = (shippingInfo, paymentInfo) => {
+    if (cart.length === 0) return null;
+
+    const order = {
+      id: generateOrderId(),
+      items: cart,
+      subtotal: cartTotal,
+      shippingFee: 0, // Can be dynamic based on address
+      tax: Math.floor(cartTotal * 0.1), // 10% tax
+      total: cartTotal + Math.floor(cartTotal * 0.1),
+      shippingInfo,
+      paymentInfo: {
+        method: paymentInfo.method,
+        last4: paymentInfo.method === 'card' ? paymentInfo.cardLast4 : null,
+      },
+      status: 'confirmed',
+      createdAt: new Date().toISOString(),
+    };
+
+    setOrders(prevOrders => [...prevOrders, order]);
+    clearCart();
+    return order;
+  };
+
+  const getOrderHistory = () => {
+    return orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  };
+
+  const getOrderById = (orderId) => {
+    return orders.find(order => order.id === orderId);
+  };
+
   const value = {
     // Cart
     cart,
@@ -111,6 +157,12 @@ export function AppProvider({ children }) {
     removeFromWishlist,
     toggleWishlist,
     isInWishlist,
+
+    // Orders
+    orders,
+    placeOrder,
+    getOrderHistory,
+    getOrderById,
 
     // User
     user,
