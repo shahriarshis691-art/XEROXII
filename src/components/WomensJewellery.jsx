@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PANELS = [
   {
     label: "Necklace Showcase",
@@ -18,12 +20,12 @@ export default function WomensJewellery() {
         <h2 className="font-display text-3xl font-semibold uppercase tracking-[0.15em] text-[#a3123a] sm:text-4xl">
           Women&apos;s Jewellery
         </h2>
-        <a
-          href="#collections"
+        <Link
+          to="/womens-jewellery-listing"
           className="mt-6 border-b border-black/40 pb-0.5 text-sm text-black/70 transition hover:border-black hover:text-black"
         >
           Explore Our Collections
-        </a>
+        </Link>
       </div>
 
       <div className="mt-14 grid grid-cols-1 sm:mt-16 sm:grid-cols-2">

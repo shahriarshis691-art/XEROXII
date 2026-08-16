@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import BrandPage from "./components/BrandPage";
 import WomensJewelleryPage from "./pages/WomensJewellery";
+import WomensJewelleryListing from "./pages/WomensJewelleryListing";
 import Footer from "./components/Footer";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/brand/:slug" element={<BrandPage />} />
             <Route path="/womens-jewellery" element={<WomensJewelleryPage />} />
+            <Route path="/womens-jewellery-listing" element={<WomensJewelleryListing />} />
             {/* Placeholder routes - will be implemented */}
             <Route path="/account" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Account page coming soon</p></div>} />
             <Route path="/wishlist" element={<div className="page-shell py-20 text-center"><p className="text-black/60">Wishlist page coming soon</p></div>} />
