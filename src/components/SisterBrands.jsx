@@ -2,29 +2,34 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SISTER_BRANDS } from "../data/brandsData";
 
-function BrandLogo({ brand }) {
+function BrandMark({ brand }) {
   if (brand.logoImage) {
     return (
-      <div
-        className="flex items-center justify-center px-6 py-8"
-        style={{ backgroundColor: brand.logoBg || "#0a0a0a" }}
-      >
-        <img
-          src={brand.logoImage}
-          alt={`${brand.name} logo`}
-          className="max-h-24 w-auto max-w-[85%] object-contain sm:max-h-28"
-          loading="lazy"
-        />
-      </div>
+      <img
+        src={brand.logoImage}
+        alt={`${brand.name} logo`}
+        className="max-h-[7.5rem] w-auto max-w-[78%] object-contain sm:max-h-32"
+        loading="lazy"
+      />
     );
   }
 
+  const [primary, ...rest] = brand.name.split(" ");
+  const secondary = rest.join(" ");
+
   return (
-    <div
-      className="flex h-28 items-center justify-center"
-      style={{ backgroundColor: brand.logoBg || "#0a0a0a" }}
-    >
-      <span className="text-2xl font-bold tracking-[0.25em] text-white">{brand.logo}</span>
+    <div className="flex flex-col items-center justify-center text-center">
+      <span className="font-display text-[1.65rem] font-semibold uppercase tracking-[0.32em] text-white sm:text-3xl">
+        {primary}
+      </span>
+      {secondary ? (
+        <>
+          <span className="mt-3 h-px w-8 bg-white/35" aria-hidden="true" />
+          <span className="mt-3 text-[0.625rem] font-medium uppercase tracking-[0.42em] text-white/70">
+            {secondary}
+          </span>
+        </>
+      ) : null}
     </div>
   );
 }
@@ -33,69 +38,48 @@ export default function SisterBrands() {
   return (
     <section
       aria-labelledby="sister-brands-heading"
-      className="relative border-y border-black/10 bg-[#fafaf8] py-12 sm:py-16"
+      className="relative border-y border-black/10 bg-[#fafaf8] py-16 sm:py-24"
     >
       <div className="page-shell">
-        <div className="mb-10 text-center">
+        <div className="mb-12 text-center sm:mb-16">
           <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-black/45">
             Affiliated Brands
           </p>
           <h2
             id="sister-brands-heading"
-            className="mt-2 font-display text-2xl font-semibold uppercase tracking-[0.14em] text-[#0a0a0a] sm:text-3xl"
+            className="mt-3 font-display text-2xl font-semibold uppercase tracking-[0.14em] text-[#0a0a0a] sm:text-3xl"
           >
             Our Sister Ventures
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:gap-6 md:grid-cols-3">
           {SISTER_BRANDS.map((brand, index) => (
             <motion.article
               key={brand.id}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group flex flex-col overflow-hidden border border-black/10 bg-white shadow-sm transition hover:border-black/25 hover:shadow-md"
+              className="group flex flex-col border border-black/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-black/30 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
             >
-              <BrandLogo brand={brand} />
-
-              <div className="relative aspect-[16/9] overflow-hidden bg-[#0a0a0a]">
-                <img
-                  src={brand.cardImage}
-                  alt={brand.name}
-                  loading="lazy"
-                  className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div
+                className="flex aspect-[4/3] items-center justify-center border-b border-black/10 px-8"
+                style={{ backgroundColor: brand.logoImage ? brand.logoBg || "#0a0a0a" : "#0a0a0a" }}
+              >
+                <BrandMark brand={brand} />
               </div>
 
-              <div className="flex flex-1 flex-col p-6 sm:p-7">
-                <h3 className="text-lg font-semibold uppercase tracking-[0.12em] text-black">
+              <div className="flex flex-1 flex-col items-center px-6 py-8 text-center">
+                <h3 className="text-[0.8rem] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a]">
                   {brand.name}
                 </h3>
-                <p className="mt-2 text-xs uppercase tracking-[0.14em] text-black/50">
-                  {brand.category}
-                </p>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-black/65">
-                  {brand.tagline}
-                </p>
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    to={`/brands/${brand.slug}`}
-                    className="inline-flex min-h-11 flex-1 items-center justify-center border border-black bg-black px-5 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-transparent hover:text-black sm:text-xs"
-                  >
-                    Explore Brand
-                  </Link>
-                  <a
-                    href={brand.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 flex-1 items-center justify-center border border-black/20 px-5 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-black transition hover:border-black hover:bg-black hover:text-white sm:text-xs"
-                  >
-                    View Portfolio
-                  </a>
-                </div>
+                <Link
+                  to={`/brands/${brand.slug}`}
+                  className="mt-7 inline-flex min-h-11 w-full max-w-[14rem] items-center justify-center border border-[#0a0a0a] bg-transparent px-6 text-[0.625rem] font-semibold uppercase tracking-[0.22em] text-[#0a0a0a] transition duration-300 hover:bg-[#0a0a0a] hover:text-white"
+                >
+                  Explore Brand
+                </Link>
               </div>
             </motion.article>
           ))}
