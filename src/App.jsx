@@ -8,6 +8,7 @@ import PageLoader from "./components/PageLoader";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
+import FounderMessage from "./components/FounderMessage";
 import WelcomeLocationModal from "./components/WelcomeLocationModal";
 import { getStaticPageSlugs } from "./data/staticPages";
 
@@ -53,6 +54,7 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
+            <FounderMessage />
             <Footer />
           </ErrorBoundary>
         </BrowserRouter>
